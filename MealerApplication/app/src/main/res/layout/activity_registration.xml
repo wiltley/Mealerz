@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Register"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3C3A3A"
+    tools:context=".RegistrationActivity">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="315dp"
+        android:layout_height="88dp"
+        android:text="Register"
+        android:textColor="#009688"
+        android:textSize="34sp"
+        tools:layout_editor_absoluteX="21dp"
+        tools:layout_editor_absoluteY="22dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="185dp"
+        android:layout_height="48dp"
+        android:text="Email"
+        android:textColor="#009688"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="181dp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="(Please Enter Your Email Address"
+        android:textColor="#009688"
+        android:textColorHint="#009688"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="229dp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="175dp"
+        android:layout_height="41dp"
+        android:text="Password"
+        android:textColor="#009688"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="321dp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/password2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="(Please Enter your Password)"
+        android:textColorHint="#009688"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="363dp" />
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="148dp"
+        android:layout_height="68dp"
+        android:text="REGISTER"
+        tools:layout_editor_absoluteX="125dp"
+        tools:layout_editor_absoluteY="429dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="235dp"
+        android:layout_height="45dp"
+        android:text="Already have an account?"
+        android:textColor="#009688"
+        android:textColorHint="#009688"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="23dp"
+        tools:layout_editor_absoluteY="569dp" />
+
+    <Button
+        android:id="@+id/login2"
+        android:layout_width="129dp"
+        android:layout_height="45dp"
+        android:background="#009688"
+        android:hint="LOGIN"
+        android:text="LOGIN"
+        tools:layout_editor_absoluteX="258dp"
+        tools:layout_editor_absoluteY="561dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="1dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
