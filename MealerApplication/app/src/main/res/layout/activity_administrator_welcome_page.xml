@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/adminwelcomepage"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ee5d6c"
+    tools:context=".AdministratorWelcomePage">
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="391dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="254dp"
+        android:layout_marginEnd="4dp"
+        android:text="Welcome Dear Administrator"
+        android:textColor="#eeaf61"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/signoutbutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/signoutbutton"
+        android:layout_width="215dp"
+        android:layout_height="103dp"
+        android:layout_marginStart="98dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="98dp"
+        android:layout_marginBottom="232dp"
+        android:text="SIGNOUT"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcome" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
