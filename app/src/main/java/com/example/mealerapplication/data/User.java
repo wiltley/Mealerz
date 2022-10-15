@@ -26,6 +26,10 @@ public abstract class User {
 
     }
 
+    public void handleMessageFromServer(){
+
+    }
+
     /*public void permissable(Permission p){
 
     }*/
