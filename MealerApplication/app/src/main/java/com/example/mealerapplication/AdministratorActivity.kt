@@ -6,6 +6,6 @@ import android.os.Bundle
 class AdministratorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_administrator)
+        setContentView(R.layout.`activity_administratorWelcome.xml`)
     }
 }
