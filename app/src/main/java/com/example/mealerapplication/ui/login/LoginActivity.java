@@ -23,6 +23,7 @@ import com.example.mealerapplication.DashboardActivity;
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.Authentication;
 import com.example.mealerapplication.databinding.ActivityLoginBinding;
+import com.example.mealerapplication.ui.registration.SignupActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -108,6 +109,8 @@ public class LoginActivity extends AppCompatActivity {
                         else {
                             Toast.makeText(getApplicationContext(), "Login failed! Please try again later", Toast.LENGTH_LONG).show();
                             loginButton.setText("failed");
+                            Intent intent1 = new Intent(LoginActivity.this, SignupActivity.class);
+                            startActivity(intent1);
                         }
                     }
                 });
