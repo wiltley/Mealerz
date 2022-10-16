@@ -1,6 +1,7 @@
 package com.example.mealerapplication.data;
 import com.example.mealerapplication.data.model.Address;
 import com.example.mealerapplication.data.model.CreditCard;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,19 +19,14 @@ public class User {
     private String lName;
     Address address;
     CreditCard creditCard;
+    FirebaseUser user;
 
     public User(){
 
     }
 
-    public User(String username, String ID, String email, String fName, String lName, Address address, CreditCard creditCard) {
-        this.username = username;
-        this.ID = ID;
-        this.email = email;
-        this.fName = fName;
-        this.lName = lName;
-        this.address = address;
-        this.creditCard = creditCard;
+    public User(FirebaseUser user) {
+        //Changed the way how we're going to initialize things
     }
 
     public String getID(){
