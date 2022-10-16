@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mealerapplication.R;
+import com.example.mealerapplication.data.model.Authentication;
 import com.example.mealerapplication.ui.login.LoginViewModel;
 import com.example.mealerapplication.ui.login.LoginViewModelFactory;
 import com.example.mealerapplication.databinding.ActivityLoginBinding;
@@ -120,9 +121,11 @@ public class LoginActivity extends AppCompatActivity {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
-                //quick discord test
+                        Authentication.signIn(usernameEditText.getText().toString(), passwordEditText.getText().toString());
             }
         });
+
+
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
