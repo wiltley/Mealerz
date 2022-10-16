@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.mealerapplication.DashboardActivity;
 import com.example.mealerapplication.R;
+import com.example.mealerapplication.data.User;
 import com.example.mealerapplication.data.model.Authentication;
 import com.example.mealerapplication.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -101,7 +102,8 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            User user = new User();
+                            user.setCurrentUser(mAuth.getCurrentUser());
                             loginButton.setText("success");
                             startActivity(intent);
                         }

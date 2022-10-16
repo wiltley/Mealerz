@@ -2,6 +2,9 @@ package com.example.mealerapplication.data;
 import com.example.mealerapplication.data.model.Address;
 import com.example.mealerapplication.data.model.CreditCard;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,16 +22,24 @@ public class User {
     private String lName;
     Address address;
     CreditCard creditCard;
-    FirebaseUser user;
+    private FirebaseUser currentUser;
+    private DatabaseReference ref;
 
     public User(){
 
     }
 
-    public User(FirebaseUser user) {
-        //Changed the way how we're going to initialize things
+    public static void createUser(){
+
     }
 
+
+    public void setCurrentUser(FirebaseUser user){
+        currentUser = user;
+        ref = FirebaseDatabase.getInstance().getReference();
+        email = user.getEmail();
+
+    }
     public String getID(){
         return ID;
     }
