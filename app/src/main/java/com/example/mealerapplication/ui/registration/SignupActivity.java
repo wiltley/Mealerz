@@ -20,6 +20,9 @@ import com.example.mealerapplication.DashboardActivity;
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.Authentication;
 import com.example.mealerapplication.databinding.ActivityLoginBinding;
+import com.example.mealerapplication.ui.login.LoginActivity;
+import com.example.mealerapplication.ui.welcome.WelcomeActivity;
+import com.example.mealerapplication.ui.welcome.Welcomephase2;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -31,6 +34,7 @@ public class SignupActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private Button registerButton;
     private FirebaseAuth auth;
+    private Button loginButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -43,6 +47,24 @@ public class SignupActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.registerUserEt);
         passwordEditText = findViewById(R.id.registerPassEt);
         registerButton = findViewById(R.id.registerBtn);
+
+//        registerButton = findViewById(R.id.registerBtn);
+//        registerButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(SignupActivity.this, WelcomeActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+
+        loginButton = findViewById(R.id.loginButton2);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
         registerButton.setOnClickListener(new View.OnClickListener(){
 
@@ -72,7 +94,7 @@ public class SignupActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(getApplicationContext(), "Registration complete!", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(SignupActivity.this, DashboardActivity.class);
+                    Intent intent = new Intent(SignupActivity.this, WelcomeActivity.class);
                     startActivity(intent);
                 }
                 else{
