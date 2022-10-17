@@ -25,6 +25,7 @@ import com.example.mealerapplication.data.User;
 import com.example.mealerapplication.data.model.Authentication;
 import com.example.mealerapplication.databinding.ActivityLoginBinding;
 import com.example.mealerapplication.ui.registration.SignupActivity;
+import com.example.mealerapplication.ui.welcome.Welcomephase2;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -38,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private Button loginButton;
     private FirebaseAuth mAuth;
+    private Button registerButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,13 +54,27 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = binding.loginButton;
         mAuth = FirebaseAuth.getInstance();
 
+        registerButton = findViewById(R.id.registerButton);
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loginUserAccount();
                 Toast.makeText(getApplicationContext(), "Worked", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(LoginActivity.this, Welcomephase2.class);
+                startActivity(intent);
             }
         });
+
+
 
         TextWatcher afterTextChangedListener = new TextWatcher() {
             @Override
@@ -116,6 +132,8 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+
     }
 
 
