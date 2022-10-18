@@ -1,5 +1,7 @@
 package com.example.mealerapplication.data.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Address {
@@ -59,6 +61,18 @@ public class Address {
 
     public String toString(){
         return houseNumber + " " + streetName + ", " + city + ", " + country + " " + postalCode;
+    }
+
+    public Map<String, Object> getAddressMap(){
+        //Gives data in map form for storing in Firebase
+        Map<String, Object> data = new HashMap<>();
+        data.put("houseNumber", houseNumber);
+        data.put("streetName", streetName);
+        data.put("city", city);
+        data.put("country", country != null ? country : "");
+        data.put("postalCode", postalCode != null ? postalCode : "");
+
+        return data;
     }
 
     @Override

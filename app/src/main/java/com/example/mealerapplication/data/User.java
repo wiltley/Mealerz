@@ -10,13 +10,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 // CLIENT SIDE GENERAL USER
 
 public class User {
 
     private String username;
-    private String ID;
+    private String id;
     private String email;
     private String fName;
     private String lName;
@@ -24,6 +27,22 @@ public class User {
     CreditCard creditCard;
     private FirebaseUser currentUser;
     private DatabaseReference ref;
+    private Role role;
+
+    public enum Role{
+        CLIENT(0),
+        COOK(1),
+        ADMIN(2);
+
+        public final int role;
+
+        private Role(int role){
+            this.role = role;
+        }
+        public int getRole(){
+            return role;
+        }
+    }
 
     public User(){
 
@@ -40,8 +59,8 @@ public class User {
         email = user.getEmail();
 
     }
-    public String getID(){
-        return ID;
+    public String getId(){
+        return id;
     }
 
     public String getUsername(){
@@ -87,6 +106,36 @@ public class User {
     public void setCreditCard(CreditCard creditCard) {
         this.creditCard = creditCard;
     }
+
+    public boolean isClient(){
+        return role == Role.CLIENT;
+    }
+
+    public boolean isCook(){
+        return role == Role.COOK;
+    }
+
+    public boolean isAdmin(){
+        return role == Role.ADMIN;
+    }
+
+    public Map<String, Object> getUserMap(){
+        //used to get mapped data for user to update Firebase
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("username", username);
+        data.put("id", id);
+        data.put("email", email);
+        data.put("fName", fName != null ? fName : "");
+        data.put("lName", lName != null ? lName : "");
+        data.put("address", address.getAddressMap());
+        //Do we put credit cards in the DB? seems like a security risk but not sure
+        // how serious we should take it for now
+
+        return data;
+    }
+
+
 
     public void handleMessageFromServer(){
 
