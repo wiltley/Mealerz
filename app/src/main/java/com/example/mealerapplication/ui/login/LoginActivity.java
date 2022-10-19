@@ -25,6 +25,7 @@ import com.example.mealerapplication.data.User;
 import com.example.mealerapplication.data.model.Authentication;
 import com.example.mealerapplication.databinding.ActivityLoginBinding;
 import com.example.mealerapplication.ui.registration.SignupActivity;
+import com.example.mealerapplication.ui.welcome.WelcomeActivity;
 import com.example.mealerapplication.ui.welcome.Welcomephase2;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -114,11 +115,11 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, Welcomephase2.class);
                             User user = new User();
                             user.setCurrentUser(mAuth.getCurrentUser());
                             loginButton.setText("success");
