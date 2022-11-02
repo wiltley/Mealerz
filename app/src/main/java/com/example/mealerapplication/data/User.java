@@ -19,7 +19,6 @@ import java.util.Map;
 public class User {
 
     private String username;
-    private String id;
     private String email;
     private String fName;
     private String lName;
@@ -36,16 +35,28 @@ public class User {
 
         public final int role;
 
-        private Role(int role){
+        Role(int role){
             this.role = role;
         }
         public int getRole(){
             return role;
         }
+        public String getRoleString(){
+            switch (role){
+                case 0:
+                    return "client";
+                case 1:
+                    return "cook";
+                default:
+                    return "admin";
+            }
+        }
     }
 
-    public User(){
-
+    public User(String username, String email, Role role) {
+        this.username = username;
+        this.email = email;
+        this.role = role;
     }
 
     public static void createUser(){
@@ -58,9 +69,6 @@ public class User {
         ref = FirebaseDatabase.getInstance().getReference();
         email = user.getEmail();
 
-    }
-    public String getId(){
-        return id;
     }
 
     public String getUsername(){
@@ -124,11 +132,11 @@ public class User {
 
         Map<String, Object> data = new HashMap<>();
         data.put("username", username);
-        data.put("id", id);
         data.put("email", email);
         data.put("fName", fName != null ? fName : "");
         data.put("lName", lName != null ? lName : "");
         data.put("address", address.getAddressMap());
+        data.put("role", role.getRole());
         //Do we put credit cards in the DB? seems like a security risk but not sure
         // how serious we should take it for now
 

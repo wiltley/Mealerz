@@ -120,8 +120,9 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(LoginActivity.this, Welcomephase2.class);
-                            User user = new User();
-                            user.setCurrentUser(mAuth.getCurrentUser());
+                            //User object is only in the scope of this function here
+//                            User user = new User();
+//                            user.setCurrentUser(mAuth.getCurrentUser());
                             loginButton.setText("success");
                             startActivity(intent);
                         }

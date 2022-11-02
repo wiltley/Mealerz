@@ -36,7 +36,7 @@
         app:layout_constraintTop_toBottomOf="@+id/register" />
 
     <EditText
-        android:id="@+id/registerUserEt"
+        android:id="@+id/registerUserEmail"
         android:layout_width="365dp"
         android:layout_height="53dp"
         android:layout_marginTop="224dp"
@@ -62,10 +62,10 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerUserEt" />
+        app:layout_constraintTop_toBottomOf="@+id/registerUserEmail" />
 
     <EditText
-        android:id="@+id/registerPassEt"
+        android:id="@+id/registerUserPass"
         android:layout_width="367dp"
         android:layout_height="48dp"
         android:layout_marginTop="356dp"
