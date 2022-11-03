@@ -1,10 +1,6 @@
 package com.example.mealerapplication.ui.login;
 
-import android.app.Activity;
-
 import androidx.annotation.NonNull;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,24 +10,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.mealerapplication.DashboardActivity;
 import com.example.mealerapplication.R;
-import com.example.mealerapplication.data.User;
-import com.example.mealerapplication.data.model.Authentication;
 import com.example.mealerapplication.databinding.ActivityLoginBinding;
 import com.example.mealerapplication.ui.registration.SignupActivity;
-import com.example.mealerapplication.ui.welcome.WelcomeActivity;
 import com.example.mealerapplication.ui.welcome.Welcomephase2;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -74,6 +67,27 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //OnClickListener that handles show/hide password buttons being clicked
+
+        //Set onclick listener for show/hide password buttons on login activity
+        Button showLoginPassword = findViewById(R.id.showHideBtnLogin);
+        showLoginPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                passwordEditText = findViewById(R.id.password);
+                if(showLoginPassword.getText().toString().equals(getString(R.string.show_pass))){
+                    passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    showLoginPassword.setText(R.string.hide_pass);
+                } else{
+                    passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    showLoginPassword.setText(R.string.show_pass);
+                }
+            }
+        });
+
+
+
 
 
 

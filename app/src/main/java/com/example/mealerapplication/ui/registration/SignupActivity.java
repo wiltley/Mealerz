@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -59,6 +61,20 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        Button showRegisterPassword = findViewById(R.id.showHideBtnReg);
+        showRegisterPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(showRegisterPassword.getText().toString().equals(getString(R.string.show_pass))){
+                    passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    showRegisterPassword.setText(R.string.hide_pass);
+                } else{
+                    passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    showRegisterPassword.setText(R.string.show_pass);
+                }
             }
         });
 
