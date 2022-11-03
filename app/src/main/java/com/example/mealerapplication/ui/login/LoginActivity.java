@@ -32,6 +32,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -69,8 +74,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loginUserAccount();
-                Toast.makeText(getApplicationContext(), "Worked", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(LoginActivity.this, Welcomephase2.class);
+                //Toast.makeText(getApplicationContext(), "Worked", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
@@ -95,6 +100,29 @@ public class LoginActivity extends AppCompatActivity {
         usernameEditText.addTextChangedListener(afterTextChangedListener);
         passwordEditText.addTextChangedListener(afterTextChangedListener);
 
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        DocumentReference docRef = db.collection("users").document(auth.getCurrentUser().getUid());
+
+//         if role is cook and status is banned, show them message of them not being able to access account
+//         else if role is cook and status is suspended, show them message with time remaining before their suspension uplifts
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if ((document.contains("cook") && (document.contains("Banned")))) {
+                        Toast.makeText(getApplicationContext(), "yes", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "no", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+
+                }
+            }
+        });
 
     }
 
@@ -128,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
                         else {
                             Toast.makeText(getApplicationContext(), "Login failed! Please try again later", Toast.LENGTH_LONG).show();
                             loginButton.setText("failed");
-                            Intent intent1 = new Intent(LoginActivity.this, SignupActivity.class);
+                            Intent intent1 = new Intent(LoginActivity.this, LoginActivity.class);
                             startActivity(intent1);
                         }
                     }
