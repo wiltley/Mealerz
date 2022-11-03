@@ -9,23 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import com.example.mealerapplication.DashboardActivity;
 import com.example.mealerapplication.R;
-import com.example.mealerapplication.data.model.Authentication;
-import com.example.mealerapplication.databinding.ActivityLoginBinding;
+import com.example.mealerapplication.data.User;
 import com.example.mealerapplication.ui.login.LoginActivity;
 import com.example.mealerapplication.ui.welcome.WelcomeActivity;
-import com.example.mealerapplication.ui.welcome.Welcomephase2;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -54,8 +50,8 @@ public class SignupActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-        emailEditText = findViewById(R.id.registerUserEt);
-        passwordEditText = findViewById(R.id.registerPassEt);
+        emailEditText = findViewById(R.id.registerUserEmail);
+        passwordEditText = findViewById(R.id.registerUserPass);
         registerButton = findViewById(R.id.registerBtn);
 
 
@@ -65,6 +61,20 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        Button showRegisterPassword = findViewById(R.id.showHideBtnReg);
+        showRegisterPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(showRegisterPassword.getText().toString().equals(getString(R.string.show_pass))){
+                    passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    showRegisterPassword.setText(R.string.hide_pass);
+                } else{
+                    passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    showRegisterPassword.setText(R.string.show_pass);
+                }
             }
         });
 
@@ -81,12 +91,13 @@ public class SignupActivity extends AppCompatActivity {
         //Careful when this is called because .set has the ability to overwrite documents
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        Map<String, Object> userInfo = new HashMap<>();
-        userInfo.put("email", "");
-        userInfo.put("first name", "");
-        userInfo.put("last name", "");
-        userInfo.put("role", "");
+        String email = emailEditText.getText().toString();
+        User userObj = new User(email, email, User.Role.CLIENT);
+        Map<String, Object> userInfo = userObj.getUserMap();
+//        userInfo.put("email", "");
+//        userInfo.put("first name", "");
+//        userInfo.put("last name", "");
+//        userInfo.put("role", "");
 
         db.collection("users").document(auth.getCurrentUser().getUid())
                 .set(userInfo)
