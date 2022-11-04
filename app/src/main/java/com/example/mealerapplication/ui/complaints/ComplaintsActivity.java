@@ -67,8 +67,11 @@ public class ComplaintsActivity extends AppCompatActivity implements ComplaintsA
                         String accused = document.getString("accused");
                         String accuser = document.getString("accuser");
                         String message = document.getString("complaint");
+                        String accusedUID = document.getString("accusedUID");
+                        String documentId = document.getId();
 
-                        list.add(new Complaint(accuser, accused, message));
+                        list.add(new Complaint(accuser, accused, message, documentId, accusedUID));
+
                     }
 
                     myAdapter.notifyDataSetChanged();
@@ -83,8 +86,16 @@ public class ComplaintsActivity extends AppCompatActivity implements ComplaintsA
     public void onComplaintClicked(int position) {
 
         // Gets us the complaint that was clicked
-        Log.d(TAG, "" + list.get(position));
         Intent intent = new Intent(this, ComplaintsDecision.class);
+        String accused = list.get(position).getAccused();
+        String message = list.get(position).getMessage();
+        String documentId = list.get(position).getDocumentID();
+        String accusedUID = list.get(position).getAccused_UID();
+
+        intent.putExtra("message", message );
+        intent.putExtra("accused", accused );
+        intent.putExtra("documentID", documentId );
+        intent.putExtra("accusedUID", accusedUID );
         startActivity(intent);
     }
 }
