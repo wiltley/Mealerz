@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -27,6 +28,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -64,9 +70,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loginUserAccount();
+
                 Toast.makeText(getApplicationContext(), "Worked", Toast.LENGTH_LONG).show();
-                //temp changing this
                 Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
+
                 startActivity(intent);
             }
         });
@@ -113,6 +120,34 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText.addTextChangedListener(afterTextChangedListener);
 
 
+
+
+    }
+
+    private void checkIfBanned() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        DocumentReference docRef = db.collection("users").document(auth.getCurrentUser().getUid());
+
+//         if role is cook and status is banned, show them message of them not being able to access account
+//         else if role is cook and status is suspended, show them message with time remaining before their suspension uplifts
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.getString("role").equals("cook") && document.getString("status").equals("Banned")) {
+                        Toast.makeText(getApplicationContext(), "Sorry, but your account is permanently banned", Toast.LENGTH_LONG).show();
+                    }
+                    else if(document.getString("role").equals("cook") && document.getString("status").equals("Suspended")) {
+                        Toast.makeText(getApplicationContext(), "Sorry, but your account is temporarily banned for 3 days", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Log.d("LOGGER ", "get failed with", task.getException());
+                }
+            }
+        });
     }
 
 
@@ -145,9 +180,10 @@ public class LoginActivity extends AppCompatActivity {
                             loginButton.setText("success");
                         }
                         else {
+                            checkIfBanned();
                             Toast.makeText(getApplicationContext(), "Login failed! Please try again later", Toast.LENGTH_LONG).show();
                             loginButton.setText("failed");
-                            Intent intent1 = new Intent(LoginActivity.this, SignupActivity.class);
+                            Intent intent1 = new Intent(LoginActivity.this, LoginActivity.class);
                             startActivity(intent1);
                         }
                     }
