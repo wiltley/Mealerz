@@ -59,6 +59,10 @@ public class User {
         this.role = role;
     }
 
+    public User(){
+
+    }
+
     public static void createUser(){
 
     }
@@ -126,6 +130,8 @@ public class User {
     public boolean isAdmin(){
         return role == Role.ADMIN;
     }
+
+    public Role getRole(){ return role; }
 
     public Map<String, Object> getUserMap(){
         //used to get mapped data for user to update Firebase
