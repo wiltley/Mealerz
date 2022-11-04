@@ -117,6 +117,34 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText.addTextChangedListener(afterTextChangedListener);
 
 
+
+
+    }
+
+    private void checkIfBanned() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        DocumentReference docRef = db.collection("users").document(auth.getCurrentUser().getUid());
+
+//         if role is cook and status is banned, show them message of them not being able to access account
+//         else if role is cook and status is suspended, show them message with time remaining before their suspension uplifts
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.getString("role").equals("cook") && document.getString("status").equals("Banned")) {
+                        Toast.makeText(getApplicationContext(), "Sorry, but your account is permanently banned", Toast.LENGTH_LONG).show();
+                    }
+                    else if(document.getString("role").equals("cook") && document.getString("status").equals("Suspended")) {
+                        Toast.makeText(getApplicationContext(), "Sorry, but your account is temporarily banned for 3 days", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Log.d("LOGGER ", "get failed with", task.getException());
+                }
+            }
+        });
     }
 
 
@@ -150,9 +178,10 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                         else {
+                            checkIfBanned();
                             Toast.makeText(getApplicationContext(), "Login failed! Please try again later", Toast.LENGTH_LONG).show();
                             loginButton.setText("failed");
-                            Intent intent1 = new Intent(LoginActivity.this, SignupActivity.class);
+                            Intent intent1 = new Intent(LoginActivity.this, LoginActivity.class);
                             startActivity(intent1);
                         }
                     }
