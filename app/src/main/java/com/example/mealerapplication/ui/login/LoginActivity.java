@@ -40,7 +40,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
-
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
