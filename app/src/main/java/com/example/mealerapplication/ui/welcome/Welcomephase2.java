@@ -23,6 +23,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class Welcomephase2 extends AppCompatActivity {
     private Button signoutButton;
 
+    String role;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +33,7 @@ public class Welcomephase2 extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         TextView tV = findViewById(R.id.welcome2);
+        Button button = findViewById(R.id.signoutButton);
 
         DocumentReference docRef = db.collection("users").document(auth.getCurrentUser().getUid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -39,7 +42,12 @@ public class Welcomephase2 extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document != null) {
-                        tV.setText("Welcome dear, " + document.getString("role")+"!");
+                        role = document.getString("role");
+                        tV.setText("Welcome dear, " + role +"!");
+
+                        if(document.getString("role").equals("admin")){
+                            button.setText("View Complaints");
+                        }
                     } else {
                         Log.d("LOGGER", "No such document");
                     }
@@ -53,8 +61,16 @@ public class Welcomephase2 extends AppCompatActivity {
         signoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Welcomephase2.this, LoginActivity.class);
+
+                Intent intent;
+                if(role.equals("admin")){
+
+                    intent = new Intent(Welcomephase2.this, ComplaintsActivity.class);
+                }else{
+
+                    intent = new Intent(Welcomephase2.this, LoginActivity.class);
                 // TEMPORARILY ROUTING THIS TO COMPLAINTS VIEW
+                }
                 //auth.signOut();
                 startActivity(intent);
             }
