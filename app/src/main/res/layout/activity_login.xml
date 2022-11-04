@@ -76,7 +76,7 @@
     <EditText
         android:id="@+id/password"
         android:layout_width="292dp"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_marginTop="72dp"
         android:hint="@string/prompt_password"
         android:imeActionLabel="@string/action_sign_in_short"
@@ -93,7 +93,7 @@
     <Button
         android:id="@+id/showHideBtnLogin"
         android:layout_width="86dp"
-        android:layout_height="41dp"
+        android:layout_height="48dp"
         android:text="@string/show_pass"
         app:layout_constraintBottom_toTopOf="@+id/loginButton"
         app:layout_constraintEnd_toEndOf="parent"

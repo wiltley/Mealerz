@@ -53,7 +53,7 @@ public class Welcomephase2 extends AppCompatActivity {
         signoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Welcomephase2.this, ComplaintsActivity.class);
+                Intent intent = new Intent(Welcomephase2.this, LoginActivity.class);
                 // TEMPORARILY ROUTING THIS TO COMPLAINTS VIEW
                 //auth.signOut();
                 startActivity(intent);
