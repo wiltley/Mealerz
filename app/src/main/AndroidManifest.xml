@@ -13,11 +13,16 @@
         android:theme="@style/Theme.MealerApplication"
         tools:targetApi="31">
         <activity
-
+            android:name=".ui.complaints.ComplaintsDecision"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.complaints.ComplaintsActivity"
             android:exported="false"
             android:label="ComplaintsActivity" />
-
         <activity
             android:name=".ui.welcome.Welcomephase2"
             android:exported="false">
