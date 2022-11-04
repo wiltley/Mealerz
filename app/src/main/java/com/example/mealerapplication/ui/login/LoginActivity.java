@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.databinding.ActivityLoginBinding;
+import com.example.mealerapplication.ui.complaints.ComplaintsActivity;
 import com.example.mealerapplication.ui.registration.SignupActivity;
 import com.example.mealerapplication.ui.welcome.WelcomeActivity;
 import com.example.mealerapplication.ui.welcome.Welcomephase2;
@@ -69,8 +70,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loginUserAccount();
-                //Toast.makeText(getApplicationContext(), "Worked", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+
+                Toast.makeText(getApplicationContext(), "Worked", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
+
                 startActivity(intent);
             }
         });
@@ -170,12 +173,11 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(LoginActivity.this, Welcomephase2.class);
+                            // TEMPORARY CHANGE TO SEND TO COMAPLINTSACTIVITY
                             //User object is only in the scope of this function here
 //                            User user = new User();
 //                            user.setCurrentUser(mAuth.getCurrentUser());
                             loginButton.setText("success");
-                            startActivity(intent);
                         }
                         else {
                             checkIfBanned();

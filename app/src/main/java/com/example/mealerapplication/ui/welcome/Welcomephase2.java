@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.mealerapplication.R;
+import com.example.mealerapplication.ui.complaints.ComplaintsActivity;
 import com.example.mealerapplication.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -52,8 +53,9 @@ public class Welcomephase2 extends AppCompatActivity {
         signoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Welcomephase2.this, LoginActivity.class);
-                auth.signOut();
+                Intent intent = new Intent(Welcomephase2.this, ComplaintsActivity.class);
+                // TEMPORARILY ROUTING THIS TO COMPLAINTS VIEW
+                //auth.signOut();
                 startActivity(intent);
             }
         });
