@@ -5,6 +5,7 @@ public class Complaint {
     private String accuser;
     private String accused;
     private String message;
+    private String documentId;
 
 
     public Complaint(){
@@ -12,6 +13,7 @@ public class Complaint {
         accuser = "";
         accused = "";
         message = "";
+        documentId = "";
     }
 
     public Complaint(String accuser, String accused, String message){
@@ -35,6 +37,11 @@ public class Complaint {
         return message;
     }
 
+    public void banAccused(){
+
+
+
+    }
 
 
 }
