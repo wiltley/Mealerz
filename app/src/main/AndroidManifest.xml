@@ -13,6 +13,10 @@
         android:theme="@style/Theme.MealerApplication"
         tools:targetApi="31">
         <activity
+            android:name=".ui.complaints.ComplaintsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_complaints" />
+        <activity
             android:name=".ui.welcome.Welcomephase2"
             android:exported="false">
             <meta-data
