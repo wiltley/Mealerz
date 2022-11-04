@@ -100,6 +100,7 @@ public class SignupActivity extends AppCompatActivity {
         userInfo.put("first name", "");
         userInfo.put("last name", "");
         userInfo.put("role", "");
+        userInfo.put("status", "");
 
         db.collection("users").document(auth.getCurrentUser().getUid())
                 .set(userInfo)
