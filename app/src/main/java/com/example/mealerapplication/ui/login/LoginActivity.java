@@ -23,6 +23,7 @@ import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.User;
 import com.example.mealerapplication.databinding.ActivityLoginBinding;
 import com.example.mealerapplication.ui.complaints.ComplaintsActivity;
+import com.example.mealerapplication.ui.complaints.ComplaintsDecision;
 import com.example.mealerapplication.ui.registration.SignupActivity;
 import com.example.mealerapplication.ui.welcome.WelcomeActivity;
 import com.example.mealerapplication.ui.welcome.Welcomephase2;
@@ -44,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
     private FirebaseAuth mAuth;
     private Button registerButton;
+    private boolean isBanned;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,9 +76,6 @@ public class LoginActivity extends AppCompatActivity {
                 loginUserAccount();
 
                 Toast.makeText(getApplicationContext(), "Worked", Toast.LENGTH_LONG).show();
-//                Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
-//
-//                startActivity(intent);
             }
         });
 
@@ -126,6 +125,13 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void setBanned(boolean bool){
+
+        isBanned = bool;
+
+    }
+
+
     private void checkIfBanned() {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -141,15 +147,35 @@ public class LoginActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.getString("role").equals("cook") && document.getString("status").equals("Banned")) {
                         Toast.makeText(getApplicationContext(), "Sorry, but your account is permanently banned", Toast.LENGTH_LONG).show();
+                        setBanned(true);
+                        Intent i = new Intent(LoginActivity.this, LoginActivity.class);
+                        startActivity(i);
+                        finish();
                     }
                     else if(document.getString("role").equals("cook") && document.getString("status").equals("Suspended")) {
                         Toast.makeText(getApplicationContext(), "Sorry, but your account is temporarily banned for 3 days", Toast.LENGTH_LONG).show();
+                        setBanned(true);
+
+                        Intent i = new Intent(LoginActivity.this, LoginActivity.class);
+                        startActivity(i);
+                        finish();
+
+                    }else if(!document.getString("role").equals("admin")){
+                        setBanned(false);
+                        Intent i = new Intent(LoginActivity.this, Welcomephase2.class);
+                        startActivity(i);
+                    }else{
+
+                        Intent i = new Intent(LoginActivity.this, ComplaintsActivity.class);
+                        startActivity(i);
                     }
                 } else {
-                    Log.d("LOGGER ", "get failed with", task.getException());
                 }
             }
         });
+
+
+
     }
 
 
@@ -176,24 +202,13 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             //Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
-                            User user = new User();
-                            user.setCurrentUser(mAuth.getCurrentUser());
-                            if(user.isAdmin()){
-                                Intent intent2 = new Intent(LoginActivity.this, ComplaintsActivity.class);
-                                startActivity(intent2);
-                            }
-                            else {
-                                Intent intent3 = new Intent(LoginActivity.this, Welcomephase2.class);
-                                startActivity(intent3);
-                            }
-                            //loginButton.setText("success");
-                        }
-                        else {
-                            checkIfBanned();
-                            Toast.makeText(getApplicationContext(), "Login failed! Please try again later", Toast.LENGTH_LONG).show();
-                            loginButton.setText("failed");
-                            Intent intent1 = new Intent(LoginActivity.this, LoginActivity.class);
-                            startActivity(intent1);
+
+                                checkIfBanned();
+                        }else {
+
+                                Toast.makeText(getApplicationContext(), "Login failed! Please try again later", Toast.LENGTH_LONG).show();
+                                loginButton.setText("failed");
+                                Intent intent1 = new Intent(LoginActivity.this, LoginActivity.class);
                         }
                     }
                 });
