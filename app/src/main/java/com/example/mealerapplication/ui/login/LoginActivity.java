@@ -15,6 +15,8 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +40,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -121,9 +124,9 @@ public class LoginActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.getString("role").equals("cook") && document.getString("status").equals("Banned")) {
                         Toast.makeText(getApplicationContext(), "Sorry, but your account is permanently banned", Toast.LENGTH_LONG).show();
-                    } else if(document.getString("role").equals("cook") && document.getString("status").equals("Suspended")) {
+                    }
+                    else if(document.getString("role").equals("cook") && document.getString("status").equals("Suspended")) {
                         Toast.makeText(getApplicationContext(), "Sorry, but your account is temporarily banned for 3 days", Toast.LENGTH_LONG).show();
-
                     }
                 } else {
                     Log.d("LOGGER ", "get failed with", task.getException());
