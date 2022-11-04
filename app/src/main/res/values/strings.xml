@@ -20,4 +20,5 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="show_pass">Show</string>
     <string name="hide_pass">Hide</string>
+    <string name="title_activity_complaints">ComplaintsActivity</string>
 </resources>
