@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.databinding.ActivityLoginBinding;
 import com.example.mealerapplication.ui.registration.SignupActivity;
+import com.example.mealerapplication.ui.welcome.WelcomeActivity;
 import com.example.mealerapplication.ui.welcome.Welcomephase2;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -63,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loginUserAccount();
                 Toast.makeText(getApplicationContext(), "Worked", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(LoginActivity.this, Welcomephase2.class);
+                Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
                 startActivity(intent);
             }
         });
