@@ -9,12 +9,14 @@ public class Address {
     private int houseNumber;
     private String city;
     private String country;
+    private String province;
     private String postalCode;
 
-    public Address(int houseNumber, String streetName, String city, String country, String postalCode){
+    public Address(int houseNumber, String streetName, String city, String province, String country, String postalCode){
         this.houseNumber = houseNumber;
         this.streetName = streetName;
         this.city = city;
+        this.province = province;
         this.country = country;
         this.postalCode = postalCode;
     }
@@ -43,6 +45,10 @@ public class Address {
         this.city = city;
     }
 
+    public String getProvince() { return province; }
+
+    public void setProvince(String province) { this.province = province; }
+
     public String getCountry() {
         return country;
     }
@@ -60,7 +66,20 @@ public class Address {
     }
 
     public String toString(){
-        return houseNumber + " " + streetName + ", " + city + ", " + country + " " + postalCode;
+        return houseNumber + " " + streetName + ", " + city + ", " + province + ", " + country + ", " + postalCode;
+    }
+
+    public Map<String, Object> getAddressMap(){
+        //Gives data in map form for storing in Firebase
+        Map<String, Object> data = new HashMap<>();
+        data.put("houseNumber", houseNumber);
+        data.put("streetName", streetName);
+        data.put("city", city);
+        data.put("province", province);
+        data.put("country", country != null ? country : "");
+        data.put("postalCode", postalCode != null ? postalCode : "");
+
+        return data;
     }
 
     public Map<String, Object> getAddressMap(){
@@ -80,6 +99,7 @@ public class Address {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
-        return houseNumber == address.houseNumber && Objects.equals(streetName, address.streetName) && Objects.equals(city, address.city) && Objects.equals(country, address.country) && Objects.equals(postalCode, address.postalCode);
+        return houseNumber == address.houseNumber && Objects.equals(streetName, address.streetName)
+                && Objects.equals(city, address.city) && Objects.equals(province, address.province) && Objects.equals(country, address.country) && Objects.equals(postalCode, address.postalCode);
     }
 }
