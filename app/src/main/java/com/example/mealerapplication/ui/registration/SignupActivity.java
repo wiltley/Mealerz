@@ -64,19 +64,19 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-        Button showRegisterPassword = findViewById(R.id.showHideBtnReg);
-        showRegisterPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(showRegisterPassword.getText().toString().equals(getString(R.string.show_pass))){
-                    passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    showRegisterPassword.setText(R.string.hide_pass);
-                } else{
-                    passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    showRegisterPassword.setText(R.string.show_pass);
-                }
-            }
-        });
+//        Button showRegisterPassword = findViewById(R.id.showHideBtnReg);
+//        showRegisterPassword.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(showRegisterPassword.getText().toString().equals(getString(R.string.show_pass))){
+//                    passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+//                    showRegisterPassword.setText(R.string.hide_pass);
+//                } else{
+//                    passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+//                    showRegisterPassword.setText(R.string.show_pass);
+//                }
+//            }
+//        });
 
         registerButton.setOnClickListener(new View.OnClickListener(){
 
@@ -91,13 +91,15 @@ public class SignupActivity extends AppCompatActivity {
         //Careful when this is called because .set has the ability to overwrite documents
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String email = emailEditText.getText().toString();
-        User userObj = new User(email, email, User.Role.CLIENT);
-        Map<String, Object> userInfo = userObj.getUserMap();
-//        userInfo.put("email", "");
-//        userInfo.put("first name", "");
-//        userInfo.put("last name", "");
-//        userInfo.put("role", "");
+
+//        String email = emailEditText.getText().toString();
+//        User userObj = new User(email, email, User.Role.CLIENT);
+
+        Map<String, Object> userInfo = new HashMap<>();
+        userInfo.put("email", "");
+        userInfo.put("first name", "");
+        userInfo.put("last name", "");
+        userInfo.put("role", "");
 
         db.collection("users").document(auth.getCurrentUser().getUid())
                 .set(userInfo)
@@ -123,10 +125,12 @@ public class SignupActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(), "Please enter email!", Toast.LENGTH_LONG).show();
             return;
+
         }
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(getApplicationContext(), "Please enter password!", Toast.LENGTH_LONG).show();
             return;
+
         }
 
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
