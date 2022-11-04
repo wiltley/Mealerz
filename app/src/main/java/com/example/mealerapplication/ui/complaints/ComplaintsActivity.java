@@ -1,11 +1,15 @@
 package com.example.mealerapplication.ui.complaints;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.mealerapplication.R;
@@ -22,13 +26,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class ComplaintsActivity extends AppCompatActivity {
+public class ComplaintsActivity extends AppCompatActivity implements ComplaintsAdapter.OnComplaintListener  {
 
     RecyclerView recyclerView;
     ComplaintsAdapter myAdapter;
     ArrayList<Complaint> list;
     FirebaseAuth auth;
     FirebaseFirestore db ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +47,14 @@ public class ComplaintsActivity extends AppCompatActivity {
         //System.out.println("reached");
 
         recyclerView = findViewById(R.id.complaintsList);
+
+
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<>();
-        myAdapter = new ComplaintsAdapter(this, list);
+        myAdapter = new ComplaintsAdapter(this, list, this);
         recyclerView.setAdapter(myAdapter);
 
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
@@ -59,8 +67,11 @@ public class ComplaintsActivity extends AppCompatActivity {
                         String accused = document.getString("accused");
                         String accuser = document.getString("accuser");
                         String message = document.getString("complaint");
+                        String accusedUID = document.getString("accusedUID");
+                        String documentId = document.getId();
 
-                        list.add(new Complaint(accuser, accused, message));
+                        list.add(new Complaint(accuser, accused, message, documentId, accusedUID));
+
                     }
 
                     myAdapter.notifyDataSetChanged();
@@ -71,6 +82,20 @@ public class ComplaintsActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onComplaintClicked(int position) {
 
+        // Gets us the complaint that was clicked
+        Intent intent = new Intent(this, ComplaintsDecision.class);
+        String accused = list.get(position).getAccused();
+        String message = list.get(position).getMessage();
+        String documentId = list.get(position).getDocumentID();
+        String accusedUID = list.get(position).getAccused_UID();
 
+        intent.putExtra("message", message );
+        intent.putExtra("accused", accused );
+        intent.putExtra("documentID", documentId );
+        intent.putExtra("accusedUID", accusedUID );
+        startActivity(intent);
+    }
 }

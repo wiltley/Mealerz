@@ -1,6 +1,9 @@
 package com.example.mealerapplication.ui.complaints;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,18 +20,20 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.My
     Context context;
 
     ArrayList<Complaint> list;
+    private OnComplaintListener mOnComplaintListener;
 
 
-    public ComplaintsAdapter(Context context, ArrayList<Complaint> list) {
+    public ComplaintsAdapter(Context context, ArrayList<Complaint> list, OnComplaintListener mOnComplaintListener) {
         this.context = context;
         this.list = list;
+        this.mOnComplaintListener = mOnComplaintListener;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.complaints_item,parent,false);
-        return  new MyViewHolder(v);
+        return  new MyViewHolder(v, mOnComplaintListener);
     }
 
     @Override
@@ -42,22 +47,38 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.My
 
     }
 
+
+
     @Override
     public int getItemCount() {
         return list.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView accuser, accused, message;
+        OnComplaintListener onComplaintListener;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, OnComplaintListener onComplaintListener) {
             super(itemView);
 
+            this.onComplaintListener = onComplaintListener;
             accuser = itemView.findViewById(R.id.accuser);
             accused = itemView.findViewById(R.id.accused);
             message = itemView.findViewById(R.id.message);
+            itemView.setOnClickListener(this);
 
         }
+
+        @Override
+        public void onClick(View view) {
+            onComplaintListener.onComplaintClicked(getAdapterPosition());
+            Log.d(TAG, "YOOOO!");
+
+        }
+    }
+
+    public interface OnComplaintListener{
+        void onComplaintClicked(int position);
     }
 }
