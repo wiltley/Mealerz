@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.mealerapplication.R;
+
 public class MyMealsActivity extends AppCompatActivity {
 
     @Override

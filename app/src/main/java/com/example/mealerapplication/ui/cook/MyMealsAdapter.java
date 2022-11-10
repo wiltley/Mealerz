@@ -1,2 +1,4 @@
-package com.example.mealerapplication.ui.cook;public class MyMealsAdapter {
+package com.example.mealerapplication.ui.cook;
+
+public class MyMealsAdapter {
 }
