@@ -118,6 +118,27 @@ public class UserHandler {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        HashMap<String, Integer> test = new HashMap<String, Integer>();
+        test.put("Yo", 2);
+
+
+        System.out.println("reachd");
+        db.collection("meals").document(user.getUid()).collection("recipes").document()
+                .set(test)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
+
     }
 
 
