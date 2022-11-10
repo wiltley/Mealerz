@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mealerapplication.R;
+import com.example.mealerapplication.data.model.Complaint;
 
 import java.util.ArrayList;
 

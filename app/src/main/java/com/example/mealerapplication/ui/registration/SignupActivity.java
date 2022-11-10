@@ -47,26 +47,13 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-//        Button showRegisterPassword = findViewById(R.id.showHideBtnReg);
-//        showRegisterPassword.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(showRegisterPassword.getText().toString().equals(getString(R.string.show_pass))){
-//                    passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-//                    showRegisterPassword.setText(R.string.hide_pass);
-//                } else{
-//                    passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
-//                    showRegisterPassword.setText(R.string.show_pass);
-//                }
-//            }
-//        });
-
         registerButton.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view){
                 registerUser();
             }
+
         });
     }
 
