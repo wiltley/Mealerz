@@ -74,7 +74,6 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.My
         @Override
         public void onClick(View view) {
             onComplaintListener.onComplaintClicked(getAdapterPosition());
-            Log.d(TAG, "YOOOO!");
 
         }
     }
