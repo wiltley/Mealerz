@@ -8,6 +8,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mealerapplication.R;
+import com.example.mealerapplication.data.accounthandling.UserHandler;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,7 +35,7 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(WelcomeActivity.this, Welcomephase2.class);
-                updateUserRole("cook");
+                UserHandler.updateUserRole("cook");
                 startActivity(intent);
             }
         });
@@ -44,23 +45,10 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(WelcomeActivity.this, Welcomephase2.class);
-                updateUserRole("client");
+                UserHandler.updateUserRole("client");
                 startActivity(intent);
             }
         });
-
-
-    }
-
-    public void updateUserRole(String userType) {
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference ref = db.collection("users").document(user.getUid());
-
-        Map<String, Object> userInfo = new HashMap<>();
-        userInfo.put("role", userType);
-        ref.update(userInfo);
 
 
     }
