@@ -1,16 +1,12 @@
 package com.example.mealerapplication.ui.login;
 
-import androidx.annotation.NonNull;
-
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -20,21 +16,10 @@ import android.widget.Toast;
 
 import com.example.mealerapplication.R;
 //import com.example.mealerapplication.data.User;
-import com.example.mealerapplication.data.User;
+import com.example.mealerapplication.data.accounthandling.UserHandler;
 import com.example.mealerapplication.databinding.ActivityLoginBinding;
-import com.example.mealerapplication.ui.complaints.ComplaintsActivity;
-import com.example.mealerapplication.ui.complaints.ComplaintsDecision;
 import com.example.mealerapplication.ui.registration.SignupActivity;
-import com.example.mealerapplication.ui.welcome.WelcomeActivity;
-import com.example.mealerapplication.ui.welcome.Welcomephase2;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -98,10 +83,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
         TextWatcher afterTextChangedListener = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -125,96 +106,12 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void setBanned(boolean bool){
-
-        isBanned = bool;
-
-    }
-
-
-    private void checkIfBanned() {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        DocumentReference docRef = db.collection("users").document(auth.getCurrentUser().getUid());
-
-//         if role is cook and status is banned, show them message of them not being able to access account
-//         else if role is cook and status is suspended, show them message with time remaining before their suspension uplifts
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.getString("role").equals("cook") && document.getString("status").equals("Banned")) {
-                        Toast.makeText(getApplicationContext(), "Sorry, but your account is permanently banned", Toast.LENGTH_LONG).show();
-                        setBanned(true);
-                        Intent i = new Intent(LoginActivity.this, LoginActivity.class);
-                        startActivity(i);
-                        finish();
-                    }
-                    else if(document.getString("role").equals("cook") && document.getString("status").equals("Suspended")) {
-                        Toast.makeText(getApplicationContext(), "Sorry, but your account is temporarily banned for 3 days", Toast.LENGTH_LONG).show();
-                        setBanned(true);
-
-                        Intent i = new Intent(LoginActivity.this, LoginActivity.class);
-                        startActivity(i);
-                        finish();
-
-                    }else if(!document.getString("role").equals("admin")){
-                        setBanned(false);
-                        Intent i = new Intent(LoginActivity.this, Welcomephase2.class);
-                        startActivity(i);
-                    }else{
-
-                        Intent i = new Intent(LoginActivity.this, ComplaintsActivity.class);
-                        startActivity(i);
-                    }
-                } else {
-                }
-            }
-        });
-
-
-
-    }
-
-
-
-
     private void loginUserAccount() {
 
         String email, password;
         email = usernameEditText.getText().toString();
         password= passwordEditText.getText().toString();
-
-        if (TextUtils.isEmpty(email)) {
-            Toast.makeText(getApplicationContext(), "Please enter email...", Toast.LENGTH_LONG).show();
-            return;
-        }
-        if (TextUtils.isEmpty(password)) {
-            Toast.makeText(getApplicationContext(), "Please enter password!", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            //Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
-
-                                checkIfBanned();
-                        }else {
-
-                                Toast.makeText(getApplicationContext(), "Login failed! Please try again later", Toast.LENGTH_LONG).show();
-                                loginButton.setText("failed");
-                                Intent intent1 = new Intent(LoginActivity.this, LoginActivity.class);
-                        }
-                    }
-                });
-
+        UserHandler.loginUser(email, password, getApplicationContext());
 
     }
-
-
 }
