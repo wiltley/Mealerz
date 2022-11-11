@@ -83,6 +83,7 @@ public class ComplaintsActivity extends AppCompatActivity implements TestAdapter
     public void onElementClicked(int position) {
 
         // Gets us the complaint that was clicked
+        // Honestly we probably just want to make Complaints Serializable
         Intent intent = new Intent(this, ComplaintsDecision.class);
         String accused = list.get(position).getAccused();
         String message = list.get(position).getMessage();

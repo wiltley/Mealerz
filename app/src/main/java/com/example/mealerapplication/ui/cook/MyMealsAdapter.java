@@ -46,7 +46,9 @@ public class MyMealsAdapter extends ClickableAdapter{
 
         public MyViewHolder(@NonNull View itemView, OnElementClickedListener onElementClickedListener) {
             // Pass the IDS here
+            // ============================= NEEDS TO BE CHANGED
             super(itemView, onElementClickedListener, R.id.accuser, R.id.accused, R.id.message);
+            // ============================= NEEDS TO BE CHANGED
         }
 
         @Override

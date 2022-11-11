@@ -1,6 +1,8 @@
 package com.example.mealerapplication.data.model;
 
-public class Complaint {
+import java.io.Serializable;
+
+public class Complaint implements Serializable {
 
     private String accuser;
     private String accused;
@@ -30,9 +32,6 @@ public class Complaint {
     }
 
 
-    public void removeFromFirebase(){
-
-    }
 
     public String getAccused_UID(){ return accused_UID;}
 
@@ -51,11 +50,6 @@ public class Complaint {
         return message;
     }
 
-    public void banAccused(){
-
-
-
-    }
 
 
 }

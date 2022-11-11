@@ -2,16 +2,23 @@ package com.example.mealerapplication.data.accounthandling;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.mealerapplication.data.model.Recipe;
+import com.example.mealerapplication.ui.complaints.ComplaintsActivity;
+import com.example.mealerapplication.ui.login.LoginActivity;
+import com.example.mealerapplication.ui.welcome.Welcomephase2;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -87,6 +94,8 @@ public class CookHandler {
                     }
                 });
 
+        // Might want to do the same for instructions
+
     }
 
     public static void addRecipeToOffered(Recipe recipe){
@@ -129,5 +138,8 @@ public class CookHandler {
         // There's probably a more intelligent way of handling this
 
     }
+
+
+
 
 }
