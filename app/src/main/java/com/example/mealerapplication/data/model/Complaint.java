@@ -1,4 +1,4 @@
-package com.example.mealerapplication.ui.complaints;
+package com.example.mealerapplication.data.model;
 
 public class Complaint {
 
@@ -29,6 +29,10 @@ public class Complaint {
 
     }
 
+
+    public void removeFromFirebase(){
+
+    }
 
     public String getAccused_UID(){ return accused_UID;}
 

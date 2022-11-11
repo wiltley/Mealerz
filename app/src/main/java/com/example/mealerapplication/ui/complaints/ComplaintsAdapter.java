@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mealerapplication.R;
+import com.example.mealerapplication.data.model.Complaint;
 
 import java.util.ArrayList;
 
@@ -73,7 +74,6 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.My
         @Override
         public void onClick(View view) {
             onComplaintListener.onComplaintClicked(getAdapterPosition());
-            Log.d(TAG, "YOOOO!");
 
         }
     }
