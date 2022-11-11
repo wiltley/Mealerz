@@ -28,8 +28,6 @@ public class MyMealsActivity extends AppCompatActivity implements ClickableAdapt
 
 
     RecyclerView recyclerView;
-    // MyMealsAdapter and MyComplaints Adapter can probably be generalized
-    // Esp given how much overlapping code they'll have
     MyMealsAdapter myAdapter;
     ArrayList<Recipe> list;
     FirebaseAuth auth;

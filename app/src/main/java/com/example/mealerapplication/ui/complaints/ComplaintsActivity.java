@@ -37,6 +37,7 @@ public class ComplaintsActivity extends AppCompatActivity implements TestAdapter
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_complaints);
+        //getActionBar().setTitle("Review Complaints");
 
 
         //DocumentReference docRef = db.collection("complaints").document("3peAFJuv37mH7PqIEjL5");
@@ -82,18 +83,8 @@ public class ComplaintsActivity extends AppCompatActivity implements TestAdapter
     @Override
     public void onElementClicked(int position) {
 
-        // Gets us the complaint that was clicked
-        // Honestly we probably just want to make Complaints Serializable
         Intent intent = new Intent(this, ComplaintsDecision.class);
-        String accused = list.get(position).getAccused();
-        String message = list.get(position).getMessage();
-        String documentId = list.get(position).getDocumentID();
-        String accusedUID = list.get(position).getAccused_UID();
-
-        intent.putExtra("message", message );
-        intent.putExtra("accused", accused );
-        intent.putExtra("documentID", documentId );
-        intent.putExtra("accusedUID", accusedUID );
+        intent.putExtra("complaint", list.get(position));
         startActivity(intent);
     }
 }

@@ -7,9 +7,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Map;
 
 public class Recipe implements Serializable {
@@ -81,17 +79,16 @@ public class Recipe implements Serializable {
 
     // Depending on whether we will use this for the full on search query for
 
-    public static void getFullRecipe(Recipe r) {
+    public void getFullRecipe() {
 
-        String id = r.getDocumentID();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
 
         DocumentReference docRef = db.collection("meals")
-                .document(r.getAuthorID())
+                .document(authorID)
                 .collection("recipes")
-                .document(r.getDocumentID())
+                .document(documentID)
                 .collection("ingredients")
                 .document("ingredients list");
 
@@ -103,15 +100,15 @@ public class Recipe implements Serializable {
 
                     // For reference, DocumentSnapshot#getData returns a Map<String, Object>, that's why this works.
                     // or should....
-                    r.setIngredients(document.getData());
+                    ingredients = (document.getData());
                 }
             }
         });
 
         DocumentReference docRef2 = db.collection("meals")
-                .document(r.getAuthorID())
+                .document(author)
                 .collection("recipes")
-                .document(r.getDocumentID())
+                .document(documentID)
                 .collection("instructions")
                 .document("instructions list");
     }
