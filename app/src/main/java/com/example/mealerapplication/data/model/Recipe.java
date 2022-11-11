@@ -7,6 +7,11 @@ public class Recipe {
     private String recipeName;
     private String description;
     private HashMap<String, String> ingredients;
+    // We might wants instructions to be it's own hashmap similarly to
+    // ingredients instead
+
+    // The keys would correlate to the step number;
+
     private String instructions;
     private String author;
     private String briefing;

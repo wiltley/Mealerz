@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import com.example.mealerapplication.data.model.Recipe;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -37,6 +38,8 @@ public class CookHandler {
         r.put("Name", recipe.getRecipeName());
         r.put("Briefing", recipe.getBriefing());
         r.put("Description", recipe.getDescription());
+
+        //  Not sure if we want to add Ingredients this way
         r.put("Instructions", recipe.getInstructions());
 
         // The ingredients should already be in HashMap format before reaching here
@@ -50,6 +53,8 @@ public class CookHandler {
                         Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
 
                         // No clue if this setter will actually work lmao
+                        // or the change will only occur on this stack. I could always just store the document name
+
                         recipe.setDocumentID(documentReference.getId());
                     }
                 })
@@ -59,6 +64,7 @@ public class CookHandler {
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
+
 
         // Now for adding the ingredients subcollection
         db.collection("meals")
@@ -113,10 +119,14 @@ public class CookHandler {
     }
 
     public static void updateRecipe(String docID){
-        // Would probably be easier to pull the Recipe object
-        // change a couple fields, and then just set the whole thing again
-        // That is probably less efficient but oh well...
 
+        // Going to go under the pretext that the recipe objects
+        // fields are being altered on the editing form.
+        // Honestly there's very little different between this
+        // and addRecipe
+
+        // The only difference will bet .set and the .add
+        // There's probably a more intelligent way of handling this
 
     }
 
