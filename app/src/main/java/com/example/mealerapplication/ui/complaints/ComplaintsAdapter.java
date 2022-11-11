@@ -17,6 +17,7 @@ import com.example.mealerapplication.data.model.Complaint;
 
 import java.util.ArrayList;
 
+///////// ================== IGNORE REFER TO @TESTADAPTER.JAVA FOR NOW
 public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.MyViewHolder>{
     Context context;
 

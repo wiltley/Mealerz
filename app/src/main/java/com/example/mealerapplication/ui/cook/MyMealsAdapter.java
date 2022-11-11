@@ -12,55 +12,47 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.mealerapplication.R;
+import com.example.mealerapplication.data.model.Complaint;
 import com.example.mealerapplication.data.model.Recipe;
+import com.example.mealerapplication.data.rendering.ClickableAdapter;
 import com.example.mealerapplication.ui.complaints.ComplaintsAdapter;
 
 import java.util.ArrayList;
 
-public class MyMealsAdapter extends RecyclerView.Adapter<MyMealsAdapter.MyViewHolder> {
+public class MyMealsAdapter extends ClickableAdapter{
 
-    Context context;
-    ArrayList<Recipe> recipes;
-
-    public MyMealsAdapter(Context context, ArrayList<Recipe> list){
-
-        recipes = list;
-
+    public MyMealsAdapter(Context context, ArrayList list, OnElementClickedListener mOnClickedListener) {
+        super(context, list, mOnClickedListener);
     }
 
     @NonNull
     @Override
-    public MyMealsAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View v = LayoutInflater.from(context).inflate(R.layout.complaints_item,parent,false);
-        return  new MyMealsAdapter.MyViewHolder(v);
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return null;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyMealsAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ClickableAdapter.MyViewHolder holder, int position) {
+
+        Recipe recipe = (Recipe) list.get(position);
+        holder.text1.setText(recipe.getRecipeName());
+        holder.text2.setText(recipe.getAuthor());
+        holder.text3.setText(recipe.getBriefing());
 
     }
 
-    @Override
-    public int getItemCount() {
-        return recipes.size();
-    }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class MyViewHolder extends ClickableAdapter.MyViewHolder{
 
-        TextView recipe;
-        TextView ingredients;
-
-
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-            //recipe = itemView.findViewById(R.id.recipe);
-            //ingredients = itemView.findViewById(R.id.ingredients);
+        public MyViewHolder(@NonNull View itemView, OnElementClickedListener onElementClickedListener) {
+            // Pass the IDS here
+            super(itemView, onElementClickedListener, R.id.accuser, R.id.accused, R.id.message);
         }
 
         @Override
-        public void onClick(View view) {
+        public void initialize() {
 
         }
+
     }
 }
