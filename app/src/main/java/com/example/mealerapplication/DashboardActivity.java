@@ -32,7 +32,8 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        TextView tV = findViewById(R.id.email);
+
+        //TextView tV = findViewById(R.id.email);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -43,7 +44,7 @@ public class DashboardActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document != null) {
-                        tV.setText(document.getString("role"));
+                        //tV.setText(document.getString("role"));
                     } else {
                         Log.d("LOGGER", "No such document");
                     }

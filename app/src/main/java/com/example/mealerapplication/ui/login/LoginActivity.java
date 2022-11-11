@@ -12,6 +12,7 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mealerapplication.R;
@@ -29,12 +30,14 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private Button loginButton;
     private FirebaseAuth mAuth;
-    private Button registerButton;
+    private TextView registerButton;
     private boolean isBanned;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //getActionBar().setTitle("Mealerz Authentication");
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -45,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = binding.loginButton;
         mAuth = FirebaseAuth.getInstance();
 
-        registerButton = findViewById(R.id.registerButton);
+        registerButton = findViewById(R.id.bringToSignUp);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,20 +70,20 @@ public class LoginActivity extends AppCompatActivity {
         //OnClickListener that handles show/hide password buttons being clicked
 
         //Set onclick listener for show/hide password buttons on login activity
-        Button showLoginPassword = findViewById(R.id.showHideBtnLogin);
-        showLoginPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                passwordEditText = findViewById(R.id.password);
-                if(showLoginPassword.getText().toString().equals(getString(R.string.show_pass))){
-                    passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    showLoginPassword.setText(R.string.hide_pass);
-                } else{
-                    passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    showLoginPassword.setText(R.string.show_pass);
-                }
-            }
-        });
+        //Button showLoginPassword = findViewById(R.id.showHideBtnLogin);
+        //showLoginPassword.setOnClickListener(new View.OnClickListener() {
+         //   @Override
+          //  public void onClick(View view) {
+           //     passwordEditText = findViewById(R.id.password);
+            //    if(showLoginPassword.getText().toString().equals(getString(R.string.show_pass))){
+             //       passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+              //      showLoginPassword.setText(R.string.hide_pass);
+               // } else{
+                //    passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                 //   showLoginPassword.setText(R.string.show_pass);
+               // }
+            //}
+        //});
 
 
         TextWatcher afterTextChangedListener = new TextWatcher() {

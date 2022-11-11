@@ -13,6 +13,8 @@ import com.example.mealerapplication.R;
 import java.util.ArrayList;
 
 import com.example.mealerapplication.data.model.Complaint;
+import com.example.mealerapplication.data.rendering.ClickableAdapter;
+import com.example.mealerapplication.ui.cook.TestAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,10 +23,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class ComplaintsActivity extends AppCompatActivity implements ComplaintsAdapter.OnComplaintListener  {
+public class ComplaintsActivity extends AppCompatActivity implements TestAdapter.OnElementClickedListener  {
 
     RecyclerView recyclerView;
-    ComplaintsAdapter myAdapter;
+    TestAdapter myAdapter;
     ArrayList<Complaint> list;
     FirebaseAuth auth;
     FirebaseFirestore db ;
@@ -35,6 +37,7 @@ public class ComplaintsActivity extends AppCompatActivity implements ComplaintsA
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_complaints);
+        //getActionBar().setTitle("Review Complaints");
 
 
         //DocumentReference docRef = db.collection("complaints").document("3peAFJuv37mH7PqIEjL5");
@@ -49,7 +52,7 @@ public class ComplaintsActivity extends AppCompatActivity implements ComplaintsA
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<>();
-        myAdapter = new ComplaintsAdapter(this, list, this);
+        myAdapter = new TestAdapter(this, list, this);
         recyclerView.setAdapter(myAdapter);
 
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
@@ -78,19 +81,10 @@ public class ComplaintsActivity extends AppCompatActivity implements ComplaintsA
 
 
     @Override
-    public void onComplaintClicked(int position) {
+    public void onElementClicked(int position) {
 
-        // Gets us the complaint that was clicked
         Intent intent = new Intent(this, ComplaintsDecision.class);
-        String accused = list.get(position).getAccused();
-        String message = list.get(position).getMessage();
-        String documentId = list.get(position).getDocumentID();
-        String accusedUID = list.get(position).getAccused_UID();
-
-        intent.putExtra("message", message );
-        intent.putExtra("accused", accused );
-        intent.putExtra("documentID", documentId );
-        intent.putExtra("accusedUID", accusedUID );
+        intent.putExtra("complaint", list.get(position));
         startActivity(intent);
     }
 }

@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mealerapplication.R;
@@ -23,7 +24,7 @@ public class SignupActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private Button registerButton;
     private FirebaseAuth auth;
-    private Button loginButton;
+    private TextView loginButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -31,14 +32,15 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
+        //getActionBar().setTitle("Mealerz Registration");
+
         auth = FirebaseAuth.getInstance();
 
         emailEditText = findViewById(R.id.registerUserEmail);
         passwordEditText = findViewById(R.id.registerUserPass);
-        registerButton = findViewById(R.id.registerBtn);
+        registerButton = findViewById(R.id.registerButton);
 
-
-        loginButton = findViewById(R.id.loginButton2);
+        loginButton = findViewById(R.id.bringToLogin);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

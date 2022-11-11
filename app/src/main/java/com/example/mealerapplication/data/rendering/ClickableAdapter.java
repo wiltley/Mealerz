@@ -1,29 +1,32 @@
 package com.example.mealerapplication.data.rendering;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mealerapplication.R;
+import com.example.mealerapplication.ui.complaints.ComplaintsAdapter;
 
 import java.util.ArrayList;
 
-public abstract class ClickableAdapter extends RecyclerView.Adapter<ClickableAdapter.MyViewHolder> {
+public abstract class ClickableAdapter <T> extends RecyclerView.Adapter<ClickableAdapter.MyViewHolder> {
 
-    ArrayList<Object> list;
-    public int toInflate;
+    protected ArrayList<T> list;
+    protected Context context;
 
-    private OnElementClickedListener mOnClickedListener;
+    protected OnElementClickedListener mOnClickedListener;
 
 
-    public ClickableAdapter(Context context, ArrayList<Object> list, OnElementClickedListener mOnClickedListener, int toInflate){
+    public ClickableAdapter(Context context, ArrayList<T> list, OnElementClickedListener mOnClickedListener){
 
         this.mOnClickedListener = mOnClickedListener;
         this.list = list;
-        this.toInflate = toInflate;
+        this.context= context;
 
     }
 
@@ -32,6 +35,7 @@ public abstract class ClickableAdapter extends RecyclerView.Adapter<ClickableAda
     @NonNull
     @Override
     public abstract ClickableAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType);
+
 
 
     @Override
@@ -47,10 +51,16 @@ public abstract class ClickableAdapter extends RecyclerView.Adapter<ClickableAda
 
 
         OnElementClickedListener onElementClickedListener;
+        public TextView text1, text2, text3;
 
-        public MyViewHolder(@NonNull View itemView, OnElementClickedListener onElementClickedListener) {
+        public MyViewHolder(@NonNull View itemView, OnElementClickedListener onElementClickedListener, int id1, int id2, int id3) {
             super(itemView);
             initialize();
+
+            text1 = itemView.findViewById(id1);
+            text2 = itemView.findViewById(id2);
+            text3 = itemView.findViewById(id3);
+
             this.onElementClickedListener = onElementClickedListener;
 
             itemView.setOnClickListener(this);
@@ -70,4 +80,6 @@ public abstract class ClickableAdapter extends RecyclerView.Adapter<ClickableAda
     public interface OnElementClickedListener{
         void onElementClicked(int position);
     }
+
+
 }

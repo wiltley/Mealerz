@@ -1,6 +1,18 @@
 package com.example.mealerapplication.data.model;
 
-public class Complaint {
+import static android.content.ContentValues.TAG;
+
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.io.Serializable;
+
+public class Complaint implements Serializable {
 
     private String accuser;
     private String accused;
@@ -30,9 +42,6 @@ public class Complaint {
     }
 
 
-    public void removeFromFirebase(){
-
-    }
 
     public String getAccused_UID(){ return accused_UID;}
 
@@ -51,10 +60,24 @@ public class Complaint {
         return message;
     }
 
-    public void banAccused(){
 
+    public void removeFromDB(){
 
-
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("complaints").document(documentId)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "Successfully removed " + documentId);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
     }
 
 

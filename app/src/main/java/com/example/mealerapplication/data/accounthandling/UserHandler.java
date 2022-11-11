@@ -159,20 +159,24 @@ public class UserHandler {
                     if (document.getString("role").equals("cook") && document.getString("status").equals("Banned")) {
                         Toast.makeText(context, "Sorry, but your account is permanently banned", Toast.LENGTH_LONG).show();
                         Intent i = new Intent(context, LoginActivity.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(i);
                     }
                     else if(document.getString("role").equals("cook") && document.getString("status").equals("Suspended")) {
                         Toast.makeText(context, "Sorry, but your account is temporarily banned for 3 days", Toast.LENGTH_LONG).show();
 
                         Intent i = new Intent(context, LoginActivity.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(i);
 
                     }else if(!document.getString("role").equals("admin")){
                         Intent i = new Intent(context, Welcomephase2.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(i);
                     }else{
 
                         Intent i = new Intent(context, ComplaintsActivity.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(i);
                     }
                 } else {
