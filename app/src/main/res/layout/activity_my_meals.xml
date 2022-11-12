@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_gradient_one"
     tools:context=".ui.cook.MyMealsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -15,5 +16,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/btm_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        app:menu="@menu/bottom_navigation_menu" />
+        />
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

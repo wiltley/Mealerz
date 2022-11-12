@@ -37,7 +37,6 @@ public class MyMealsAdapter extends ClickableAdapter{
         Recipe recipe = (Recipe) list.get(position);
         holder.text1.setText(recipe.getRecipeName());
         holder.text2.setText(recipe.getAuthor());
-        holder.text3.setText(recipe.getBriefing());
 
     }
 

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="8dp">
+    android:layout_width="match_parent"
+    app:cardElevation="8dp"
+    android:layout_height="0.8in"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="1dp"
+    android:background="@drawable/background_gradient_one">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:orientation="vertical">
@@ -22,7 +23,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="Recipe Name:"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -47,7 +48,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="Cook Name:"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -57,7 +58,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="10"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description:"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/recipe_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 

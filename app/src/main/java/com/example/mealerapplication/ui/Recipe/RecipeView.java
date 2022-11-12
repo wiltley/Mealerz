@@ -18,6 +18,6 @@ public class RecipeView extends AppCompatActivity {
         Recipe recipe = (Recipe) getIntent().getSerializableExtra("recipe");
 
         // Pulls the ingredients and instructions...
-        recipe.getFullRecipe();
+        //recipe.getFullRecipe();
     }
 }

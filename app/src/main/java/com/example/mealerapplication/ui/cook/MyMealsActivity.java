@@ -2,6 +2,7 @@ package com.example.mealerapplication.ui.cook;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -65,7 +66,6 @@ public class MyMealsActivity extends AppCompatActivity implements ClickableAdapt
                         r.setRecipeName(document.getString("Name"));
                         r.setAuthor(document.getString("Author"));
                         r.setAuthorID(document.getString("Author ID"));
-                        r.setBriefing(document.getString("Briefing"));
                         r.setDescription(document.getString("Description"));
 
                         list.add(r);
@@ -87,7 +87,6 @@ public class MyMealsActivity extends AppCompatActivity implements ClickableAdapt
         Intent intent = new Intent(this, RecipeView.class);
         // If serializable works as expected we won't have to do any of this stuff
         String name = list.get(position).getRecipeName();
-        String briefing = list.get(position).getBriefing();
         String author = list.get(position).getAuthor();
 
         String documentId = list.get(position).getDocumentID();
@@ -96,6 +95,11 @@ public class MyMealsActivity extends AppCompatActivity implements ClickableAdapt
         intent.putExtra("documentID", documentId );
         intent.putExtra("recipe", list.get(position));
         startActivity(intent);
+
+    }
+
+
+    public void replaceFragment(Fragment fragment){
 
     }
 }

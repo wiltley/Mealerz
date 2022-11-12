@@ -43,11 +43,9 @@ public class CookHandler {
         r.put("Author", recipe.getAuthor());
         r.put("Author ID", recipe.getAuthorID());
         r.put("Name", recipe.getRecipeName());
-        r.put("Briefing", recipe.getBriefing());
         r.put("Description", recipe.getDescription());
 
         //  Not sure if we want to add Ingredients this way
-        r.put("Instructions", recipe.getInstructions());
 
         // The ingredients should already be in HashMap format before reaching here
         db.collection("meals")
@@ -73,28 +71,6 @@ public class CookHandler {
                 });
 
 
-        // Now for adding the ingredients subcollection
-        db.collection("meals")
-                .document(userID)
-                .collection("recipes")
-                .document(recipe.getDocumentID())
-                .collection("ingredients")
-                .document("ingredients list")
-                .set(recipe.getIngredients())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
-                    }
-                });
-
-        // Might want to do the same for instructions
 
     }
 
@@ -105,7 +81,8 @@ public class CookHandler {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Map<String, Object> r = new HashMap<>();
-        r.put(recipe.getRecipeName(), recipe.getBriefing());
+        // Dummy value for now
+        r.put(recipe.getRecipeName(), "ok");
 
         // The document's ID would match up with the ID of the recipe document
         db.collection("meals").document(userID).collection("offered recipes").document(recipe.getDocumentID())
