@@ -1,10 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/imageAdd"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ee5d6c"
     tools:context=".ui.Recipe.CreateRecipe">
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+  <TextView
+      android:id="@+id/addMeal"
+      android:layout_width="404dp"
+      android:layout_height="49dp"
+      android:layout_marginStart="4dp"
+      android:layout_marginTop="4dp"
+      android:text="Add your meal"
+      android:textColor="#eeaf61"
+      android:textSize="34sp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <ImageView
+      android:id="@+id/imageFood"
+      android:layout_width="404dp"
+      android:layout_height="196dp"
+      android:layout_marginStart="3dp"
+      android:layout_marginTop="5dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/addMeal"
+      app:srcCompat="@drawable/despair" />
+
+  <Button
+      android:id="@+id/imageUpload"
+      android:layout_width="118dp"
+      android:layout_height="49dp"
+      android:layout_marginStart="146dp"
+      android:layout_marginTop="11dp"
+      android:layout_marginEnd="147dp"
+      android:text="Add Image"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/imageFood" />
+
+  <androidx.core.widget.NestedScrollView
+      android:layout_width="410dp"
+      android:layout_height="416dp"
+      android:layout_marginStart="3dp"
+      android:layout_marginBottom="1dp"
+      android:fillViewport="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/imageUpload">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+      <com.google.android.material.textfield.TextInputLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/briefDescription"
+            android:layout_width="match_parent"
+            android:layout_height="83dp"
+            android:hint="Brief Description" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+          <com.google.android.material.textfield.TextInputLayout
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Ingredients" />
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <com.google.android.material.textfield.TextInputEditText
+              android:layout_width="match_parent"
+              android:layout_height="140dp"
+              android:hint="Description" />
+        </com.google.android.material.textfield.TextInputLayout>
+      </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+  </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
