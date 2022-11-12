@@ -8,7 +8,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.io.Serializable;
-import java.util.Map;
 
 public class Recipe implements Serializable {
 
@@ -25,7 +24,7 @@ public class Recipe implements Serializable {
     private String cuisineType;
 
     // Probably going to have to parse it??? Idk
-    private float cost;
+    private float price;
 
 
     // Should only be used when creating a new recipe
@@ -52,6 +51,8 @@ public class Recipe implements Serializable {
     public void setAuthor(String author){this.author = author;}
     public void setAuthorID(String authorID){this.authorID = authorID;}
     public void setDescription(String description){this.description = description;}
+    public void setCuisineType(String cuisineType){this.cuisineType = cuisineType;}
+    public void setPrice(float price){this.price = price;}
 
     public String getRecipeName(){
         return recipeName;
@@ -62,6 +63,8 @@ public class Recipe implements Serializable {
     public String getAuthor(){return author;}
     public String getDocumentID(){return documentID;}
     public String getAuthorID(){return authorID;}
+    public String getCuisineType(){return cuisineType;}
+    public float getPrice(){return price;}
 
 
     // By the time we call this, the recipe should already have the

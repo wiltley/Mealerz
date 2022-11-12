@@ -29,7 +29,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/recipename"
+                android:id="@+id/meal_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -54,7 +54,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/whocooked"
+                android:id="@+id/meal_cook_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -73,13 +73,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Description:"
+                android:text="Price:"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/recipe_description"
+                android:id="@+id/meal_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"

@@ -1,16 +1,22 @@
 package com.example.mealerapplication.ui.Recipe;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.mealerapplication.R;
+import com.example.mealerapplication.data.accounthandling.CookHandler;
+import com.example.mealerapplication.data.model.Recipe;
 
 public class CreateRecipe extends AppCompatActivity {
 
@@ -21,6 +27,37 @@ public class CreateRecipe extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_recipe);
+
+        EditText recipeName = findViewById(R.id.new_meal_name);
+        EditText recipeCuisine = findViewById(R.id.new_meal_name);
+        EditText recipeDescription = findViewById(R.id.new_meal_description);
+        EditText recipePrice = findViewById(R.id.new_meal_price);
+        Button submitRecipe = findViewById(R.id.create_new_recipe);
+
+        Recipe recipe = new Recipe();
+
+
+        submitRecipe.setOnClickListener(new View.OnClickListener(){
+
+           @Override
+            public void onClick(View view){
+
+
+
+               recipe.setRecipeName(String.valueOf(recipeName.getText()));
+               recipe.setDescription(String.valueOf(recipeDescription.getText()));
+               recipe.setDescription(String.valueOf(recipeDescription.getText()));
+               recipe.setCuisineType(String.valueOf(recipeCuisine.getText()));
+
+               // We're definetely want to do some checks to see if the data
+               // enter is valid before sending it to the database
+               // Such as making sure none of the fields are empty
+
+               CookHandler.addRecipe(recipe);
+
+           }
+           }
+        );
 
         //imgGallery = findViewById(R.id.imageFood);
         //Button btnGallery = findViewById(R.id.imageUpload);

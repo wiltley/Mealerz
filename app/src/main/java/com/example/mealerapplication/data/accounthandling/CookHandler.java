@@ -34,23 +34,28 @@ public class CookHandler {
         //
 
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, Object> r = new HashMap<>();
 
 
         // To get the Author's email might be annoying
         // Might wanna store both the email and UserID honestly
-        r.put("Author", recipe.getAuthor());
-        r.put("Author ID", recipe.getAuthorID());
+        r.put("Author", userEmail);
+        r.put("Author ID", userID);
         r.put("Name", recipe.getRecipeName());
         r.put("Description", recipe.getDescription());
+        r.put("Price", recipe.getPrice());
+        r.put("Offered?", false);
 
         //  Not sure if we want to add Ingredients this way
 
         // The ingredients should already be in HashMap format before reaching here
         db.collection("meals")
-                .document(userID)
-                .collection("recipes")
+                .document("cooks")
+                .collection(userID)
+                .document("meals")
+                .collection("all")
                 .add(r)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -85,7 +90,11 @@ public class CookHandler {
         r.put(recipe.getRecipeName(), "ok");
 
         // The document's ID would match up with the ID of the recipe document
-        db.collection("meals").document(userID).collection("offered recipes").document(recipe.getDocumentID())
+        // Add it to the cook's offered
+        db.collection("meals")
+                .document("cooks")
+                .collection("offered")
+                .document(recipe.getDocumentID())
                 .set(r)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -101,6 +110,30 @@ public class CookHandler {
                 });
 
 
+
+        // Add to all offered meals
+        // This is going to have to be changed to made better for searching
+        // We may want to break up collections into keywords that you can search by
+        // For a cook to remove that recipe tho they will have to store were that recipe
+        //appears
+
+        db.collection("meals")
+                .document("offered")
+                .collection("all")
+                .document(recipe.getDocumentID())
+                .set(r)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
 
     }
 

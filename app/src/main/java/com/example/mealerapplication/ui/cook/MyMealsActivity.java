@@ -10,11 +10,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.mealerapplication.R;
-import com.example.mealerapplication.data.model.Complaint;
 import com.example.mealerapplication.data.model.Recipe;
 import com.example.mealerapplication.data.rendering.ClickableAdapter;
 import com.example.mealerapplication.ui.Recipe.RecipeView;
-import com.example.mealerapplication.ui.complaints.ComplaintsDecision;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -67,6 +65,7 @@ public class MyMealsActivity extends AppCompatActivity implements ClickableAdapt
                         r.setAuthor(document.getString("Author"));
                         r.setAuthorID(document.getString("Author ID"));
                         r.setDescription(document.getString("Description"));
+                        r.setPrice(Float.valueOf(document.getString("Price")));
 
                         list.add(r);
 
@@ -98,8 +97,4 @@ public class MyMealsActivity extends AppCompatActivity implements ClickableAdapt
 
     }
 
-
-    public void replaceFragment(Fragment fragment){
-
-    }
 }
