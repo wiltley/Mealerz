@@ -4,9 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mealerapplication.R;
@@ -19,6 +21,7 @@ public abstract class ClickableAdapter <T> extends RecyclerView.Adapter<Clickabl
     protected ArrayList<T> list;
     protected Context context;
 
+
     protected OnElementClickedListener mOnClickedListener;
 
 
@@ -28,8 +31,8 @@ public abstract class ClickableAdapter <T> extends RecyclerView.Adapter<Clickabl
         this.list = list;
         this.context= context;
 
-    }
 
+    }
 
 
     @NonNull
@@ -49,11 +52,12 @@ public abstract class ClickableAdapter <T> extends RecyclerView.Adapter<Clickabl
 
     public abstract class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-
         OnElementClickedListener onElementClickedListener;
         public TextView text1, text2, text3;
 
         public MyViewHolder(@NonNull View itemView, OnElementClickedListener onElementClickedListener, int id1, int id2, int id3) {
+
+
             super(itemView);
             initialize();
 
