@@ -3,22 +3,24 @@ package com.example.mealerapplication.ui.cook;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
+
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.Recipe;
 import com.example.mealerapplication.data.rendering.ClickableAdapter;
 
 import java.util.ArrayList;
 
-public class MyMealsAdapter extends ClickableAdapter{
+public class MyOfferedMealsAdapter extends ClickableAdapter {
 
-    public MyMealsAdapter(Context context, ArrayList list, OnElementClickedListener mOnClickedListener) {
+    public MyOfferedMealsAdapter(Context context, ArrayList list, ClickableAdapter.OnElementClickedListener mOnClickedListener) {
         super(context, list, mOnClickedListener);
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyMealsAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return null;
     }
 
@@ -35,7 +37,7 @@ public class MyMealsAdapter extends ClickableAdapter{
 
     public class MyViewHolder extends ClickableAdapter.MyViewHolder{
 
-        public MyViewHolder(@NonNull View itemView, OnElementClickedListener onElementClickedListener) {
+        public MyViewHolder(@NonNull View itemView, ClickableAdapter.OnElementClickedListener onElementClickedListener) {
             // Pass the IDS here
             super(itemView, onElementClickedListener, R.id.meal_name, R.id.meal_cook_name, R.id.meal_price);
         }

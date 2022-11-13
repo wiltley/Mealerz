@@ -4,28 +4,27 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.io.Serializable;
-import java.util.Map;
 
 public class Recipe implements Serializable {
 
     private String recipeName;
     private String description;
-    private Map<String, Object> ingredients;
 
     // We might wants instructions to be it's own hashmap similarly to
     // ingredients instead
 
-    // The keys would correlate to the step number;
-    private Map<String, Object> instructions;
 
-    private String author;
-    private String briefing;
+    private String cookName;
     private String documentID;
-    private String authorID;
+    private String cookID;
+    private String cuisineType;
+
+    // Probably going to have to parse it??? Idk
+    private String price;
 
 
     // Should only be used when creating a new recipe
@@ -35,15 +34,11 @@ public class Recipe implements Serializable {
 
     // Should be used when pulling a recipe from the Firestore
     // Constructor could honestly also just take a hashmap or 2 and deconstruct them instead of having to pass everything
-    public Recipe(String recipeName, String description, Map<String, Object> instructions, Map<String, Object> ingredients, String author, String briefing, String documentID, String authorID){
-
-        this.recipeName = recipeName;
+    public Recipe(String recipeName, String description,   String author,  String documentID, String cookID){
+this.recipeName = recipeName;
         this.description = description;
-        this.instructions = instructions;
-        this.ingredients = ingredients;
-        this.author = author;
-        this.briefing = briefing;
-        this.authorID = authorID;
+        this.cookName = author;
+        this.cookID = cookID;
 
         // If it's a new recipe this is supposed to be null
         this.documentID = documentID;
@@ -52,12 +47,11 @@ public class Recipe implements Serializable {
 
     public void setDocumentID(String documentID){this.documentID = documentID;}
     public void setRecipeName(String recipeName){this.recipeName = recipeName;}
-    public void setAuthor(String author){this.author = author;}
-    public void setAuthorID(String authorID){this.authorID = authorID;}
-    public void setBriefing(String briefing){this.briefing = briefing;}
+    public void setCookName(String cookName){this.cookName = cookName;}
+    public void setCookID(String cookID){this.cookID = cookID;}
     public void setDescription(String description){this.description = description;}
-    public void setInstructions(Map<String, Object> instructions){this.instructions = instructions;}
-    public void setIngredients(Map<String, Object> ingredients){this.ingredients = ingredients;}
+    public void setCuisineType(String cuisineType){this.cuisineType = cuisineType;}
+    public void setPrice(String price){this.price = price;}
 
     public String getRecipeName(){
         return recipeName;
@@ -65,12 +59,11 @@ public class Recipe implements Serializable {
     public String getDescription(){
         return description;
     }
-    public Map<String, Object> getInstructions(){ return instructions; }
-    public Map<String, Object> getIngredients(){ return ingredients; }
-    public String getAuthor(){return author;}
-    public String getBriefing(){return briefing;}
+    public String getCookName(){return cookName;}
     public String getDocumentID(){return documentID;}
-    public String getAuthorID(){return authorID;}
+    public String getCookID(){return cookID;}
+    public String getCuisineType(){return cuisineType;}
+    public String getPrice(){return price;}
 
 
     // By the time we call this, the recipe should already have the
@@ -79,39 +72,40 @@ public class Recipe implements Serializable {
 
     // Depending on whether we will use this for the full on search query for
 
-    public void getFullRecipe() {
+    //Might not even be needed at all
+    // Except for maybe the ratings and the comments on the recipe or sum
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public static Recipe retrieveRecipe(String documentID){
+
+       FirebaseFirestore db = FirebaseFirestore.getInstance();
+       Recipe r = new Recipe();
+
+       db.collection("meals")
+               .document("offered")
+               .collection("all")
+               .document(documentID)
+               .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                   @Override
+                   public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                       DocumentSnapshot docRef = task.getResult();
+
+                       r.setCookName(docRef.getString("Cook Name"));
+                       r.setCookID(docRef.getString("Cook ID"));
+                       r.setRecipeName(docRef.getString("Name"));
+                       r.setDescription(docRef.getString("Description"));
+                       r.setPrice(docRef.getString("Price"));
+
+                   }
+               });
 
 
 
-        DocumentReference docRef = db.collection("meals")
-                .document(authorID)
-                .collection("recipes")
-                .document(documentID)
-                .collection("ingredients")
-                .document("ingredients list");
+        return new Recipe();
 
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
 
-                    // For reference, DocumentSnapshot#getData returns a Map<String, Object>, that's why this works.
-                    // or should....
-                    ingredients = (document.getData());
-                }
-            }
-        });
-
-        DocumentReference docRef2 = db.collection("meals")
-                .document(author)
-                .collection("recipes")
-                .document(documentID)
-                .collection("instructions")
-                .document("instructions list");
     }
+
 
 }
 
