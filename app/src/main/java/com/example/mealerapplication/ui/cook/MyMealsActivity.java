@@ -2,7 +2,6 @@ package com.example.mealerapplication.ui.cook;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +22,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
+
+// FOR THIS CLASS LET'S JUST ASSUME THEY ARE RETRIEVING ALLLLLLL OF THERE MEALS
 public class MyMealsActivity extends AppCompatActivity implements ClickableAdapter.OnElementClickedListener {
 
 
@@ -48,8 +49,10 @@ public class MyMealsActivity extends AppCompatActivity implements ClickableAdapt
 
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
         CollectionReference notesRef = rootRef.collection("meals")
-                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .collection("recipes");
+                .document("cooks")
+                .collection(FirebaseAuth.getInstance().getUid())
+                .document("all")
+                .collection("meals");
 
         // Not too sure if we want this stored in here or not yet
         notesRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -62,10 +65,10 @@ public class MyMealsActivity extends AppCompatActivity implements ClickableAdapt
 
                         // We shouldn't be in need to the other stuff just yet
                         r.setRecipeName(document.getString("Name"));
-                        r.setAuthor(document.getString("Author"));
-                        r.setAuthorID(document.getString("Author ID"));
+                        r.setCookName(document.getString("Cook Name"));
+                        r.setCookID(document.getString("Cook ID"));
                         r.setDescription(document.getString("Description"));
-                        r.setPrice(Float.valueOf(document.getString("Price")));
+                        r.setPrice(document.getString("Price"));
 
                         list.add(r);
 
@@ -86,7 +89,7 @@ public class MyMealsActivity extends AppCompatActivity implements ClickableAdapt
         Intent intent = new Intent(this, RecipeView.class);
         // If serializable works as expected we won't have to do any of this stuff
         String name = list.get(position).getRecipeName();
-        String author = list.get(position).getAuthor();
+        String author = list.get(position).getCookName();
 
         String documentId = list.get(position).getDocumentID();
 

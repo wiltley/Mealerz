@@ -41,8 +41,8 @@ public class CookHandler {
 
         // To get the Author's email might be annoying
         // Might wanna store both the email and UserID honestly
-        r.put("Author", userEmail);
-        r.put("Author ID", userID);
+        r.put("Cook Name", userEmail);
+        r.put("Cook ID", userID);
         r.put("Name", recipe.getRecipeName());
         r.put("Description", recipe.getDescription());
         r.put("Price", recipe.getPrice());
@@ -54,8 +54,8 @@ public class CookHandler {
         db.collection("meals")
                 .document("cooks")
                 .collection(userID)
-                .document("meals")
-                .collection("all")
+                .document("all")
+                .collection("meals")
                 .add(r)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -87,15 +87,15 @@ public class CookHandler {
 
         Map<String, Object> r = new HashMap<>();
         // Dummy value for now
-        r.put(recipe.getRecipeName(), "ok");
+        r.put(recipe.getDocumentID(), recipe.getRecipeName());
 
         // The document's ID would match up with the ID of the recipe document
         // Add it to the cook's offered
         db.collection("meals")
                 .document("cooks")
-                .collection("offered")
-                .document(recipe.getDocumentID())
-                .set(r)
+                .collection(recipe.getCookID())
+                .document("offered")
+                .update(r)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
