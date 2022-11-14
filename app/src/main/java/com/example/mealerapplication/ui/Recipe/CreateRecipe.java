@@ -20,7 +20,10 @@ import android.widget.Toast;
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.accounthandling.CookHandler;
 import com.example.mealerapplication.data.model.Recipe;
-import com.google.android.material.textfield.TextInputEditText;
+import com.example.mealerapplication.ui.cook.MyMealsActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+
 
 
 public class CreateRecipe extends AppCompatActivity {
@@ -34,10 +37,10 @@ public class CreateRecipe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_recipe);
 
-        TextInputEditText recipeName = findViewById(R.id.new_meal_name);
-        TextInputEditText recipeCuisine = findViewById(R.id.new_meal_name);
-        TextInputEditText recipeDescription = findViewById(R.id.new_meal_description);
-        TextInputEditText recipePrice = findViewById(R.id.new_meal_price);
+//        EditText recipeName = findViewById(R.id.new_meal_name);
+//        EditText recipeCuisine = findViewById(R.id.new_meal_name);
+//        EditText recipeDescription = findViewById(R.id.new_meal_description);
+//        EditText recipePrice = findViewById(R.id.new_meal_price);
 
         Button submitRecipe = findViewById(R.id.create_new_recipe);
         Recipe recipe = new Recipe();
@@ -50,10 +53,10 @@ public class CreateRecipe extends AppCompatActivity {
 
 
 
-               recipe.setRecipeName(String.valueOf(recipeName.getText()));
-               recipe.setDescription(String.valueOf(recipeDescription.getText()));
-               recipe.setDescription(String.valueOf(recipeDescription.getText()));
-               recipe.setCuisineType(String.valueOf(recipeCuisine.getText()));
+//               recipe.setRecipeName(String.valueOf(recipeName.getText()));
+//               recipe.setDescription(String.valueOf(recipeDescription.getText()));
+//               recipe.setDescription(String.valueOf(recipeDescription.getText()));
+//               recipe.setCuisineType(String.valueOf(recipeCuisine.getText()));
 
                // We're definetely want to do some checks to see if the data
                // enter is valid before sending it to the database
