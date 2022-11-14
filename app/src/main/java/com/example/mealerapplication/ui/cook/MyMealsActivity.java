@@ -7,13 +7,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.Recipe;
 import com.example.mealerapplication.data.rendering.ClickableAdapter;
+import com.example.mealerapplication.ui.Recipe.CreateRecipe;
 import com.example.mealerapplication.ui.Recipe.RecipeView;
+import com.example.mealerapplication.ui.login.LoginActivity;
+import com.example.mealerapplication.ui.registration.SignupActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,12 +33,12 @@ import java.util.ArrayList;
 // FOR THIS CLASS LET'S JUST ASSUME THEY ARE RETRIEVING ALLLLLLL OF THERE MEALS
 public class MyMealsActivity extends AppCompatActivity implements ClickableAdapter.OnElementClickedListener {
 
-
     RecyclerView recyclerView;
     MyMealsAdapter myAdapter;
     ArrayList<Recipe> list;
     FirebaseAuth auth;
     FirebaseFirestore db ;
+    BottomNavigationView nav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +84,37 @@ public class MyMealsActivity extends AppCompatActivity implements ClickableAdapt
                     myAdapter.notifyDataSetChanged();
                 }
 
+            }
+        });
+        nav = findViewById(R.id.btm_nav);
+
+        nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()){
+                    case R.id.myMenu:
+                        break;
+
+                    case R.id.createFood:
+                        Intent intent2 = new Intent(MyMealsActivity.this, CreateRecipe.class);
+                        startActivity(intent2);
+
+                    case R.id.requests:
+                        Toast.makeText(MyMealsActivity.this, "requests", Toast.LENGTH_LONG).show();
+//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
+//                        startActivity(intent2);
+                        break;
+                    case R.id.myProfile:
+                        Toast.makeText(MyMealsActivity.this, "profile", Toast.LENGTH_LONG).show();
+//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
+//                        startActivity(intent2);
+                        break;
+
+                    default:
+                }
+
+                return true;
             }
         });
     }
