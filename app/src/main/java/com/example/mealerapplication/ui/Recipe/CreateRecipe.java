@@ -33,12 +33,12 @@ public class CreateRecipe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_recipe);
 
-        EditText recipeName = findViewById(R.id.new_meal_name);
-        EditText recipeCuisine = findViewById(R.id.new_meal_name);
-        EditText recipeDescription = findViewById(R.id.new_meal_description);
-        EditText recipePrice = findViewById(R.id.new_meal_price);
-          Button submitRecipe = findViewById(R.id.create_new_recipe);
+        TextInputEditText recipeName = findViewById(R.id.new_meal_name);
+        TextInputEditText recipeCuisine = findViewById(R.id.new_meal_name);
+        TextInputEditText recipeDescription = findViewById(R.id.new_meal_description);
+        TextInputEditText recipePrice = findViewById(R.id.new_meal_price);
 
+        Button submitRecipe = findViewById(R.id.create_new_recipe);
         Recipe recipe = new Recipe();
 
 
