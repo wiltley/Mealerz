@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.mealerapplication.data.User;
 import com.example.mealerapplication.ui.complaints.ComplaintsActivity;
 import com.example.mealerapplication.ui.login.LoginActivity;
 import com.example.mealerapplication.ui.registration.SignupActivity;
@@ -61,11 +62,10 @@ public class UserHandler {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Map<String, Object> userInfo = new HashMap<>();
-        userInfo.put("email", "");
-        userInfo.put("first name", "");
-        userInfo.put("last name", "");
-        userInfo.put("role", "");
-        userInfo.put("status", "");
+
+        //Placeholder constructor, can change later when needed
+        User userModel = new User("", "", "", user, User.Role.CLIENT, "");
+        userInfo = userModel.getUserMap();
 
         db.collection("users").document(auth.getCurrentUser().getUid())
                 .set(userInfo)

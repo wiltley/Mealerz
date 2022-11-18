@@ -8,6 +8,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Recipe implements Serializable {
 
@@ -44,6 +46,17 @@ this.recipeName = recipeName;
         // If it's a new recipe this is supposed to be null
         this.documentID = documentID;
 
+    }
+
+    public Recipe(String recipeName, String description, String cookName, String documentID, String cookID, String cuisineType, String offered, String price) {
+        this.recipeName = recipeName;
+        this.description = description;
+        this.cookName = cookName;
+        this.documentID = documentID;
+        this.cookID = cookID;
+        this.cuisineType = cuisineType;
+        this.offered = offered;
+        this.price = price;
     }
 
     public void setDocumentID(String documentID){this.documentID = documentID;}
@@ -107,6 +120,24 @@ this.recipeName = recipeName;
         return new Recipe();
 
 
+    }
+
+    public Map<String, Object> getRecipeMap(){
+        //Gives data in map form for storing in Firebase
+        Map<String, Object> data = new HashMap<>();
+        data.put("recipeName", recipeName);
+        data.put("description", description);
+        data.put("cookName", cookName);
+        data.put("cuisineType", cuisineType);
+        data.put("cookID", cookID);
+        data.put("offered", offered);
+        data.put("price", price);
+
+        return data;
+    }
+
+    public String toString(){
+        return recipeName + " by " + cookName + " ($" + price + "): " + description + " \n Cuisine Type: " + cuisineType;
     }
 
 

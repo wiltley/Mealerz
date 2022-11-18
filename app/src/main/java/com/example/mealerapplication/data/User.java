@@ -27,6 +27,7 @@ public class User {
     private FirebaseUser currentUser;
     private DatabaseReference ref;
     private Role role;
+    private String status;
 
     public enum Role{
         CLIENT(0),
@@ -51,6 +52,19 @@ public class User {
                     return "admin";
             }
         }
+
+        public Role getRoleFromString(String role){
+            switch (role){
+                case "client":
+                    return CLIENT;
+                case "cook":
+                    return COOK;
+                case "admin":
+                    return ADMIN;
+            }
+            //Shouldn't get to this area since input should only be "client", "cook" or "admin"
+            return null;
+        }
     }
 
     public User(String username, String email, Role role) {
@@ -61,6 +75,15 @@ public class User {
 
     public User(){
 
+    }
+
+    public User(String email, String fName, String lName, FirebaseUser currentUser, Role role, String status) {
+        this.email = email;
+        this.fName = fName;
+        this.lName = lName;
+        this.currentUser = currentUser;
+        this.role = role;
+        this.status = status;
     }
 
     public static void createUser(){
@@ -141,8 +164,9 @@ public class User {
         data.put("email", email);
         data.put("fName", fName != null ? fName : "");
         data.put("lName", lName != null ? lName : "");
-        data.put("address", address.getAddressMap());
+        data.put("address", address != null ? address.getAddressMap() : "");
         data.put("role", role.getRole());
+        data.put("status", status);
         //Do we put credit cards in the DB? seems like a security risk but not sure
         // how serious we should take it for now
 
