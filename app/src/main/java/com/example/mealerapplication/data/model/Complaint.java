@@ -11,6 +11,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Complaint implements Serializable {
 
@@ -78,6 +80,21 @@ public class Complaint implements Serializable {
                         Log.w(TAG, "Error deleting document", e);
                     }
                 });
+    }
+
+    public Map<String, Object> getComplaintMap(){
+        //Gives data in map form for storing in Firebase
+        Map<String, Object> data = new HashMap<>();
+        data.put("accuser", accuser);
+        data.put("accused", accused);
+        data.put("accusedUID", accused_UID);
+        data.put("message", message);
+
+        return data;
+    }
+
+    public String toString(){
+        return "Complaint by " + accuser + " against " + accused + ": " + message;
     }
 
 
