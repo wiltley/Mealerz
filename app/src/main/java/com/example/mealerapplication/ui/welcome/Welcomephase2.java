@@ -78,5 +78,14 @@ public class Welcomephase2 extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button continueButton = findViewById(R.id.finishCookRegistration);
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Welcomephase2.this, MyMealsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

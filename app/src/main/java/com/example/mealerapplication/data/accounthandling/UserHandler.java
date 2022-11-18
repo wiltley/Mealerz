@@ -43,7 +43,7 @@ public class UserHandler {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     // create user in db
-                    setUpUserInDB(auth);
+                    setUpUserInDB(auth, email);
                     Toast.makeText(context, "Registration complete!", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(context, WelcomeActivity.class);
                     context.startActivity(intent);
@@ -55,7 +55,7 @@ public class UserHandler {
         });
 
     }
-    public static void setUpUserInDB(FirebaseAuth auth){
+    public static void setUpUserInDB(FirebaseAuth auth, String email){
 
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -64,7 +64,7 @@ public class UserHandler {
         Map<String, Object> userInfo = new HashMap<>();
 
         //Placeholder constructor, can change later when needed
-        User userModel = new User("", "", "", user, User.Role.CLIENT, "");
+        User userModel = new User(email);
         userInfo = userModel.getUserMap();
 
         db.collection("users").document(auth.getCurrentUser().getUid())
@@ -101,7 +101,7 @@ public class UserHandler {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            //Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context.getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
                             checkIfBanned(context);
 
                         }else {
