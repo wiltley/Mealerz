@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 
 // FOR THIS CLASS LET'S JUST ASSUME THEY ARE RETRIEVING ALLLLLLL OF THERE MEALS
-public class MyMealsActivity extends AppCompatActivity implements ClickableAdapter.OnElementClickedListener {
+public class MyMealsActivity extends AppCompatActivity implements MyMealsAdapter.OnElementClickedListener {
 
     RecyclerView recyclerView;
     MyMealsAdapter myAdapter;
@@ -71,11 +71,13 @@ public class MyMealsActivity extends AppCompatActivity implements ClickableAdapt
 
 
                         // We shouldn't be in need to the other stuff just yet
+                        r.setDocumentID(document.getId());
                         r.setRecipeName(document.getString("Name"));
                         r.setCookName(document.getString("Cook Name"));
                         r.setCookID(document.getString("Cook ID"));
                         r.setDescription(document.getString("Description"));
                         r.setPrice(document.getString("Price"));
+                        r.setOffered(String.valueOf(document.getBoolean("Offered")));
 
                         list.add(r);
 
@@ -99,6 +101,10 @@ public class MyMealsActivity extends AppCompatActivity implements ClickableAdapt
                     case R.id.createFood:
                         Intent intent2 = new Intent(MyMealsActivity.this, CreateRecipe.class);
                         startActivity(intent2);
+
+                    case R.id.myOffer:
+                        Intent intent3 = new Intent(MyMealsActivity.this, MyOfferedMealsActivity.class);
+                        startActivity(intent3);
 
                     case R.id.requests:
                         Toast.makeText(MyMealsActivity.this, "requests", Toast.LENGTH_LONG).show();

@@ -1,6 +1,7 @@
 package com.example.mealerapplication.ui.cook;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
@@ -19,7 +20,8 @@ public class MyMealsAdapter extends ClickableAdapter{
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View v = LayoutInflater.from(context).inflate(R.layout.meal_item,parent,false);
+        return  new MyViewHolder(v, mOnClickedListener);
     }
 
     @Override
