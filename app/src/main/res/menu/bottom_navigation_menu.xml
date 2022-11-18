@@ -6,6 +6,12 @@
         android:title="MyMenu"/>
 
     <item
+        android:id="@+id/myOffer"
+        android:icon="@drawable/ic_baseline_local_offer_24"
+        android:enabled="true"
+        android:title="MyOffer"/>
+
+    <item
         android:id="@+id/createFood"
         android:icon="@drawable/ic_baseline_food_bank_24"
         android:enabled="true"

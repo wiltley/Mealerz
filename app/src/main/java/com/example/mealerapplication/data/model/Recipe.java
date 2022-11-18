@@ -22,6 +22,7 @@ public class Recipe implements Serializable {
     private String documentID;
     private String cookID;
     private String cuisineType;
+    private String offered;
 
     // Probably going to have to parse it??? Idk
     private String price;
@@ -52,6 +53,7 @@ this.recipeName = recipeName;
     public void setDescription(String description){this.description = description;}
     public void setCuisineType(String cuisineType){this.cuisineType = cuisineType;}
     public void setPrice(String price){this.price = price;}
+    public void setOffered(String offered){this.offered = offered;}
 
     public String getRecipeName(){
         return recipeName;
@@ -64,6 +66,7 @@ this.recipeName = recipeName;
     public String getCookID(){return cookID;}
     public String getCuisineType(){return cuisineType;}
     public String getPrice(){return price;}
+    public String getOffered(){return offered;}
 
 
     // By the time we call this, the recipe should already have the

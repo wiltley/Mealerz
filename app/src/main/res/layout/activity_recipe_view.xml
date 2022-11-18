@@ -65,8 +65,8 @@
 
     <TextView
         android:id="@+id/foodDescription2"
-        android:layout_width="402dp"
-        android:layout_height="115dp"
+        android:layout_width="405dp"
+        android:layout_height="192dp"
         android:layout_marginStart="3dp"
         android:layout_marginTop="64dp"
         android:text="Description"
@@ -75,37 +75,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/foodImage2" />
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/ingredientsScroll"
-        android:layout_width="410dp"
-        android:layout_height="329dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:fillViewport="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/foodDescription2">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/ingredients"
-                android:layout_width="match_parent"
-                android:layout_height="276dp"
-                android:text="Ingredients"
-                android:textColor="@color/white" />
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
 
     <RelativeLayout
-        android:layout_width="413dp"
-        android:layout_height="53dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="678dp">
+        android:layout_width="411dp"
+        android:layout_height="56dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/btm_nav"
@@ -115,5 +90,23 @@
             android:clipToPadding="false"
             app:menu="@menu/bottom_navigation_menu" />
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/cookIsOffered"
+        android:layout_width="151dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="3dp"
+        android:text="TextView"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/foodDescription2" />
+
+    <Button
+        android:id="@+id/submitOffer"
+        android:layout_width="112dp"
+        android:layout_height="48dp"
+        android:text="SUBMIT"
+        app:layout_constraintStart_toEndOf="@+id/cookIsOffered"
+        app:layout_constraintTop_toBottomOf="@+id/foodDescription2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

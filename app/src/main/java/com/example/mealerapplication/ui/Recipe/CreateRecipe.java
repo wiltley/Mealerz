@@ -20,10 +20,12 @@ import android.widget.Toast;
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.accounthandling.CookHandler;
 import com.example.mealerapplication.data.model.Recipe;
+import com.example.mealerapplication.ui.cook.MyOfferedMealsActivity;
+import com.google.android.material.textfield.TextInputEditText;
 import com.example.mealerapplication.ui.cook.MyMealsActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-
+import com.google.android.material.textfield.TextInputLayout;
 
 
 public class CreateRecipe extends AppCompatActivity {
@@ -37,11 +39,12 @@ public class CreateRecipe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_recipe);
 
-//        EditText recipeName = findViewById(R.id.new_meal_name);
-//        EditText recipeCuisine = findViewById(R.id.new_meal_name);
-//        EditText recipeDescription = findViewById(R.id.new_meal_description);
-//        EditText recipePrice = findViewById(R.id.new_meal_price);
+        TextInputLayout recipeName = findViewById(R.id.new_meal_name);
+        TextInputLayout recipeCuisine = findViewById(R.id.new_meal_cuisine_type);
+        TextInputLayout recipeDescription = findViewById(R.id.new_meal_description);
+        TextInputLayout recipePrice = findViewById(R.id.new_meal_price);
 
+        //String strTitle = String.valueOf(textInputLayout.getEditText().getText());
         Button submitRecipe = findViewById(R.id.create_new_recipe);
         Recipe recipe = new Recipe();
 
@@ -53,16 +56,17 @@ public class CreateRecipe extends AppCompatActivity {
 
 
 
-//               recipe.setRecipeName(String.valueOf(recipeName.getText()));
-//               recipe.setDescription(String.valueOf(recipeDescription.getText()));
-//               recipe.setDescription(String.valueOf(recipeDescription.getText()));
-//               recipe.setCuisineType(String.valueOf(recipeCuisine.getText()));
+               recipe.setRecipeName(String.valueOf(recipeName.getEditText().getText()));
+               recipe.setPrice(String.valueOf(recipePrice.getEditText().getText()));
+               recipe.setDescription(String.valueOf(recipeDescription.getEditText().getText()));
+               recipe.setCuisineType(String.valueOf(recipeCuisine.getEditText().getText()));
 
                // We're definetely want to do some checks to see if the data
                // enter is valid before sending it to the database
                // Such as making sure none of the fields are empty
 
                CookHandler.addRecipe(recipe);
+               Intent intent123 = new Intent(CreateRecipe.this, MyMealsActivity.class);
 
            }
            }
@@ -104,9 +108,13 @@ public class CreateRecipe extends AppCompatActivity {
                         Intent intent = new Intent(CreateRecipe.this, MyMealsActivity.class);
                         startActivity(intent);
 
-
                     case R.id.createFood:
                         break;
+
+                    case R.id.myOffer:
+                        Intent intent3 = new Intent(CreateRecipe.this, MyOfferedMealsActivity.class);
+                        startActivity(intent3);
+
 
                     case R.id.requests:
                         Toast.makeText(CreateRecipe.this, "requests", Toast.LENGTH_LONG).show();

@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -46,7 +47,7 @@ public class CookHandler {
         r.put("Name", recipe.getRecipeName());
         r.put("Description", recipe.getDescription());
         r.put("Price", recipe.getPrice());
-        r.put("Offered?", false);
+        r.put("Offered", false);
 
         //  Not sure if we want to add Ingredients this way
 
@@ -135,6 +136,29 @@ public class CookHandler {
                     }
                 });
 
+        // Update the offered tag within the recipe
+
+        Map<String, Object> f = new HashMap<>();
+        f.put("Offered", true);
+        db.collection("meals")
+                        .document("cooks")
+                        .collection(userID)
+                        .document("all")
+                        .collection("meals")
+                        .document(recipe.getDocumentID())
+                        .update(f)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d(TAG, "DocumentSnapshot successfully written!");
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error writing document", e);
+                            }
+                        });
     }
 
     public static void updateRecipe(String docID){
@@ -150,6 +174,72 @@ public class CookHandler {
     }
 
 
+    public static void removeFromOffered(Recipe recipe){
+
+      // Removes the meal from the cook's own offered list
+      Map<String, Object> deleteOffered = new HashMap<>();
+      deleteOffered.put(recipe.getDocumentID(), FieldValue.delete());
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("meals")
+                       .document("cooks")
+                       .collection(recipe.getCookID())
+                       .document("offered")
+                       .update(deleteOffered)
+                       .addOnSuccessListener(new OnSuccessListener<Void>() {
+                           @Override
+                           public void onSuccess(Void aVoid) {
+                               Log.d(TAG, "DocumentSnapshot successfully written!");
+                           }
+                       })
+                       .addOnFailureListener(new OnFailureListener() {
+                           @Override
+                           public void onFailure(@NonNull Exception e) {
+                               Log.w(TAG, "Error writing document", e);
+                           }
+                       });
+
+        // Remove the document from offered
+        db.collection("meals")
+                      .document("offered")
+                      .collection("all")
+                      .document(recipe.getDocumentID())
+                      .delete()
+                      .addOnSuccessListener(new OnSuccessListener<Void>() {
+                           @Override
+                           public void onSuccess(Void aVoid) {
+                               Log.d(TAG, "DocumentSnapshot successfully written!");
+                           }
+                       })
+                     .addOnFailureListener(new OnFailureListener() {
+                           @Override
+                           public void onFailure(@NonNull Exception e) {
+                               Log.w(TAG, "Error writing document", e);
+                           }
+                     });
+
+        Map<String, Object> f = new HashMap<>();
+        f.put("Offered", false);
+        db.collection("meals")
+                        .document("cooks")
+                        .collection(recipe.getCookID())
+                        .document("all")
+                        .collection("meals")
+                        .document(recipe.getDocumentID())
+                        .update(f)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d(TAG, "DocumentSnapshot successfully written!");
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error writing document", e);
+                            }
+                        });
+    }
 
 
 }

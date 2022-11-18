@@ -6,13 +6,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mealerapplication.R;
+import com.example.mealerapplication.data.accounthandling.CookHandler;
 import com.example.mealerapplication.data.model.Recipe;
 import com.example.mealerapplication.ui.cook.MyMealsActivity;
+import com.example.mealerapplication.ui.cook.MyOfferedMealsActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+
 
 public class RecipeView extends AppCompatActivity {
     BottomNavigationView nav;
@@ -24,6 +30,40 @@ public class RecipeView extends AppCompatActivity {
 
         // The recipe to display
         Recipe recipe = (Recipe) getIntent().getSerializableExtra("recipe");
+        String offered = recipe.getOffered();
+
+
+        Button submit = findViewById(R.id.submitOffer);
+        TextView offer = findViewById(R.id.cookIsOffered);
+
+        if(offered.equals("true")){
+
+            offer.setText("Remove this meal from offered?");
+
+        }else{
+
+            offer.setText("Add this meal to offered?");
+        }
+
+        submit.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view){
+
+                if(offered.equals("false")){
+
+                    CookHandler.addRecipeToOffered(recipe);
+                }
+                    else{
+
+                    CookHandler.removeFromOffered(recipe);;
+
+                }
+
+                Intent intent = new Intent(RecipeView.this, MyOfferedMealsActivity.class);
+            }
+        });
+
 
         // Pulls the ingredients and instructions...
         //recipe.getFullRecipe();
