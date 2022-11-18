@@ -29,6 +29,11 @@ public class User {
     private Role role;
     private String status;
 
+    public User(String email) {
+        this.email = email;
+        this.status = "";
+    }
+
     public enum Role{
         CLIENT(0),
         COOK(1),
@@ -160,13 +165,12 @@ public class User {
         //used to get mapped data for user to update Firebase
 
         Map<String, Object> data = new HashMap<>();
-        data.put("username", username);
         data.put("email", email);
         data.put("fName", fName != null ? fName : "");
         data.put("lName", lName != null ? lName : "");
         data.put("address", address != null ? address.getAddressMap() : "");
-        data.put("role", role.getRole());
-        data.put("status", status);
+        data.put("role", role != null ? role.getRole() : "");
+        data.put("status", status != null ? status : "");
         //Do we put credit cards in the DB? seems like a security risk but not sure
         // how serious we should take it for now
 
