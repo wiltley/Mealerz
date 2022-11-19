@@ -9,7 +9,7 @@
     tools:context=".ui.Recipe.RecipeView">
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/recipeName"
         android:layout_width="174dp"
         android:layout_height="59dp"
         android:layout_marginStart="1dp"
@@ -20,36 +20,26 @@
         app:layout_constraintTop_toBottomOf="@+id/foodImage2" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="105dp"
-        android:layout_height="59dp"
+        android:id="@+id/recipePrice"
+        android:layout_width="69dp"
+        android:layout_height="55dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="4dp"
         android:text="Price"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.934"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/recipeCuisineType"
         app:layout_constraintTop_toBottomOf="@+id/foodImage2" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="133dp"
-        android:layout_height="60dp"
+        android:id="@+id/recipeCuisineType"
+        android:layout_width="170dp"
+        android:layout_height="57dp"
         android:layout_marginStart="172dp"
         android:layout_marginTop="4dp"
         android:text="Cuisine Type"
         android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/foodImage2" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/foodImage2" />
 
@@ -64,7 +54,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/foodDescription2"
+        android:id="@+id/recipeDescription"
         android:layout_width="405dp"
         android:layout_height="192dp"
         android:layout_marginStart="3dp"
@@ -99,7 +89,7 @@
         android:text="TextView"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/foodDescription2" />
+        app:layout_constraintTop_toBottomOf="@+id/recipeDescription" />
 
     <Button
         android:id="@+id/submitOffer"
@@ -107,6 +97,6 @@
         android:layout_height="48dp"
         android:text="SUBMIT"
         app:layout_constraintStart_toEndOf="@+id/cookIsOffered"
-        app:layout_constraintTop_toBottomOf="@+id/foodDescription2" />
+        app:layout_constraintTop_toBottomOf="@+id/recipeDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

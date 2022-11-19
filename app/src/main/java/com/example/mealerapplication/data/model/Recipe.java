@@ -111,6 +111,7 @@ this.recipeName = recipeName;
                        r.setRecipeName(docRef.getString("Name"));
                        r.setDescription(docRef.getString("Description"));
                        r.setPrice(docRef.getString("Price"));
+                       r.setCuisineType(docRef.getString("Cuisine Type"));
 
                    }
                });

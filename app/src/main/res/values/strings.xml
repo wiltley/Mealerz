@@ -21,4 +21,9 @@
     <string name="show_pass">Show</string>
     <string name="hide_pass">Hide</string>
     <string name="title_activity_complaints">ComplaintsActivity</string>
+    <string name="recipe_name">Name: %1$s</string>
+    <string name="recipe_cuisine_type">Cuisine Type: %1$s</string>
+    <string name="recipe_description">Description: %1$s</string>
+    <string name="recipe_price">Price: %1$s$</string>
+
 </resources>
