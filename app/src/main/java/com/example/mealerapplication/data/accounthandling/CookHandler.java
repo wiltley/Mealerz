@@ -2,6 +2,7 @@ package com.example.mealerapplication.data.accounthandling;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
@@ -29,7 +30,7 @@ public class CookHandler {
 
     // Mostly going to be static methods pertaining to the cook I think
 
-    public static void addRecipe(Recipe recipe){
+    public static void addRecipe(Recipe recipe, Context context){
 
         // This recipe should not have a documentID yet
         //
@@ -42,6 +43,7 @@ public class CookHandler {
 
         // To get the Author's email might be annoying
         // Might wanna store both the email and UserID honestly
+
         r.put("Cook Name", userEmail);
         r.put("Cook ID", userID);
         r.put("Name", recipe.getRecipeName());
@@ -67,6 +69,7 @@ public class CookHandler {
                         // or the change will only occur on this stack. I could always just store the document name
 
                         recipe.setDocumentID(documentReference.getId());
+                        Toast.makeText(context.getApplicationContext(), "Recipe added!", Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

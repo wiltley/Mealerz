@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -53,7 +54,7 @@ public class CreateRecipe extends AppCompatActivity {
 
            @Override
             public void onClick(View view){
-
+                Context context = CreateRecipe.this;
 
 
                recipe.setRecipeName(String.valueOf(recipeName.getEditText().getText()));
@@ -65,8 +66,9 @@ public class CreateRecipe extends AppCompatActivity {
                // enter is valid before sending it to the database
                // Such as making sure none of the fields are empty
 
-               CookHandler.addRecipe(recipe);
-               Intent intent123 = new Intent(CreateRecipe.this, MyMealsActivity.class);
+               CookHandler.addRecipe(recipe, context);
+               Intent intent = new Intent(context, MyMealsActivity.class);
+               startActivity(intent);
 
            }
            }

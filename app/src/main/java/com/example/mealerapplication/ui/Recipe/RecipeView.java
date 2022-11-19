@@ -52,15 +52,16 @@ public class RecipeView extends AppCompatActivity {
 
                 if(offered.equals("false")){
 
-                    CookHandler.addRecipeToOffered(recipe);
+                    CookHandler.addRecipeToOffered(recipe, RecipeView.this);
                 }
                     else{
 
-                    CookHandler.removeFromOffered(recipe);;
+                    CookHandler.removeFromOffered(recipe, RecipeView.this);;
 
                 }
 
                 Intent intent = new Intent(RecipeView.this, MyOfferedMealsActivity.class);
+                    startActivity(intent);
             }
         });
 
