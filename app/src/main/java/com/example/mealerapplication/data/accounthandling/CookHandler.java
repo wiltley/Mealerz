@@ -47,6 +47,7 @@ public class CookHandler {
         r.put("Cook Name", userEmail);
         r.put("Cook ID", userID);
         r.put("Name", recipe.getRecipeName());
+        r.put("Cuisine Type", recipe.getCuisineType());
         r.put("Description", recipe.getDescription());
         r.put("Price", recipe.getPrice());
         r.put("Offered", false);
@@ -83,7 +84,7 @@ public class CookHandler {
 
     }
 
-    public static void addRecipeToOffered(Recipe recipe){
+    public static void addRecipeToOffered(Recipe recipe, Context context){
 
         String id = recipe.getDocumentID();
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -177,7 +178,7 @@ public class CookHandler {
     }
 
 
-    public static void removeFromOffered(Recipe recipe){
+    public static void removeFromOffered(Recipe recipe, Context context){
 
       // Removes the meal from the cook's own offered list
       Map<String, Object> deleteOffered = new HashMap<>();

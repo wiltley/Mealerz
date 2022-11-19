@@ -3,6 +3,7 @@ package com.example.mealerapplication.ui.Recipe;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -31,6 +32,16 @@ public class RecipeView extends AppCompatActivity {
         // The recipe to display
         Recipe recipe = (Recipe) getIntent().getSerializableExtra("recipe");
         String offered = recipe.getOffered();
+
+        TextView name = findViewById(R.id.recipeName);
+        TextView cuisineType = findViewById(R.id.recipeCuisineType);
+        TextView price =findViewById(R.id.recipePrice);
+        TextView description = findViewById(R.id.recipeDescription);
+
+        name.setText(getString(R.string.recipe_name, recipe.getRecipeName()));
+        cuisineType.setText(getString(R.string.recipe_cuisine_type, recipe.getCuisineType()));
+        price.setText(getString(R.string.recipe_price, recipe.getPrice()));
+        description.setText(getString(R.string.recipe_description, recipe.getDescription()));
 
 
         Button submit = findViewById(R.id.submitOffer);

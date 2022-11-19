@@ -78,6 +78,7 @@ public class MyMealsActivity extends AppCompatActivity implements MyMealsAdapter
                         r.setDescription(document.getString("Description"));
                         r.setPrice(document.getString("Price"));
                         r.setOffered(String.valueOf(document.getBoolean("Offered")));
+                        r.setCuisineType(document.getString("Cuisine Type"));
 
                         list.add(r);
 
