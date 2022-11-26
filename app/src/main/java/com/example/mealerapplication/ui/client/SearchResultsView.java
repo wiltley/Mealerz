@@ -1,4 +1,4 @@
-package com.example.mealerapplication.ui.cook;
+package com.example.mealerapplication.ui.client;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,17 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.Recipe;
-import com.example.mealerapplication.ui.Recipe.CreateRecipe;
 import com.example.mealerapplication.ui.Recipe.CookRecipeView;
+import com.example.mealerapplication.ui.cook.MyMealsAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,9 +23,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-
-// FOR THIS CLASS LET'S JUST ASSUME THEY ARE RETRIEVING ALLLLLLL OF THERE MEALS
-public class MyMealsActivity extends AppCompatActivity implements MyMealsAdapter.OnElementClickedListener {
+public class SearchResultsView extends AppCompatActivity implements MyMealsAdapter.OnElementClickedListener {
 
     RecyclerView recyclerView;
     MyMealsAdapter myAdapter;
@@ -40,9 +35,9 @@ public class MyMealsActivity extends AppCompatActivity implements MyMealsAdapter
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_meals);
+        setContentView(R.layout.activity_search_results_view);
 
-        recyclerView = findViewById(R.id.my_meals_list);
+        recyclerView = findViewById(R.id.my_purchases_list);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -53,9 +48,7 @@ public class MyMealsActivity extends AppCompatActivity implements MyMealsAdapter
 
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
         CollectionReference notesRef = rootRef.collection("meals")
-                .document("cooks")
-                .collection(FirebaseAuth.getInstance().getUid())
-                .document("all")
+                .document("offered")
                 .collection("meals");
 
         // Not too sure if we want this stored in here or not yet
@@ -86,46 +79,7 @@ public class MyMealsActivity extends AppCompatActivity implements MyMealsAdapter
 
             }
         });
-        nav = findViewById(R.id.btm_nav);
-
-        nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                switch (item.getItemId()){
-                    case R.id.myMenu:
-                        break;
-
-                    case R.id.createFood:
-                        Intent intent2 = new Intent(MyMealsActivity.this, CreateRecipe.class);
-                        startActivity(intent2);
-                        break;
-
-                    case R.id.myOffer:
-                        Intent intent3 = new Intent(MyMealsActivity.this, MyOfferedMealsActivity.class);
-                        startActivity(intent3);
-                        break;
-
-                    case R.id.requests:
-                        Toast.makeText(MyMealsActivity.this, "requests", Toast.LENGTH_LONG).show();
-//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
-//                        startActivity(intent2);
-                        break;
-                    case R.id.myProfile:
-                        Toast.makeText(MyMealsActivity.this, "profile", Toast.LENGTH_LONG).show();
-//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
-//                        startActivity(intent2);
-                        break;
-
-                    default:
-                }
-
-                return true;
-            }
-        });
     }
-
-
 
     @Override
     public void onElementClicked(int position) {
@@ -143,5 +97,4 @@ public class MyMealsActivity extends AppCompatActivity implements MyMealsAdapter
         startActivity(intent);
 
     }
-
 }

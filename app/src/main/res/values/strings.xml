@@ -25,5 +25,6 @@
     <string name="recipe_cuisine_type">Cuisine Type: %1$s</string>
     <string name="recipe_description">Description: %1$s</string>
     <string name="recipe_price">Price: %1$s$</string>
+    <string name="title_activity_all_meals_view">AllMealsView</string>
 
 </resources>

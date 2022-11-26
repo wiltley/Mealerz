@@ -350,5 +350,9 @@ public class CookHandler {
 
     }
 
+    public static void rejectRequest(){
+
+    }
+
 
 }

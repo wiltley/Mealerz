@@ -7,14 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.Recipe;
 import com.example.mealerapplication.data.rendering.ClickableAdapter;
 import com.example.mealerapplication.ui.Recipe.CreateRecipe;
-import com.example.mealerapplication.ui.Recipe.RecipeView;
+import com.example.mealerapplication.ui.Recipe.CookRecipeView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -125,7 +124,7 @@ public class MyOfferedMealsActivity extends AppCompatActivity implements Clickab
     @Override
     public void onElementClicked(int position) {
 
-        Intent intent = new Intent(this, RecipeView.class);
+        Intent intent = new Intent(this, CookRecipeView.class);
         // If serializable works as expected we won't have to do any of this stuff
         String name = list.get(position).getRecipeName();
         String author = list.get(position).getCookName();

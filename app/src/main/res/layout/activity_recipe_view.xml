@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient_one"
-    tools:context=".ui.Recipe.RecipeView">
+    tools:context=".ui.Recipe.CookRecipeView">
 
     <TextView
         android:id="@+id/recipeName"
@@ -92,7 +92,7 @@
         app:layout_constraintTop_toBottomOf="@+id/recipeDescription" />
 
     <Button
-        android:id="@+id/submitOffer"
+        android:id="@+id/submitRecipeOffered"
         android:layout_width="112dp"
         android:layout_height="48dp"
         android:text="SUBMIT"

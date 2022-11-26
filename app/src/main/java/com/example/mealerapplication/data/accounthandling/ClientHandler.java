@@ -21,7 +21,7 @@ public class ClientHandler {
 
 
 
-    public void purchase(Recipe recipe){
+    public static void purchase(Recipe recipe){
 
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
@@ -31,8 +31,10 @@ public class ClientHandler {
         mr.put("Requester Name", userEmail);
         mr.put("Requester ID", userID);
         mr.put("Cook ID", recipe.getCookID());
+        mr.put("Cook Name", recipe.getCookName());
         mr.put("Meal Name", recipe.getRecipeName());
         mr.put("Price", recipe.getPrice());
+        mr.put("Status", "Pending");
 
 
 
