@@ -11,14 +11,14 @@ import android.widget.TextView;
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.accounthandling.ClientHandler;
 import com.example.mealerapplication.data.model.Recipe;
-import com.example.mealerapplication.ui.client.SearchResultsView;
+import com.example.mealerapplication.ui.client.MealsSearch;
 
 public class ClientRecipeView extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_results_view);
+        setContentView(R.layout.activity_client_recipe_view);
 
         Recipe recipe = (Recipe) getIntent().getSerializableExtra("recipe");
 
@@ -59,7 +59,7 @@ public class ClientRecipeView extends AppCompatActivity {
                 // We'll make this method return something eventually to display whether it was succesfully purchase or wtv
                 ClientHandler.purchase(recipe);
 
-                Intent intent = new Intent(ClientRecipeView.this, SearchResultsView.class);
+                Intent intent = new Intent(ClientRecipeView.this, MealsSearch.class);
                 startActivity(intent);
 
             }

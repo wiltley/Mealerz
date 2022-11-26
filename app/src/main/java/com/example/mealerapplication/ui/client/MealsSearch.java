@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.Recipe;
+import com.example.mealerapplication.ui.Recipe.ClientRecipeView;
 import com.example.mealerapplication.ui.Recipe.CookRecipeView;
 import com.example.mealerapplication.ui.cook.MyMealsAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,7 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class SearchResultsView extends AppCompatActivity implements MyMealsAdapter.OnElementClickedListener {
+public class MealsSearch extends AppCompatActivity implements MealsSearchAdapter.OnElementClickedListener {
 
     RecyclerView recyclerView;
     MyMealsAdapter myAdapter;
@@ -35,9 +36,9 @@ public class SearchResultsView extends AppCompatActivity implements MyMealsAdapt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_results_view);
+        setContentView(R.layout.activity_client_meals_search);
 
-        recyclerView = findViewById(R.id.my_purchases_list);
+        recyclerView = findViewById(R.id.search_meals_list);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -49,9 +50,8 @@ public class SearchResultsView extends AppCompatActivity implements MyMealsAdapt
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
         CollectionReference notesRef = rootRef.collection("meals")
                 .document("offered")
-                .collection("meals");
+                .collection("all");
 
-        // Not too sure if we want this stored in here or not yet
         notesRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -60,15 +60,14 @@ public class SearchResultsView extends AppCompatActivity implements MyMealsAdapt
                         Recipe r = new Recipe();
 
 
-                        // We shouldn't be in need to the other stuff just yet
                         r.setDocumentID(document.getId());
-                        r.setRecipeName(document.getString("Name"));
-                        r.setCookName(document.getString("Cook Name"));
-                        r.setCookID(document.getString("Cook ID"));
-                        r.setDescription(document.getString("Description"));
-                        r.setPrice(document.getString("Price"));
-                        r.setOffered(String.valueOf(document.getBoolean("Offered")));
-                        r.setCuisineType(document.getString("Cuisine Type"));
+                        r.setRecipeName(document.getString("name"));
+                        r.setCookName(document.getString("cookName"));
+                        r.setCookID(document.getString("cookID"));
+                        r.setDescription(document.getString("description"));
+                        r.setPrice(document.getString("price"));
+                        r.setOffered(String.valueOf(document.getString("offered")));
+                        r.setCuisineType(document.getString("cuisineType"));
 
                         list.add(r);
 
@@ -84,7 +83,7 @@ public class SearchResultsView extends AppCompatActivity implements MyMealsAdapt
     @Override
     public void onElementClicked(int position) {
 
-        Intent intent = new Intent(this, CookRecipeView.class);
+        Intent intent = new Intent(this, ClientRecipeView.class);
         // If serializable works as expected we won't have to do any of this stuff
         String name = list.get(position).getRecipeName();
         String author = list.get(position).getCookName();

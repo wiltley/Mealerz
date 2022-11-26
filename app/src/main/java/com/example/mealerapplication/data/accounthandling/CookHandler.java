@@ -38,13 +38,13 @@ public class CookHandler {
         // To get the Author's email might be annoying
         // Might wanna store both the email and UserID honestly
 
-        r.put("Cook Name", userEmail);
-        r.put("Cook ID", userID);
-        r.put("Name", recipe.getRecipeName());
-        r.put("Cuisine Type", recipe.getCuisineType());
-        r.put("Description", recipe.getDescription());
-        r.put("Price", recipe.getPrice());
-        r.put("Offered", false);
+        r.put("cookName", userEmail);
+        r.put("cookID", userID);
+        r.put("recipeName", recipe.getRecipeName());
+        r.put("cuisineType", recipe.getCuisineType());
+        r.put("description", recipe.getDescription());
+        r.put("price", recipe.getPrice());
+        r.put("offered", "false");
 
         //  Not sure if we want to add Ingredients this way
 

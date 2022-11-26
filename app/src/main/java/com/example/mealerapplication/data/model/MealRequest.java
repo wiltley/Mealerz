@@ -15,6 +15,8 @@ public class MealRequest {
     String status;
     String cookName;
 
+    String clientAddress;
+
     public String getMeal(){return this.mealID;}
     public String getClientID(){return this.clientID;}
     public String getCookID(){return this.cookID;}
@@ -23,6 +25,7 @@ public class MealRequest {
     public String getDocumentID(){return this.documentID;}
     public String getCookName(){return cookName;}
     public String getStatus(){return status;}
+    public String getClientAddress(){return status;}
 
 
     public void setMealName(String mealName){this.mealName = mealName;}
@@ -33,5 +36,6 @@ public class MealRequest {
     public void setDocumentID(String documentID){this.documentID = documentID;}
     public void setCookName(String cookName){this.cookName = cookName;}
     public void setStatus(String status){this.status = status;}
+    public void setClientAddress(String clientAddress){this.clientAddress = clientAddress;}
 
 }

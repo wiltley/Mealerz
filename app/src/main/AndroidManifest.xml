@@ -13,14 +13,14 @@
         android:theme="@style/Theme.MealerApplication"
         tools:targetApi="31">
         <activity
-            android:name=".CompletedSales"
+            android:name=".ui.cook.CompletedSales"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".MySales"
+            android:name=".ui.cook.MySales"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -34,9 +34,9 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.client.SearchResultsView"
+            android:name=".ui.client.MealsSearch"
             android:exported="false"
-            android:label="@string/title_activity_all_meals_view"
+            android:label=""
             android:theme="@style/Theme.MealerApplication.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
