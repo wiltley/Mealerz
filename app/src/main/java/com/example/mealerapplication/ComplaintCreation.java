@@ -1,4 +1,4 @@
-package com.example.mealerapplication.ui.Recipe;
+package com.example.mealerapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,19 +7,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.mealerapplication.R;
+import com.example.mealerapplication.ui.Recipe.ClientRecipeView;
 import com.example.mealerapplication.ui.client.MealsSearch;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class Client_To_Cook_Profile extends AppCompatActivity {
+public class ComplaintCreation extends AppCompatActivity {
 
     BottomNavigationView nav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_client_to_cook_profile);
+        setContentView(R.layout.activity_complaint_creation);
 
         nav = findViewById(R.id.btm_nav);
 
@@ -29,12 +29,12 @@ public class Client_To_Cook_Profile extends AppCompatActivity {
 
                 switch (item.getItemId()){
                     case R.id.searchMenu_client:
-                        Intent intent0 = new Intent(Client_To_Cook_Profile.this, MealsSearch.class);
+                        Intent intent0 = new Intent(ComplaintCreation.this, MealsSearch.class);
                         startActivity(intent0);
                         return true;
 
                     case R.id.requests_client:
-                        Intent intent = new Intent(Client_To_Cook_Profile.this, ClientRecipeView.class);
+                        Intent intent = new Intent(ComplaintCreation.this, ClientRecipeView.class);
                         startActivity(intent);
                         return true;
 
