@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.MealRequest;
@@ -30,11 +33,15 @@ public class MySales extends AppCompatActivity implements MySalesAdapter.OnEleme
     FirebaseAuth auth;
     FirebaseFirestore db ;
     BottomNavigationView nav;
+    LinearLayout decisionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_sales);
+
+
+        decisionBar = findViewById(R.id.decisionBar);
 
         recyclerView = findViewById(R.id.my_sales_list);
 
@@ -83,6 +90,7 @@ public class MySales extends AppCompatActivity implements MySalesAdapter.OnEleme
     @Override
     public void onElementClicked(int position) {
         // Going to make a fragment pop up probably
+        decisionBar.setVisibility(View.VISIBLE);
 
     }
 }
