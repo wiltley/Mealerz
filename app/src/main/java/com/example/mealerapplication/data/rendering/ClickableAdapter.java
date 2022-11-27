@@ -22,7 +22,7 @@ public abstract class ClickableAdapter <T> extends RecyclerView.Adapter<Clickabl
 
     // List that holds variable of any type
     // Example usages include Recipe and Complaints
-    protected ArrayList<T> list;
+    public ArrayList<T> list;
 
     // The content must be passed to the constructor as it is used
     // for rendering components of the recycler view
