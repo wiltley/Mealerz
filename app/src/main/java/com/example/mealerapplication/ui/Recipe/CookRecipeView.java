@@ -3,7 +3,6 @@ package com.example.mealerapplication.ui.Recipe;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -15,13 +14,15 @@ import android.widget.Toast;
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.accounthandling.CookHandler;
 import com.example.mealerapplication.data.model.Recipe;
+import com.example.mealerapplication.ui.client.MyPurchases;
 import com.example.mealerapplication.ui.cook.MyMealsActivity;
 import com.example.mealerapplication.ui.cook.MyOfferedMealsActivity;
+import com.example.mealerapplication.ui.cook.MySales;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 
-public class RecipeView extends AppCompatActivity {
+public class CookRecipeView extends AppCompatActivity {
     BottomNavigationView nav;
 
     @Override
@@ -44,8 +45,9 @@ public class RecipeView extends AppCompatActivity {
         description.setText(getString(R.string.recipe_description, recipe.getDescription()));
 
 
-        Button submit = findViewById(R.id.submitOffer);
+        Button submit = findViewById(R.id.submitRecipeOffered);
         TextView offer = findViewById(R.id.cookIsOffered);
+
 
         if(offered.equals("true")){
 
@@ -63,15 +65,15 @@ public class RecipeView extends AppCompatActivity {
 
                 if(offered.equals("false")){
 
-                    CookHandler.addRecipeToOffered(recipe, RecipeView.this);
+                    CookHandler.addRecipeToOffered(recipe, CookRecipeView.this);
                 }
                     else{
 
-                    CookHandler.removeFromOffered(recipe, RecipeView.this);;
+                    CookHandler.removeFromOffered(recipe, CookRecipeView.this);;
 
                 }
 
-                Intent intent = new Intent(RecipeView.this, MyOfferedMealsActivity.class);
+                Intent intent = new Intent(CookRecipeView.this, MyOfferedMealsActivity.class);
                     startActivity(intent);
             }
         });
@@ -88,22 +90,24 @@ public class RecipeView extends AppCompatActivity {
 
                 switch (item.getItemId()){
                     case R.id.myMenu:
-                        Toast.makeText(RecipeView.this, "meals", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(RecipeView.this, MyMealsActivity.class);
+                        Toast.makeText(CookRecipeView.this, "meals", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(CookRecipeView.this, MyMealsActivity.class);
                         startActivity(intent);
+                        break;
 
                     case R.id.createFood:
-                        Toast.makeText(RecipeView.this, "meals", Toast.LENGTH_LONG).show();
-                        Intent intent2 = new Intent(RecipeView.this, CreateRecipe.class);
+                        Toast.makeText(CookRecipeView.this, "meals", Toast.LENGTH_LONG).show();
+                        Intent intent2 = new Intent(CookRecipeView.this, CreateRecipe.class);
                         startActivity(intent2);
+                        break;
 
                     case R.id.requests:
-                        Toast.makeText(RecipeView.this, "requests", Toast.LENGTH_LONG).show();
-//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
-//                        startActivity(intent2);
+                        Toast.makeText(CookRecipeView.this, "requests", Toast.LENGTH_LONG).show();
+                        Intent intent3 = new Intent(CookRecipeView.this, MySales.class);
+                        startActivity(intent3);
                         break;
                     case R.id.myProfile:
-                        Toast.makeText(RecipeView.this, "profile", Toast.LENGTH_LONG).show();
+                        Toast.makeText(CookRecipeView.this, "profile", Toast.LENGTH_LONG).show();
 //                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
 //                        startActivity(intent2);
                         break;

@@ -6,14 +6,12 @@
     android:layout_height="100dp"
     android:layout_margin="8dp"
     app:cardCornerRadius="1dp"
-    android:background="@drawable/background_gradient_one"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -25,13 +23,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Recipe Name:"
+                android:text="Meal Name:"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/meal_name"
+                android:id="@+id/purchase_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -56,7 +54,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/meal_cook_name"
+                android:id="@+id/purchase_cook_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -75,13 +73,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Price:"
+                android:text="Status:"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/meal_price"
+                android:id="@+id/purchase_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"

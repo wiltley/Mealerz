@@ -3,25 +3,20 @@ package com.example.mealerapplication.data.accounthandling;
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.mealerapplication.data.model.MealRequest;
 import com.example.mealerapplication.data.model.Recipe;
-import com.example.mealerapplication.ui.complaints.ComplaintsActivity;
-import com.example.mealerapplication.ui.login.LoginActivity;
-import com.example.mealerapplication.ui.welcome.Welcomephase2;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,13 +39,13 @@ public class CookHandler {
         // To get the Author's email might be annoying
         // Might wanna store both the email and UserID honestly
 
-        r.put("Cook Name", userEmail);
-        r.put("Cook ID", userID);
-        r.put("Name", recipe.getRecipeName());
-        r.put("Cuisine Type", recipe.getCuisineType());
-        r.put("Description", recipe.getDescription());
-        r.put("Price", recipe.getPrice());
-        r.put("Offered", false);
+        r.put("cookName", userEmail);
+        r.put("cookID", userID);
+        r.put("recipeName", recipe.getRecipeName());
+        r.put("cuisineType", recipe.getCuisineType());
+        r.put("description", recipe.getDescription());
+        r.put("price", recipe.getPrice());
+        r.put("offered", "false");
 
         //  Not sure if we want to add Ingredients this way
 
@@ -100,7 +95,7 @@ public class CookHandler {
                 .document("cooks")
                 .collection(recipe.getCookID())
                 .document("offered")
-                .update(r)
+                .set(r, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -126,7 +121,7 @@ public class CookHandler {
                 .document("offered")
                 .collection("all")
                 .document(recipe.getDocumentID())
-                .set(r)
+                .set(recipe.getRecipeMap())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -143,7 +138,7 @@ public class CookHandler {
         // Update the offered tag within the recipe
 
         Map<String, Object> f = new HashMap<>();
-        f.put("Offered", true);
+        f.put("offered", "true");
         db.collection("meals")
                         .document("cooks")
                         .collection(userID)
@@ -223,7 +218,7 @@ public class CookHandler {
                      });
 
         Map<String, Object> f = new HashMap<>();
-        f.put("Offered", false);
+        f.put("offered", "false");
         db.collection("meals")
                         .document("cooks")
                         .collection(recipe.getCookID())
@@ -243,6 +238,121 @@ public class CookHandler {
                                 Log.w(TAG, "Error writing document", e);
                             }
                         });
+    }
+
+    // This method is basically only to clean up from the "in progress" sections
+    // of purchase and sale
+    public static void cleanupRequest(MealRequest mr){
+
+        //Clean up client
+         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
+         rootRef.collection("requests")
+                 .document("purchase")
+                 .collection("clients")
+                 .document(mr.getClientID())
+                 .collection("in progress")
+                 .document(mr.getDocumentID())
+                 .delete()
+                 .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                    .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+        });
+
+        // Clean up cook
+        rootRef.collection("requests")
+                .document("sale")
+                .collection("cooks")
+                .document(mr.getCookID())
+                .collection("in progress")
+                .document(mr.getDocumentID())
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
+    }
+
+    public static void acceptRequest(MealRequest mr){
+
+        cleanupRequest(mr);
+
+        // Deal with clients adding to
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Map<String, Object> m = new HashMap<>();
+
+        m.put("Requester Name", mr.getClientName());
+        m.put("Requester ID", mr.getClientID());
+        m.put("Cook ID", mr.getCookID());
+        m.put("Meal Name", mr.getMealName());
+        m.put("Status", "Accepted");
+
+
+
+        // Add it to the client's "completed"
+        db.collection("requests")
+                .document("purchase")
+                .collection("clients")
+                .document(mr.getClientID())
+                .collection("completed")
+                .document(mr.getDocumentID())
+                .set(m)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+
+                });
+
+        // Add it to the cook's completed
+        db.collection("requests")
+                .document("sale")
+                .collection("cooks")
+                .document(mr.getCookID())
+                .collection("completed")
+                .document(mr.getDocumentID())
+                .set(m)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+
+                });
+
+
+    }
+
+    public static void rejectRequest(){
+
     }
 
 

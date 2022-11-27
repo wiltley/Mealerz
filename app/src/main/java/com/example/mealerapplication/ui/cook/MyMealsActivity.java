@@ -12,11 +12,8 @@ import android.widget.Toast;
 
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.Recipe;
-import com.example.mealerapplication.data.rendering.ClickableAdapter;
 import com.example.mealerapplication.ui.Recipe.CreateRecipe;
-import com.example.mealerapplication.ui.Recipe.RecipeView;
-import com.example.mealerapplication.ui.login.LoginActivity;
-import com.example.mealerapplication.ui.registration.SignupActivity;
+import com.example.mealerapplication.ui.Recipe.CookRecipeView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -72,13 +69,13 @@ public class MyMealsActivity extends AppCompatActivity implements MyMealsAdapter
 
                         // We shouldn't be in need to the other stuff just yet
                         r.setDocumentID(document.getId());
-                        r.setRecipeName(document.getString("Name"));
-                        r.setCookName(document.getString("Cook Name"));
-                        r.setCookID(document.getString("Cook ID"));
-                        r.setDescription(document.getString("Description"));
-                        r.setPrice(document.getString("Price"));
-                        r.setOffered(String.valueOf(document.getBoolean("Offered")));
-                        r.setCuisineType(document.getString("Cuisine Type"));
+                        r.setRecipeName(document.getString("recipeName"));
+                        r.setCookName(document.getString("cookName"));
+                        r.setCookID(document.getString("cookID"));
+                        r.setDescription(document.getString("description"));
+                        r.setPrice(document.getString("price"));
+                        r.setOffered(document.getString("offered"));
+                        r.setCuisineType(document.getString("cuisineType"));
 
                         list.add(r);
 
@@ -133,7 +130,7 @@ public class MyMealsActivity extends AppCompatActivity implements MyMealsAdapter
     @Override
     public void onElementClicked(int position) {
 
-        Intent intent = new Intent(this, RecipeView.class);
+        Intent intent = new Intent(this, CookRecipeView.class);
         // If serializable works as expected we won't have to do any of this stuff
         String name = list.get(position).getRecipeName();
         String author = list.get(position).getCookName();

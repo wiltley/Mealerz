@@ -1,29 +1,30 @@
-package com.example.mealerapplication.ui.cook;
+package com.example.mealerapplication.ui.client;
+
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.Recipe;
 import com.example.mealerapplication.data.rendering.ClickableAdapter;
 
 import java.util.ArrayList;
 
-public class MyOfferedMealsAdapter extends ClickableAdapter {
+public class MealsSearchAdapter extends ClickableAdapter{
 
-    public MyOfferedMealsAdapter(Context context, ArrayList list, ClickableAdapter.OnElementClickedListener mOnClickedListener) {
+    public MealsSearchAdapter(Context context, ArrayList list, OnElementClickedListener mOnClickedListener) {
         super(context, list, mOnClickedListener);
     }
 
     @NonNull
     @Override
-    public MyOfferedMealsAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public com.example.mealerapplication.ui.client.MealsSearchAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.meal_item,parent,false);
-        return  new MyOfferedMealsAdapter.MyViewHolder(v, mOnClickedListener);
+        return  new com.example.mealerapplication.ui.client.MealsSearchAdapter.MyViewHolder(v, mOnClickedListener);
     }
 
     @Override
@@ -39,7 +40,7 @@ public class MyOfferedMealsAdapter extends ClickableAdapter {
 
     public class MyViewHolder extends ClickableAdapter.MyViewHolder{
 
-        public MyViewHolder(@NonNull View itemView, ClickableAdapter.OnElementClickedListener onElementClickedListener) {
+        public MyViewHolder(@NonNull View itemView, OnElementClickedListener onElementClickedListener) {
             // Pass the IDS here
             super(itemView, onElementClickedListener, R.id.meal_name, R.id.meal_cook_name, R.id.meal_price);
         }

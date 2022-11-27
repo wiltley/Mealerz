@@ -106,12 +106,12 @@ this.recipeName = recipeName;
 
                        DocumentSnapshot docRef = task.getResult();
 
-                       r.setCookName(docRef.getString("Cook Name"));
-                       r.setCookID(docRef.getString("Cook ID"));
-                       r.setRecipeName(docRef.getString("Name"));
-                       r.setDescription(docRef.getString("Description"));
-                       r.setPrice(docRef.getString("Price"));
-                       r.setCuisineType(docRef.getString("Cuisine Type"));
+                       r.setCookName(docRef.getString("cookName"));
+                       r.setCookID(docRef.getString("cookID"));
+                       r.setRecipeName(docRef.getString("name"));
+                       r.setDescription(docRef.getString("description"));
+                       r.setPrice(docRef.getString("price"));
+                       r.setCuisineType(docRef.getString("cuisineType"));
 
                    }
                });
