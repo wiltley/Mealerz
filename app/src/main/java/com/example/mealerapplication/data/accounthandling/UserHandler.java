@@ -29,33 +29,38 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 // This class will be huge for now but we will want to split it up further
 // into a authentication handler, registration handler... etc
 public class UserHandler {
 
-    public static void registerUser(HashMap<String, String> map, String password, Context context, FirebaseAuth auth){
+    public static void registerUser(HashMap<String, String> map, String password, Context context, FirebaseAuth auth) {
 
-        auth.createUserWithEmailAndPassword(map.get("email"),password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        auth.createUserWithEmailAndPassword(map.get("email"), password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     // create user in db
                     setUpUserInDB(auth, map);
                     Toast.makeText(context, "Registration complete!", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(context, WelcomeActivity.class);
                     context.startActivity(intent);
-                }
-                else{
+                } else {
                     Toast.makeText(context, "Registration Failed!!", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
     }
-    public static void setUpUserInDB(FirebaseAuth auth, HashMap<String, String> map){
+
+    public static void setUpUserInDB(FirebaseAuth auth, HashMap<String, String> map) {
 
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -78,7 +83,7 @@ public class UserHandler {
                 });
     }
 
-    public static  void loginUser(String email, String password, Context context){
+    public static void loginUser(String email, String password, Context context) {
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
 
@@ -99,7 +104,7 @@ public class UserHandler {
                             Toast.makeText(context.getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
                             checkIfBanned(context);
 
-                        }else {
+                        } else {
 
                             Toast.makeText(context, "Login failed! Please try again later", Toast.LENGTH_LONG).show();
                         }
@@ -109,7 +114,7 @@ public class UserHandler {
 
     }
 
-    public static void cookSetup(){
+    public static void cookSetup() {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -118,7 +123,7 @@ public class UserHandler {
     }
 
 
-    public static void checkIfBanned(Context context){
+    public static void checkIfBanned(Context context) {
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -137,23 +142,45 @@ public class UserHandler {
 
 
                     if (document.getString("role").equals("cook") && document.getString("status").equals("Banned")) {
-                        Toast.makeText(context, "Sorry, but your account is permanently banned", Toast.LENGTH_LONG).show();
+                        Long banExpiry = document.getLong("banExpiry");
+                        //Check if ban expired and remove banned status
+                        if (banExpiry != null) {
+                            if (System.currentTimeMillis() >= banExpiry) {
+                                Map<String, Object> userMap = new HashMap<>();
+                                userMap.put("status", null);
+                                userMap.put("banExpiry", "");
+                                docRef.update(userMap);
+                                Intent i = new Intent(context, Welcomephase2.class);
+                                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                context.startActivity(i);
+                                return;
+                            }
+
+                            //If user is still banned show when ban expires
+                            Date date = new Date(banExpiry);
+                            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
+                            String dateString = dateFormat.format(date);
+                            Toast.makeText(context, "Sorry, but your account is banned until " + dateString, Toast.LENGTH_LONG).show();
+
+                        }else{
+                            Toast.makeText(context, "Sorry, but your account is banned", Toast.LENGTH_LONG).show();
+                        }
+
                         Intent i = new Intent(context, LoginActivity.class);
                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(i);
-                    }
-                    else if(document.getString("role").equals("cook") && document.getString("status").equals("Suspended")) {
+                    } else if (document.getString("role").equals("cook") && document.getString("status").equals("Suspended")) {
                         Toast.makeText(context, "Sorry, but your account is temporarily banned for 3 days", Toast.LENGTH_LONG).show();
 
                         Intent i = new Intent(context, LoginActivity.class);
                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(i);
 
-                    }else if(!document.getString("role").equals("admin")){
+                    } else if (!document.getString("role").equals("admin")) {
                         Intent i = new Intent(context, Welcomephase2.class);
                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(i);
-                    }else{
+                    } else {
 
                         Intent i = new Intent(context, ComplaintsActivity.class);
                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -167,7 +194,7 @@ public class UserHandler {
     }
 
 
-    public static void updateUserRole(String role){
+    public static void updateUserRole(String role) {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -178,7 +205,7 @@ public class UserHandler {
         ref.update(userInfo);
 
         // If the usertype is cook, it's going to require additional setup..
-        if(role.equals("cook")){
+        if (role.equals("cook")) {
             cookSetup();
         }
 
