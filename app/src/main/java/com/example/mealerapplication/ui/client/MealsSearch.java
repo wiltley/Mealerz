@@ -128,7 +128,7 @@ public class MealsSearch extends AppCompatActivity implements MealsSearchAdapter
                         return true;
 
                     case R.id.requests_client:
-                        Intent intent = new Intent(MealsSearch.this, ClientRecipeView.class);
+                        Intent intent = new Intent(MealsSearch.this, MyPurchases.class);
                         startActivity(intent);
                         return true;
 
