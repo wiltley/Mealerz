@@ -28,11 +28,12 @@
             android:text="Offered Meals" />
 
         <Button
+            android:id="@+id/search_reset_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:fontFamily="@font/montserrat"
-            android:text="Filter/search"
+            android:text="Reset search"
             app:layout_constraintRight_toRightOf="parent" />
 
     </LinearLayout>

@@ -7,15 +7,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
 
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.Recipe;
+import com.example.mealerapplication.data.rendering.Searcher;
 import com.example.mealerapplication.ui.Recipe.ClientRecipeView;
-import com.example.mealerapplication.ui.Recipe.CookRecipeView;
 import com.example.mealerapplication.ui.cook.MyMealsAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,19 +41,26 @@ public class MealsSearch extends AppCompatActivity implements MealsSearchAdapter
     BottomNavigationView nav;
     Spinner spinner;
     ListView listview;
-    SearchView search;
+    SearchView searchView;
+    Button searchButton;
+    Button resetSearchButton;
+    Searcher searchFunc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_meals_search);
 
+        resetSearchButton = findViewById(R.id.search_reset_button);
+        searchView = findViewById(R.id.searchView);
         spinner = findViewById(R.id.search_spinner);
         List<String> search = new ArrayList<>();
-        search.add("Meal Type");
+        search.add("Meal Name");
         search.add("Cuisine Type");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, search);
+
+
         spinner.setAdapter(adapter);
 
         recyclerView = findViewById(R.id.search_meals_list);
@@ -60,6 +69,10 @@ public class MealsSearch extends AppCompatActivity implements MealsSearchAdapter
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<>();
+        // Pass it to the search class
+        searchFunc = new Searcher(list);
+        //
+
         myAdapter = new MyMealsAdapter(this, list, this );
         recyclerView.setAdapter(myAdapter);
 
@@ -94,6 +107,34 @@ public class MealsSearch extends AppCompatActivity implements MealsSearchAdapter
 
             }
         });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+
+                myAdapter.list = (ArrayList<Recipe>) searchFunc.search(s, adapter.getItem(spinner.getSelectedItemPosition()) );
+                myAdapter.notifyDataSetChanged();
+                return false;
+            }
+        });
+
+        resetSearchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                myAdapter.list = (ArrayList<Recipe>) searchFunc.getOriginal();
+                myAdapter.notifyDataSetChanged();
+
+            }
+        });
+
+
     }
 
     @Override
