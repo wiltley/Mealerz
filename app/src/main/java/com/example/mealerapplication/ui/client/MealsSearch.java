@@ -7,6 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.Spinner;
 
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.Recipe;
@@ -23,6 +27,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MealsSearch extends AppCompatActivity implements MealsSearchAdapter.OnElementClickedListener {
 
@@ -32,11 +37,22 @@ public class MealsSearch extends AppCompatActivity implements MealsSearchAdapter
     FirebaseAuth auth;
     FirebaseFirestore db ;
     BottomNavigationView nav;
+    Spinner spinner;
+    ListView listview;
+    SearchView search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_meals_search);
+
+        spinner = findViewById(R.id.search_spinner);
+        List<String> search = new ArrayList<>();
+        search.add("Meal Type");
+        search.add("Cuisine Type");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, search);
+        spinner.setAdapter(adapter);
 
         recyclerView = findViewById(R.id.search_meals_list);
 

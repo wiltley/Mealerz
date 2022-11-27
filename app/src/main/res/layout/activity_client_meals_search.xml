@@ -7,11 +7,14 @@
     android:background="@drawable/background_gradient_one"
     tools:context=".ui.client.MealsSearch">
 
+
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="#1a1a1a"
+        android:id="@+id/OfferedMealsSearchTop"
         app:layout_constraintTop_toTopOf="parent"
         >
 
@@ -19,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textColor="#FFFFFF"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:layout_marginLeft="10dp"
             android:fontFamily="@font/montserrat"
             android:text="Offered Meals" />
@@ -34,20 +37,47 @@
 
     </LinearLayout>
 
+    <LinearLayout
 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#1a1a1a"
+        app:layout_constraintTop_toBottomOf="@id/OfferedMealsSearchTop"
+        >
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="300dp"
+        android:background="#FFFF"
+        android:layout_height="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
 
+    <Spinner
+        android:id="@+id/search_spinner"
+        android:background="#FFFFFF"
+        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        app:layout_constraintStart_toEndOf="@+id/searchView"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_meals_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="150dp"
             android:layout_marginBottom="30dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/btm_nav"
