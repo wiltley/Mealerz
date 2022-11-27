@@ -7,6 +7,18 @@
     android:background="@drawable/background_gradient_one"
     tools:context=".ComplaintCreation">
 
+    <TextView
+        android:id="@+id/cookName2"
+        android:layout_width="169dp"
+        android:layout_height="47dp"
+        android:background="@drawable/background_gradient_two"
+        android:text="Cook's Name"
+        android:textAlignment="center"
+        android:textColor="#F4F2F2"
+        android:textSize="14sp"
+        tools:layout_editor_absoluteX="114dp"
+        tools:layout_editor_absoluteY="113dp" />
+
     <RelativeLayout
         android:layout_width="413dp"
         android:layout_height="56dp"
