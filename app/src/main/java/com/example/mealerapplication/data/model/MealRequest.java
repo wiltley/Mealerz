@@ -25,7 +25,7 @@ public class MealRequest {
     public String getDocumentID(){return this.documentID;}
     public String getCookName(){return cookName;}
     public String getStatus(){return status;}
-    public String getClientAddress(){return status;}
+    public String getClientAddress(){return clientAddress;}
 
 
     public void setMealName(String mealName){this.mealName = mealName;}

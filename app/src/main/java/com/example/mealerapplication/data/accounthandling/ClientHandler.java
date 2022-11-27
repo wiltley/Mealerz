@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.mealerapplication.data.User;
 import com.example.mealerapplication.data.model.Recipe;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,7 +35,9 @@ public class ClientHandler {
         mr.put("Cook Name", recipe.getCookName());
         mr.put("Meal Name", recipe.getRecipeName());
         mr.put("Price", recipe.getPrice());
+        mr.put("Client Address", User.getAddress());
         mr.put("Status", "Pending");
+
 
 
 
@@ -59,7 +62,7 @@ public class ClientHandler {
                         db.collection("requests")
                                 .document("sale")
                                 .collection("cooks")
-                                .document(userID)
+                                .document(recipe.getCookID())
                                 .collection("in progress").document(documentID)
                                 .set(mr)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {

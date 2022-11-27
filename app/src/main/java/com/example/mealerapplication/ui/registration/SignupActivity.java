@@ -18,10 +18,16 @@ import com.example.mealerapplication.data.accounthandling.UserHandler;
 import com.example.mealerapplication.ui.login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.HashMap;
+
 public class SignupActivity extends AppCompatActivity {
 
     private EditText emailEditText;
     private EditText passwordEditText;
+    private EditText addressEditText;
+    private EditText firstNameEditText;
+    private EditText lastNameEditText;
+
     private Button registerButton;
     private FirebaseAuth auth;
     private TextView loginButton;
@@ -39,6 +45,10 @@ public class SignupActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.registerUserEmail);
         passwordEditText = findViewById(R.id.registerUserPass);
         registerButton = findViewById(R.id.registerButton);
+        addressEditText = findViewById(R.id.registerUserAddress);
+        firstNameEditText = findViewById(R.id.registerUserFirstName);
+        lastNameEditText = findViewById(R.id.registerUserLastName);
+
 
         loginButton = findViewById(R.id.bringToLogin);
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -62,10 +72,17 @@ public class SignupActivity extends AppCompatActivity {
 
     public void registerUser() {
 
-        String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        if (TextUtils.isEmpty(email)) {
+        HashMap<String, String> map = new HashMap<>();
+
+        map.put("fName", firstNameEditText.getText().toString());
+        map.put("email", emailEditText.getText().toString());
+        map.put("lName", lastNameEditText.getText().toString());
+        map.put("address", addressEditText.getText().toString());
+        map.put("status", "");
+
+        if (TextUtils.isEmpty(map.get("email"))) {
             Toast.makeText(getApplicationContext(), "Please enter email!", Toast.LENGTH_LONG).show();
             return;
 
@@ -76,6 +93,11 @@ public class SignupActivity extends AppCompatActivity {
 
         }
 
-        UserHandler.registerUser(email, password, SignupActivity.this, auth);
+        if (TextUtils.isEmpty(map.get("address"))) {
+            Toast.makeText(getApplicationContext(), "Please enter address!", Toast.LENGTH_LONG).show();
+            return;
+
+        }
+        UserHandler.registerUser(map, password, SignupActivity.this, auth);
     }
 }
