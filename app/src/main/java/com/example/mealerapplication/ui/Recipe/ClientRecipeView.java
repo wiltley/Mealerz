@@ -1,9 +1,11 @@
 package com.example.mealerapplication.ui.Recipe;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,10 +14,12 @@ import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.accounthandling.ClientHandler;
 import com.example.mealerapplication.data.model.Recipe;
 import com.example.mealerapplication.ui.client.MealsSearch;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class ClientRecipeView extends AppCompatActivity {
-
+    BottomNavigationView nav;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,5 +69,32 @@ public class ClientRecipeView extends AppCompatActivity {
 
             }
         });
+        nav = findViewById(R.id.btm_nav);
+
+        nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()){
+                    case R.id.searchMenu_client:
+                        Intent intent0 = new Intent(ClientRecipeView.this, MealsSearch.class);
+                        startActivity(intent0);
+                        return true;
+
+                    case R.id.requests_client:
+                        return true;
+
+                    case R.id.myProfile_client:
+//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
+//                        startActivity(intent2);
+                        return true;
+
+//                    default:
+                }
+
+                return false;
+            }
+        });
+
     }
 }

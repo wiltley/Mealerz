@@ -10,22 +10,21 @@
 
     <LinearLayout
 
+        android:id="@+id/OfferedMealsSearchTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="#1a1a1a"
-        android:id="@+id/OfferedMealsSearchTop"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:fontFamily="@font/montserrat"
-            android:text="Offered Meals" />
+            android:text="Offered Meals"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
 
         <Button
             android:layout_width="wrap_content"
@@ -41,25 +40,24 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="#1a1a1a"
-        app:layout_constraintTop_toBottomOf="@id/OfferedMealsSearchTop"
-        >
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="300dp"
-        android:background="#FFFF"
-        android:layout_height="40dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        />
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/OfferedMealsSearchTop">
 
-    <Spinner
-        android:id="@+id/search_spinner"
-        android:background="#FFFFFF"
-        android:layout_height="40dp"
-        android:layout_width="match_parent"
-        app:layout_constraintStart_toEndOf="@+id/searchView"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:background="#FFFF"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <Spinner
+            android:id="@+id/search_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/searchView" />
 
     </LinearLayout>
 
@@ -86,7 +84,7 @@
             android:clipToPadding="false"
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom"
-            app:menu="@menu/bottom_navigation_menu"
+            app:menu="@menu/client_bottom_navigation_menu"
             />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

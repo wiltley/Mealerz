@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -15,11 +16,14 @@ import android.widget.Spinner;
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.Recipe;
 import com.example.mealerapplication.ui.Recipe.ClientRecipeView;
-import com.example.mealerapplication.ui.Recipe.CookRecipeView;
+import com.example.mealerapplication.ui.Recipe.CreateRecipe;
+import com.example.mealerapplication.ui.cook.MyMealsActivity;
 import com.example.mealerapplication.ui.cook.MyMealsAdapter;
+import com.example.mealerapplication.ui.cook.MyOfferedMealsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -48,7 +52,7 @@ public class MealsSearch extends AppCompatActivity implements MealsSearchAdapter
 
         spinner = findViewById(R.id.search_spinner);
         List<String> search = new ArrayList<>();
-        search.add("Meal Type");
+        search.add("Meal Name");
         search.add("Cuisine Type");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, search);
@@ -92,6 +96,33 @@ public class MealsSearch extends AppCompatActivity implements MealsSearchAdapter
                     myAdapter.notifyDataSetChanged();
                 }
 
+            }
+        });
+        nav = findViewById(R.id.btm_nav);
+
+
+        nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()){
+                    case R.id.searchMenu_client:
+                        return true;
+
+                    case R.id.requests_client:
+                        Intent intent = new Intent(MealsSearch.this, ClientRecipeView.class);
+                        startActivity(intent);
+                        return true;
+
+                    case R.id.myProfile_client:
+//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
+//                        startActivity(intent2);
+                        return true;
+
+//                    default:
+                }
+
+                return false;
             }
         });
     }
