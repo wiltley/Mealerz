@@ -1,5 +1,6 @@
 package com.example.mealerapplication.ui.complaints;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -15,7 +16,12 @@ import com.example.mealerapplication.data.model.Complaint;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class ComplaintsDecision extends AppCompatActivity {
@@ -26,6 +32,8 @@ public class ComplaintsDecision extends AppCompatActivity {
     String msg;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
+    CalendarView calendar;
+    long banTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +52,13 @@ public class ComplaintsDecision extends AppCompatActivity {
 
 
 
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) CalendarView ban_time = findViewById(R.id.ban_calendar);
+        calendar = findViewById(R.id.ban_calendar);
         Button ban = findViewById(R.id.ban_button);
+        banTime = System.currentTimeMillis();
+
+        Date date = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
+        ban.setText(getString(R.string.ban_until, dateFormat.format(date)));
 
 
         accus.setText(accused);
@@ -59,7 +72,7 @@ public class ComplaintsDecision extends AppCompatActivity {
 
 
                 Map<String,Object> userMap = new HashMap<>();
-                userMap.put("status", "Banned");
+                userMap.put("status", "");
 
                 db = FirebaseFirestore.getInstance ();
 
@@ -86,10 +99,12 @@ public class ComplaintsDecision extends AppCompatActivity {
         ban.setOnClickListener(new View.OnClickListener(){
            @Override
            public void onClick(View v){
-
-               long time = ban_time.getDate();
-
-
+               Map<String,Object> userMap = new HashMap<>();
+               userMap.put("status", "Banned");
+               userMap.put("banExpiry", banTime);
+               long time = calendar.getDate();
+               db = FirebaseFirestore.getInstance();
+               db.collection("users").document(complaint.getAccused_UID()).update(userMap);
                complaint.removeFromDB();
 
                Intent i = new Intent(ComplaintsDecision.this, ComplaintsActivity.class);
@@ -97,6 +112,18 @@ public class ComplaintsDecision extends AppCompatActivity {
            }
 
 
+        });
+
+        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
+                //Month integer is 0-indexed for some reason (Jan = 0, Dec = 11), so add 1 to be readable for users
+                String dateString = year + "-" + (month+1) + "-" + day;
+                ban.setText(getString(R.string.ban_until, dateString));
+                Calendar c = Calendar.getInstance();
+                c.set(year, month, day);
+                banTime = c.getTimeInMillis();
+            }
         });
 
 
