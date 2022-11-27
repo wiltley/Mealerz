@@ -28,7 +28,8 @@
         </activity>
         <activity
             android:name=".ui.cook.MySales"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/Theme.MealerApplication.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

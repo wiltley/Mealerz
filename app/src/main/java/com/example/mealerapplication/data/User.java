@@ -16,13 +16,17 @@ import java.util.Map;
 
 // CLIENT SIDE GENERAL USER
 
+// Only really using this for address atm
+// Treat this as only for the LOGGED IN user
 public class User {
 
     private String username;
     private String email;
     private String fName;
     private String lName;
-    Address address;
+
+    //  Need this static cuz
+    static String address;
     CreditCard creditCard;
     private FirebaseUser currentUser;
     private DatabaseReference ref;
@@ -106,59 +110,44 @@ public class User {
     public String getUsername(){
         return username;
     }
-
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
-
     public String getfName() {
         return fName;
     }
-
     public void setfName(String fName) {
         this.fName = fName;
     }
-
     public String getlName() {
         return lName;
     }
-
     public void setlName(String lName) {
         this.lName = lName;
     }
-
-    public Address getAddress() {
+    public static String getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
+    public static void setAddress(String ad) {address = ad;}
     public CreditCard getCreditCard() {
         return creditCard;
     }
-
     public void setCreditCard(CreditCard creditCard) {
         this.creditCard = creditCard;
     }
-
     public boolean isClient(){
         return role == Role.CLIENT;
     }
-
     public boolean isCook(){
         return role == Role.COOK;
     }
-
     public boolean isAdmin(){
         return role == Role.ADMIN;
     }
-
     public Role getRole(){ return role; }
 
     public Map<String, Object> getUserMap(){
@@ -168,7 +157,7 @@ public class User {
         data.put("email", email);
         data.put("fName", fName != null ? fName : "");
         data.put("lName", lName != null ? lName : "");
-        data.put("address", address != null ? address.getAddressMap() : "");
+        data.put("address", address != null ? address : "");
         data.put("role", role != null ? role.getRole() : "");
         data.put("status", status != null ? status : "");
         //Do we put credit cards in the DB? seems like a security risk but not sure
@@ -176,16 +165,5 @@ public class User {
 
         return data;
     }
-
-
-
-    public void handleMessageFromServer(){
-
-    }
-
-    /*public void permissable(Permission p){
-
-    }*/
-
 
 }

@@ -36,14 +36,14 @@ import java.util.Map;
 // into a authentication handler, registration handler... etc
 public class UserHandler {
 
-    public static void registerUser(String email, String password, Context context, FirebaseAuth auth){
+    public static void registerUser(HashMap<String, String> map, String password, Context context, FirebaseAuth auth){
 
-        auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        auth.createUserWithEmailAndPassword(map.get("email"),password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     // create user in db
-                    setUpUserInDB(auth, email);
+                    setUpUserInDB(auth, map);
                     Toast.makeText(context, "Registration complete!", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(context, WelcomeActivity.class);
                     context.startActivity(intent);
@@ -55,20 +55,15 @@ public class UserHandler {
         });
 
     }
-    public static void setUpUserInDB(FirebaseAuth auth, String email){
+    public static void setUpUserInDB(FirebaseAuth auth, HashMap<String, String> map){
 
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        Map<String, Object> userInfo = new HashMap<>();
-
-        //Placeholder constructor, can change later when needed
-        User userModel = new User(email);
-        userInfo = userModel.getUserMap();
 
         db.collection("users").document(auth.getCurrentUser().getUid())
-                .set(userInfo)
+                .set(map)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -119,25 +114,6 @@ public class UserHandler {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        HashMap<String, Integer> test = new HashMap<String, Integer>();
-        test.put("Yo", 2);
-
-
-        System.out.println("reachd");
-        db.collection("meals").document(user.getUid()).collection("recipes").document()
-                .set(test)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
-                    }
-                });
 
     }
 
@@ -156,6 +132,10 @@ public class UserHandler {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
+                    // Can also read current user info in case we need it
+                    User.setAddress(document.getString("address"));
+
+
                     if (document.getString("role").equals("cook") && document.getString("status").equals("Banned")) {
                         Toast.makeText(context, "Sorry, but your account is permanently banned", Toast.LENGTH_LONG).show();
                         Intent i = new Intent(context, LoginActivity.class);

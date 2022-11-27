@@ -39,7 +39,6 @@ public class MyPurchases extends AppCompatActivity implements MyPurchasesAdapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_purchases);
-        // TODO: 2022-11-23  Change this to match the proper r.id_list
         recyclerView = findViewById(R.id.my_purchases_list);
 
         recyclerView.setHasFixedSize(true);

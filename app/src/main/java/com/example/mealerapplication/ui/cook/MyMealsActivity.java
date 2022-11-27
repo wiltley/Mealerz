@@ -108,8 +108,8 @@ public class MyMealsActivity extends AppCompatActivity implements MyMealsAdapter
 
                     case R.id.requests:
                         Toast.makeText(MyMealsActivity.this, "requests", Toast.LENGTH_LONG).show();
-//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
-//                        startActivity(intent2);
+                        Intent intent4 = new Intent(MyMealsActivity.this, MySales.class);
+                        startActivity(intent4);
                         return true;
                     case R.id.myProfile:
                         Toast.makeText(MyMealsActivity.this, "profile", Toast.LENGTH_LONG).show();
