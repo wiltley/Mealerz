@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_gradient_one"
     tools:context=".ui.cook.MyOfferedMealsActivity">
 
     <RelativeLayout
@@ -22,11 +23,10 @@
     </RelativeLayout>
 
     <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="408dp"
-        android:layout_height="614dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="58dp"
+        android:id="@+id/scrollview_my_offered_meals"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

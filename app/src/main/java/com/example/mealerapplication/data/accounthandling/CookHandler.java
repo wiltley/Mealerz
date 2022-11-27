@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -94,7 +95,7 @@ public class CookHandler {
                 .document("cooks")
                 .collection(recipe.getCookID())
                 .document("offered")
-                .update(r)
+                .set(r, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -120,7 +121,7 @@ public class CookHandler {
                 .document("offered")
                 .collection("all")
                 .document(recipe.getDocumentID())
-                .set(r)
+                .set(recipe.getRecipeMap())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -137,7 +138,7 @@ public class CookHandler {
         // Update the offered tag within the recipe
 
         Map<String, Object> f = new HashMap<>();
-        f.put("Offered", true);
+        f.put("offered", "true");
         db.collection("meals")
                         .document("cooks")
                         .collection(userID)
@@ -217,7 +218,7 @@ public class CookHandler {
                      });
 
         Map<String, Object> f = new HashMap<>();
-        f.put("Offered", false);
+        f.put("offered", "false");
         db.collection("meals")
                         .document("cooks")
                         .collection(recipe.getCookID())

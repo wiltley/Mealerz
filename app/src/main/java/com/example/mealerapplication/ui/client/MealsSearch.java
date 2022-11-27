@@ -61,7 +61,7 @@ public class MealsSearch extends AppCompatActivity implements MealsSearchAdapter
 
 
                         r.setDocumentID(document.getId());
-                        r.setRecipeName(document.getString("name"));
+                        r.setRecipeName(document.getString("recipeName"));
                         r.setCookName(document.getString("cookName"));
                         r.setCookID(document.getString("cookID"));
                         r.setDescription(document.getString("description"));

@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.accounthandling.CookHandler;
 import com.example.mealerapplication.data.model.Recipe;
 import com.example.mealerapplication.ui.cook.MyOfferedMealsActivity;
+import com.example.mealerapplication.ui.cook.MySales;
 import com.google.android.material.textfield.TextInputEditText;
 import com.example.mealerapplication.ui.cook.MyMealsActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -109,19 +111,21 @@ public class CreateRecipe extends AppCompatActivity {
                     case R.id.myMenu:
                         Intent intent = new Intent(CreateRecipe.this, MyMealsActivity.class);
                         startActivity(intent);
+                        break;
 
                     case R.id.createFood:
                         break;
 
                     case R.id.myOffer:
-                        Intent intent3 = new Intent(CreateRecipe.this, MyOfferedMealsActivity.class);
-                        startActivity(intent3);
+                        Intent intent2 = new Intent(CreateRecipe.this, MyOfferedMealsActivity.class);
+                        startActivity(intent2);
+                        break;
 
 
                     case R.id.requests:
                         Toast.makeText(CreateRecipe.this, "requests", Toast.LENGTH_LONG).show();
-//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
-//                        startActivity(intent2);
+                        Intent intent3 = new Intent(CreateRecipe.this, MySales.class);
+                        startActivity(intent3);
                         break;
                     case R.id.myProfile:
                         Toast.makeText(CreateRecipe.this, "profile", Toast.LENGTH_LONG).show();
@@ -136,5 +140,6 @@ public class CreateRecipe extends AppCompatActivity {
             }
         });
     }
+
 
 }

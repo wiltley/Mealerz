@@ -31,28 +31,23 @@
             android:fontFamily="@font/montserrat"
             android:text="Filter/search"
             app:layout_constraintRight_toRightOf="parent" />
+
     </LinearLayout>
 
 
-    <ScrollView
-        android:id="@+id/scrollView3"
-        android:layout_width="408dp"
-        android:layout_height="614dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="58dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_meals_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="30dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-    </ScrollView>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/btm_nav"

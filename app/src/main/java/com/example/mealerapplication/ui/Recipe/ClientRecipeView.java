@@ -12,6 +12,7 @@ import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.accounthandling.ClientHandler;
 import com.example.mealerapplication.data.model.Recipe;
 import com.example.mealerapplication.ui.client.MealsSearch;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class ClientRecipeView extends AppCompatActivity {
 
@@ -22,21 +23,21 @@ public class ClientRecipeView extends AppCompatActivity {
 
         Recipe recipe = (Recipe) getIntent().getSerializableExtra("recipe");
 
-        TextView mealName = findViewById(R.id.client_view_recipe_name);
-        TextView mealDescription = findViewById(R.id.client_view_recipe_description);
-        TextView mealPrice = findViewById(R.id.client_view_recipe_price);
-        TextView mealType = findViewById(R.id.client_view_recipe_type);
-        TextView cookName = findViewById(R.id.client_view_cook_name);
+        TextInputLayout mealName = findViewById(R.id.client_view_recipe_name);
+        TextInputLayout mealDescription = findViewById(R.id.client_view_recipe_description);
+        TextInputLayout mealPrice = findViewById(R.id.client_view_recipe_price);
+        TextInputLayout mealType = findViewById(R.id.client_view_recipe_type);
+        TextInputLayout cookName = findViewById(R.id.client_view_cook_name);
 
         Button purchase =  findViewById(R.id.client_view_purchase_recipe);
         Button viewProfile =  findViewById(R.id.client_view_cook_profile);
 
 
-        mealName.setHint(recipe.getRecipeName());
-        mealDescription.setHint(recipe.getDescription());
-        mealPrice.setHint(recipe.getPrice());
+        mealName.setHint("Meal Name: " +recipe.getRecipeName());
+        mealDescription.setHint("Meal Desc.: " + recipe.getDescription());
+        mealPrice.setHint("$" + recipe.getPrice());
         cookName.setHint(recipe.getCookName());
-        mealType.setHint(recipe.getCuisineType());
+        mealType.setHint("Cuisine Type: " + recipe.getCuisineType());
 
 
 

@@ -68,14 +68,18 @@ public class MyOfferedMealsActivity extends AppCompatActivity implements Clickab
 
                         // We shouldn't be in need to the other stuff just yet
                         r.setDocumentID(document.getId());
-                        r.setRecipeName(document.getString("Name"));
-                        r.setCookName(document.getString("Cook Name"));
-                        r.setCookID(document.getString("Cook ID"));
-                        r.setDescription(document.getString("Description"));
-                        r.setPrice(document.getString("Price"));
-                        r.setOffered(String.valueOf(document.getBoolean("Offered")));
+                        r.setRecipeName(document.getString("recipeName"));
+                        r.setCookName(document.getString("cookName"));
+                        r.setCookID(document.getString("cookID"));
+                        r.setDescription(document.getString("description"));
+                        r.setPrice(document.getString("price"));
+                        r.setOffered(String.valueOf(document.getString("offered")));
 
-                        list.add(r);
+                        if(r.getOffered().equals("true")){
+
+                            list.add(r);
+                        }
+
 
                     }
 

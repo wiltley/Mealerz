@@ -14,8 +14,10 @@ import android.widget.Toast;
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.accounthandling.CookHandler;
 import com.example.mealerapplication.data.model.Recipe;
+import com.example.mealerapplication.ui.client.MyPurchases;
 import com.example.mealerapplication.ui.cook.MyMealsActivity;
 import com.example.mealerapplication.ui.cook.MyOfferedMealsActivity;
+import com.example.mealerapplication.ui.cook.MySales;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -91,16 +93,18 @@ public class CookRecipeView extends AppCompatActivity {
                         Toast.makeText(CookRecipeView.this, "meals", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(CookRecipeView.this, MyMealsActivity.class);
                         startActivity(intent);
+                        break;
 
                     case R.id.createFood:
                         Toast.makeText(CookRecipeView.this, "meals", Toast.LENGTH_LONG).show();
                         Intent intent2 = new Intent(CookRecipeView.this, CreateRecipe.class);
                         startActivity(intent2);
+                        break;
 
                     case R.id.requests:
                         Toast.makeText(CookRecipeView.this, "requests", Toast.LENGTH_LONG).show();
-//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
-//                        startActivity(intent2);
+                        Intent intent3 = new Intent(CookRecipeView.this, MySales.class);
+                        startActivity(intent3);
                         break;
                     case R.id.myProfile:
                         Toast.makeText(CookRecipeView.this, "profile", Toast.LENGTH_LONG).show();
