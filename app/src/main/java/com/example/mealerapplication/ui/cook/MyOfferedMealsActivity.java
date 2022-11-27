@@ -92,6 +92,7 @@ public class MyOfferedMealsActivity extends AppCompatActivity implements Clickab
 
         nav = findViewById(R.id.btm_nav);
 
+
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -100,27 +101,29 @@ public class MyOfferedMealsActivity extends AppCompatActivity implements Clickab
                     case R.id.myMenu:
                         Intent intent1 = new Intent(MyOfferedMealsActivity.this, MyMealsActivity.class);
                         startActivity(intent1);
+                        return true;
 
                     case R.id.createFood:
                         Intent intent2 = new Intent(MyOfferedMealsActivity.this, CreateRecipe.class);
                         startActivity(intent2);
+                        return true;
 
                     case R.id.myOffer:
-                        break;
+                        return true;
 
                     case R.id.requests:
 //                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
 //                        startActivity(intent2);
-                        break;
+                        return true;
                     case R.id.myProfile:
 //                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
 //                        startActivity(intent2);
-                        break;
+                        return true;
 
-                    default:
+//                    default:
                 }
 
-                return true;
+                return false;
             }
         });
     }

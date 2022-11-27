@@ -7,7 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import android.view.MenuItem;
+
 import android.view.View;
+
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -18,10 +22,13 @@ import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.Recipe;
 import com.example.mealerapplication.data.rendering.Searcher;
 import com.example.mealerapplication.ui.Recipe.ClientRecipeView;
+
 import com.example.mealerapplication.ui.cook.MyMealsAdapter;
+import com.example.mealerapplication.ui.cook.MyOfferedMealsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -108,6 +115,36 @@ public class MealsSearch extends AppCompatActivity implements MealsSearchAdapter
             }
         });
 
+
+        nav = findViewById(R.id.btm_nav);
+
+
+        nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()){
+                    case R.id.searchMenu_client:
+                        return true;
+
+                    case R.id.requests_client:
+                        Intent intent = new Intent(MealsSearch.this, ClientRecipeView.class);
+                        startActivity(intent);
+                        return true;
+
+                    case R.id.myProfile_client:
+//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
+//                        startActivity(intent2);
+                        return true;
+
+//                    default:
+                }
+
+                return false;
+            }
+        });
+
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -133,6 +170,7 @@ public class MealsSearch extends AppCompatActivity implements MealsSearchAdapter
 
             }
         });
+
 
 
     }

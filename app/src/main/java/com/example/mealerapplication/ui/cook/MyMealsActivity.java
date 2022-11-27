@@ -94,33 +94,33 @@ public class MyMealsActivity extends AppCompatActivity implements MyMealsAdapter
 
                 switch (item.getItemId()){
                     case R.id.myMenu:
-                        break;
+                        return true;
 
                     case R.id.createFood:
                         Intent intent2 = new Intent(MyMealsActivity.this, CreateRecipe.class);
                         startActivity(intent2);
-                        break;
+                        return true;
 
                     case R.id.myOffer:
                         Intent intent3 = new Intent(MyMealsActivity.this, MyOfferedMealsActivity.class);
                         startActivity(intent3);
-                        break;
+                        return true;
 
                     case R.id.requests:
                         Toast.makeText(MyMealsActivity.this, "requests", Toast.LENGTH_LONG).show();
 //                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
 //                        startActivity(intent2);
-                        break;
+                        return true;
                     case R.id.myProfile:
                         Toast.makeText(MyMealsActivity.this, "profile", Toast.LENGTH_LONG).show();
 //                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
 //                        startActivity(intent2);
-                        break;
+                        return true;
 
-                    default:
+                    //default:
                 }
 
-                return true;
+                return false;
             }
         });
     }
