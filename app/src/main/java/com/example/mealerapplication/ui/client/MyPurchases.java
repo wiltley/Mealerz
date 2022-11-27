@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.MealRequest;
@@ -14,6 +16,8 @@ import com.example.mealerapplication.ui.cook.MyMealsAdapter;
 //import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,11 +29,12 @@ import java.util.ArrayList;
 public class MyPurchases extends AppCompatActivity implements MyPurchasesAdapter.OnElementClickedListener {
 
     RecyclerView recyclerView;
-    MyMealsAdapter myAdapter;
+    MyPurchasesAdapter myAdapter;
     ArrayList<MealRequest> list;
     FirebaseAuth auth;
     FirebaseFirestore db ;
-    //BottomNavigationView nav;
+    BottomNavigationView nav;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +46,7 @@ public class MyPurchases extends AppCompatActivity implements MyPurchasesAdapter
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<>();
-        myAdapter = new MyMealsAdapter(this, list, this );
+        myAdapter = new MyPurchasesAdapter(this, list, this );
         recyclerView.setAdapter(myAdapter);
 
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
@@ -75,6 +80,35 @@ public class MyPurchases extends AppCompatActivity implements MyPurchasesAdapter
                     myAdapter.notifyDataSetChanged();
                 }
 
+            }
+        });
+
+        nav = findViewById(R.id.btm_nav);
+
+
+        nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()){
+                    case R.id.searchMenu_client:
+                        Intent intent = new Intent(MyPurchases.this, MealsSearch.class);
+                        startActivity(intent);
+                        return true;
+
+
+                    case R.id.requests_client:
+                        return true;
+
+                    case R.id.myProfile_client:
+//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
+//                        startActivity(intent2);
+                        return true;
+
+//                    default:
+                }
+
+                return false;
             }
         });
     }

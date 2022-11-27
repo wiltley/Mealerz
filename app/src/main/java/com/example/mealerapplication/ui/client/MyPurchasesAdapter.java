@@ -33,8 +33,8 @@ public class MyPurchasesAdapter extends ClickableAdapter {
     public void onBindViewHolder(@NonNull ClickableAdapter.MyViewHolder holder, int position) {
 
         MealRequest request = (MealRequest) list.get(position);
-        holder.text1.setText(request.getClientName());
-        holder.text2.setText(request.getMealName());
+        holder.text1.setText(request.getMealName());
+        holder.text2.setText(request.getCookName());
         holder.text3.setText(request.getStatus());
 
     }
