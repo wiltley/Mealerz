@@ -94,6 +94,7 @@ public class CreateRecipe extends AppCompatActivity {
         //}
     //}
         nav = findViewById(R.id.btm_nav);
+        nav.getMenu().findItem(R.id.createFood).setChecked(true);
 
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -106,11 +107,6 @@ public class CreateRecipe extends AppCompatActivity {
                         break;
 
                     case R.id.createFood:
-                        break;
-
-                    case R.id.myOffer:
-                        Intent intent2 = new Intent(CreateRecipe.this, MyOfferedMealsActivity.class);
-                        startActivity(intent2);
                         break;
 
 

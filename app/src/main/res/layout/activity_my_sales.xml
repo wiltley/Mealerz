@@ -22,7 +22,7 @@
             android:textSize="20dp"
             android:layout_marginLeft="10dp"
             android:fontFamily="@font/montserrat"
-            android:text="Orders In Progress" />
+            android:text="My Requests" />
 
         <Button
             android:layout_width="wrap_content"
@@ -94,6 +94,7 @@
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/btm_nav"
+            app:labelVisibilityMode="labeled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"

@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.mealerapplication.R;
@@ -36,11 +38,15 @@ public class MyMealsActivity extends AppCompatActivity implements MyMealsAdapter
     FirebaseAuth auth;
     FirebaseFirestore db ;
     BottomNavigationView nav;
+    Button goViewOffered;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_meals);
+
+
+        goViewOffered = findViewById(R.id.view_offered_meals);
 
         recyclerView = findViewById(R.id.my_meals_list);
 
@@ -86,7 +92,18 @@ public class MyMealsActivity extends AppCompatActivity implements MyMealsAdapter
 
             }
         });
+
+        goViewOffered.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyMealsActivity.this, MyOfferedMealsActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
         nav = findViewById(R.id.btm_nav);
+        nav.getMenu().findItem(R.id.myMenu).setChecked(true);
 
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -99,11 +116,6 @@ public class MyMealsActivity extends AppCompatActivity implements MyMealsAdapter
                     case R.id.createFood:
                         Intent intent2 = new Intent(MyMealsActivity.this, CreateRecipe.class);
                         startActivity(intent2);
-                        return true;
-
-                    case R.id.myOffer:
-                        Intent intent3 = new Intent(MyMealsActivity.this, MyOfferedMealsActivity.class);
-                        startActivity(intent3);
                         return true;
 
                     case R.id.requests:

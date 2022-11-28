@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import com.example.mealerapplication.R;
@@ -35,12 +37,15 @@ public class MyOfferedMealsActivity extends AppCompatActivity implements Clickab
     FirebaseAuth auth;
     FirebaseFirestore db ;
     BottomNavigationView nav;
+    Button returntoAll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_offered_meals);
 
+
+        returntoAll = findViewById(R.id.return_to_all_meals);
         recyclerView = findViewById(R.id.my_offered_meals_list);
 
         recyclerView.setHasFixedSize(true);
@@ -89,8 +94,17 @@ public class MyOfferedMealsActivity extends AppCompatActivity implements Clickab
             }
         });
 
+        returntoAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MyOfferedMealsActivity.this, MyMealsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         nav = findViewById(R.id.btm_nav);
+        nav.getMenu().findItem(R.id.myMenu).setChecked(true);
 
 
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -108,12 +122,9 @@ public class MyOfferedMealsActivity extends AppCompatActivity implements Clickab
                         startActivity(intent2);
                         return true;
 
-                    case R.id.myOffer:
-                        return true;
-
                     case R.id.requests:
-//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
-//                        startActivity(intent2);
+                        Intent intent3 = new Intent(MyOfferedMealsActivity.this, MySales.class);
+                        startActivity(intent3);
                         return true;
                     case R.id.myProfile:
 //                        Intent intent2 = new Intent(MyMealsActivity.this, .class);

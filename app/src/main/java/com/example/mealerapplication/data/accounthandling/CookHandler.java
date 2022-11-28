@@ -288,7 +288,7 @@ public class CookHandler {
                 });
     }
 
-    public static void acceptRequest(MealRequest mr){
+    public static void acceptRequest(MealRequest mr, String toAction){
 
         cleanupRequest(mr);
 
@@ -300,7 +300,7 @@ public class CookHandler {
         m.put("Requester ID", mr.getClientID());
         m.put("Cook ID", mr.getCookID());
         m.put("Meal Name", mr.getMealName());
-        m.put("Status", "Accepted");
+        m.put("Status", toAction);
 
 
 
@@ -351,9 +351,6 @@ public class CookHandler {
 
     }
 
-    public static void rejectRequest(){
-
-    }
 
 
 }
