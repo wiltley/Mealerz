@@ -7,16 +7,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import com.example.mealerapplication.ComplaintCreation;
 import com.example.mealerapplication.R;
 
 import java.util.ArrayList;
 
 import com.example.mealerapplication.data.model.Complaint;
 import com.example.mealerapplication.data.rendering.ClickableAdapter;
+import com.example.mealerapplication.ui.Recipe.ClientRecipeView;
+import com.example.mealerapplication.ui.client.MealsSearch;
 import com.example.mealerapplication.ui.cook.TestAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,6 +36,7 @@ public class ComplaintsActivity extends AppCompatActivity implements TestAdapter
     ArrayList<Complaint> list;
     FirebaseAuth auth;
     FirebaseFirestore db ;
+    BottomNavigationView nav;
 
 
     @Override
@@ -75,6 +82,33 @@ public class ComplaintsActivity extends AppCompatActivity implements TestAdapter
                     myAdapter.notifyDataSetChanged();
                 }
 
+            }
+        });
+
+        nav = findViewById(R.id.btm_nav);
+
+        nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()){
+                    case R.id.complaint:
+                        return true;
+
+//                    case R.id.setBanTime:
+//                        Intent intent = new Intent(ComplaintsActivity.this, ComplaintsDecision.class);
+//                        startActivity(intent);
+//                        return true;
+
+                    case R.id.myProfile_admin:
+//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
+//                        startActivity(intent2);
+                        return true;
+
+//                    default:
+                }
+
+                return false;
             }
         });
     }

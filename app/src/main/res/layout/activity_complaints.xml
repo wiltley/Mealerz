@@ -12,9 +12,38 @@
         android:id="@+id/complaintsList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="131dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:layout_constraintTop_toBottomOf="@+id/complaintTitle" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/btm_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="264dp"
+        android:clipToPadding="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/complaintsList"
+        app:menu="@menu/admin_bottom_navigation_menu">
+
+        <RelativeLayout
+            android:layout_width="413dp"
+            android:layout_height="56dp">
+
+        </RelativeLayout>
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <TextView
+        android:id="@+id/complaintTitle"
+        android:layout_width="284dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="20dp"
+        android:text="Complaint"
+        android:textColor="@color/white"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
