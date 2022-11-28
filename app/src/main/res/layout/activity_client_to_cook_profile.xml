@@ -11,7 +11,7 @@
         android:layout_width="413dp"
         android:layout_height="56dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2">
+        app:layout_constraintTop_toBottomOf="@+id/complaintButton">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/btm_nav"
@@ -24,7 +24,7 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/complaintButton"
         android:layout_width="125dp"
         android:layout_height="52dp"
         android:layout_marginStart="276dp"

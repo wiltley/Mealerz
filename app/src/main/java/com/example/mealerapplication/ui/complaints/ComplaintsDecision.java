@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.Complaint;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -34,6 +37,7 @@ public class ComplaintsDecision extends AppCompatActivity {
     FirebaseFirestore db;
     CalendarView calendar;
     long banTime;
+    BottomNavigationView nav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +131,32 @@ public class ComplaintsDecision extends AppCompatActivity {
         });
 
 
+        nav = findViewById(R.id.btm_nav);
+
+        nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()){
+                    case R.id.complaint:
+                        Intent intent = new Intent(ComplaintsDecision.this, ComplaintsActivity.class);
+                        startActivity(intent);
+                        return true;
+
+//                    case R.id.setBanTime:
+//                        return true;
+
+                    case R.id.myProfile_admin:
+//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
+//                        startActivity(intent2);
+                        return true;
+
+//                    default:
+                }
+
+                return false;
+            }
+        });
     }
 
 

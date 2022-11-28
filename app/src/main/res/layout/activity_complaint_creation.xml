@@ -11,19 +11,22 @@
         android:id="@+id/cookName2"
         android:layout_width="169dp"
         android:layout_height="47dp"
+        android:layout_marginStart="114dp"
+        android:layout_marginTop="23dp"
         android:background="@drawable/background_gradient_two"
         android:text="Cook's Name"
         android:textAlignment="center"
         android:textColor="#F4F2F2"
         android:textSize="14sp"
-        tools:layout_editor_absoluteX="114dp"
-        tools:layout_editor_absoluteY="113dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <RelativeLayout
         android:layout_width="413dp"
         android:layout_height="56dp"
-        tools:layout_editor_absoluteX="-2dp"
-        tools:layout_editor_absoluteY="675dp">
+        android:layout_marginTop="175dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/btm_nav"
@@ -40,9 +43,11 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="378dp"
         android:layout_height="186dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="27dp"
         android:hint="Complaint"
-        tools:layout_editor_absoluteX="17dp"
-        tools:layout_editor_absoluteY="187dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cookName2">
 
 
         <com.google.android.material.textfield.TextInputEditText
@@ -63,19 +68,23 @@
         android:id="@+id/button3"
         android:layout_width="156dp"
         android:layout_height="58dp"
+        android:layout_marginStart="127dp"
+        android:layout_marginTop="69dp"
         android:text="SUBMIT"
-        tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="442dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/complaint1" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="366dp"
         android:layout_height="71dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="19dp"
         android:background="@drawable/background_gradient_two"
         android:text="Complaints"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="29sp"
-        tools:layout_editor_absoluteX="20dp"
-        tools:layout_editor_absoluteY="19dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

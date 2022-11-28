@@ -9,13 +9,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.mealerapplication.ComplaintCreation;
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.Recipe;
 import com.example.mealerapplication.ui.client.MealsSearch;
 import com.example.mealerapplication.ui.cook.MyMealsAdapter;
+import com.example.mealerapplication.ui.login.LoginActivity;
+import com.example.mealerapplication.ui.registration.SignupActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -42,6 +47,7 @@ public class Client_To_Cook_Profile extends AppCompatActivity {
     TextView averageRating;
     TextView biography;
     RecyclerView testimonial;
+    Button complaint;
 //    ArrayList<Recipe> list;
 
 
@@ -94,6 +100,15 @@ public class Client_To_Cook_Profile extends AppCompatActivity {
                 } else {
                     Log.d("LOGGER", "get failed with ", task.getException());
                 }
+            }
+        });
+
+        complaint = findViewById(R.id.complaintButton);
+        complaint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Client_To_Cook_Profile.this, ComplaintCreation.class);
+                startActivity(intent);
             }
         });
 
