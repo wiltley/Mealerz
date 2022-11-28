@@ -13,11 +13,23 @@
         android:theme="@style/Theme.MealerApplication"
         tools:targetApi="31">
         <activity
-            android:name=".Client_To_Cook_Profile"
+            android:name=".ComplaintCreation"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.Recipe.Client_To_Cook_Profile"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.cook.CompletedSales"
@@ -134,13 +146,13 @@
         </activity>
         <activity
             android:name=".ui.login.LoginActivity"
-            android:exported="true"
+            android:exported="false"
             android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
     </application>
 

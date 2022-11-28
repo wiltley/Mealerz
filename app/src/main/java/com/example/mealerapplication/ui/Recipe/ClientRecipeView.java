@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.accounthandling.ClientHandler;
@@ -27,8 +26,8 @@ public class ClientRecipeView extends AppCompatActivity {
 
         Recipe recipe = (Recipe) getIntent().getSerializableExtra("recipe");
 
-        TextInputLayout mealName = findViewById(R.id.client_view_recipe_name);
-        TextInputLayout mealDescription = findViewById(R.id.client_view_recipe_description);
+        TextInputLayout mealName = findViewById(R.id.complaint);
+        TextInputLayout mealDescription = findViewById(R.id.complaint1);
         TextInputLayout mealPrice = findViewById(R.id.client_view_recipe_price);
         TextInputLayout mealType = findViewById(R.id.client_view_recipe_type);
         TextInputLayout cookName = findViewById(R.id.client_view_cook_name);
