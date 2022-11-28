@@ -5,18 +5,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.example.mealerapplication.R;
+import com.example.mealerapplication.data.accounthandling.CookHandler;
 import com.example.mealerapplication.data.model.MealRequest;
 import com.example.mealerapplication.data.rendering.ClickableAdapter;
+import com.example.mealerapplication.ui.Recipe.CreateRecipe;
 import com.example.mealerapplication.ui.client.MyPurchasesAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -34,12 +40,18 @@ public class MySales extends AppCompatActivity implements MySalesAdapter.OnEleme
     FirebaseFirestore db ;
     BottomNavigationView nav;
     LinearLayout decisionBar;
+    MealRequest toAction;
+    int toActionPosition;
+    Button acceptRequest;
+    Button denyRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_sales);
 
+        acceptRequest = findViewById(R.id.requestApprove);
+        denyRequest = findViewById(R.id.requestDeny);
 
         decisionBar = findViewById(R.id.decisionBar);
 
@@ -85,12 +97,75 @@ public class MySales extends AppCompatActivity implements MySalesAdapter.OnEleme
 
             }
         });
+
+        nav = findViewById(R.id.btm_nav);
+        nav.getMenu().findItem(R.id.requests).setChecked(true);
+
+        nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()){
+                    case R.id.myMenu:
+                        Intent intent1 = new Intent(MySales.this, MyMealsActivity.class);
+                        startActivity(intent1);
+                        return true;
+
+                    case R.id.createFood:
+                        Intent intent2 = new Intent(MySales.this, CreateRecipe.class);
+                        startActivity(intent2);
+                        return true;
+
+                    case R.id.requests:
+                        return true;
+
+                    case R.id.myProfile:
+//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
+//                        startActivity(intent2);
+                        return true;
+
+//                    default:
+                }
+
+                return false;
+            }
+        });
+
+        acceptRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Deny
+
+                CookHandler.acceptRequest(toAction, "Denied");
+                decisionBar.setVisibility(View.GONE);
+                list.remove(toActionPosition);
+                myAdapter.notifyDataSetChanged();
+
+            }
+        });
+
+        denyRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                CookHandler.acceptRequest(toAction, "Accept");
+                decisionBar.setVisibility(View.GONE);
+                list.remove(toActionPosition);
+                myAdapter.notifyDataSetChanged();
+            }
+        });
+
+
+
     }
 
     @Override
     public void onElementClicked(int position) {
         // Going to make a fragment pop up probably
         decisionBar.setVisibility(View.VISIBLE);
+        toAction = list.get(position);
 
     }
 }

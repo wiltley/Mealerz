@@ -7,11 +7,46 @@
     android:background="@drawable/background_gradient_one"
     tools:context=".ui.cook.MyOfferedMealsActivity">
 
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#1a1a1a"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/montserrat"
+            android:text="My Offered Meals" />
+
+        <Button
+            android:id="@+id/return_to_all_meals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:fontFamily="@font/montserrat"
+            android:text="Return to all"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/my_offered_meals_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
+            app:labelVisibilityMode="labeled"
             android:id="@+id/btm_nav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,20 +58,5 @@
             app:itemTextColor="@color/white"
             app:menu="@menu/bottom_navigation_menu" />
     </RelativeLayout>
-
-    <ScrollView
-        android:id="@+id/scrollview_my_offered_meals"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/my_offered_meals_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,33 @@
     android:background="@drawable/background_gradient_one"
     tools:context=".ui.cook.MyMealsActivity">
 
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#1a1a1a"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/montserrat"
+            android:text="Viewing All My Meals" />
+
+
+        <Button
+            android:id="@+id/view_offered_meals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:fontFamily="@font/montserrat"
+            android:text="View offered"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </LinearLayout>
 
 
     <RelativeLayout
@@ -21,6 +48,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
+            app:labelVisibilityMode="labeled"
             android:id="@+id/btm_nav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

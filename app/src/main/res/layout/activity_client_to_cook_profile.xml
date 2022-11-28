@@ -7,6 +7,24 @@
     android:background="@drawable/background_gradient_one"
     tools:context=".ui.Recipe.Client_To_Cook_Profile">
 
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#1a1a1a"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/montserrat"
+            android:text="Viewing profile" />
+
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="411dp"
         android:layout_height="53dp"
