@@ -118,7 +118,7 @@ public class MyOfferedMealsActivity extends AppCompatActivity implements Clickab
                     case R.id.myProfile:
 //                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
 //                        startActivity(intent2);
-                        return true;
+                          return true;
 
 //                    default:
                 }
