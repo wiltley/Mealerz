@@ -37,14 +37,6 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat"
-            android:textSize="20dp"
-            android:textColor="#FFFF"
-            android:text="Select same day to permaban." />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -99,6 +91,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="vertical">
 
 
@@ -109,15 +102,13 @@
                 android:orientation="vertical">
 
 
-
                 <CalendarView
                     android:id="@+id/ban_calendar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:theme="@style/CalenderViewCustom"
                     android:dateTextAppearance="@style/CalenderViewDateCustomText"
-                    android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"
-                    />
+                    android:theme="@style/CalenderViewCustom"
+                    android:weekDayTextAppearance="@style/CalenderViewWeekCustomText" />
 
 
             </LinearLayout>
@@ -132,26 +123,32 @@
                     android:id="@+id/dismiss_complaint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toRightOf="@id/ban_button"
-                    app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginLeft="20dp"
-                    android:textSize="15dp"
                     android:fontFamily="@font/montserrat"
-                    android:text="Dismiss" />
+                    android:text="Dismiss"
+                    android:textSize="15dp"
+                    app:layout_constraintLeft_toRightOf="@id/ban_button"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/ban_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_marginLeft="20dp"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Ban Until X"
 
                     android:textSize="15dp"
-                    android:fontFamily="@font/montserrat"
-                    android:text="Ban Until X" />
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/permaBanButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Permanently Ban" />
         </LinearLayout>
     </LinearLayout>
 
@@ -172,6 +169,7 @@
             android:layout_gravity="bottom"
             app:menu="@menu/admin_bottom_navigation_menu"
             />
+
     </RelativeLayout>
 
 </LinearLayout>
