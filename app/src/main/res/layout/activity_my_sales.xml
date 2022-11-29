@@ -96,6 +96,9 @@
             android:id="@+id/btm_nav"
             app:labelVisibilityMode="labeled"
             android:layout_width="match_parent"
+
+            android:background="@drawable/nav_layout"
+            app:itemIconTint="@color/white"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
             android:layout_alignParentBottom="true"
