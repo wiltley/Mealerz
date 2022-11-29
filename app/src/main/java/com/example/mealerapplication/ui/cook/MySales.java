@@ -1,11 +1,13 @@
 package com.example.mealerapplication.ui.cook;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,11 +46,21 @@ public class MySales extends AppCompatActivity implements MySalesAdapter.OnEleme
     int toActionPosition;
     Button acceptRequest;
     Button denyRequest;
+    Drawable navBack;
+    int altNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_sales);
+
+
+
+        nav = findViewById(R.id.btm_nav);
+        navBack = nav.getBackground();
+
+        String uri = "@drawable/nav_layout_sqr";
+        altNav  = getResources().getIdentifier(uri, null, getPackageName());
 
         acceptRequest = findViewById(R.id.requestApprove);
         denyRequest = findViewById(R.id.requestDeny);
@@ -61,7 +73,7 @@ public class MySales extends AppCompatActivity implements MySalesAdapter.OnEleme
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<>();
-        myAdapter = new MySalesAdapter(this, list, this );
+        myAdapter = new MySalesAdapter(this, list, this);
         recyclerView.setAdapter(myAdapter);
 
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
@@ -98,7 +110,6 @@ public class MySales extends AppCompatActivity implements MySalesAdapter.OnEleme
             }
         });
 
-        nav = findViewById(R.id.btm_nav);
         nav.getMenu().findItem(R.id.requests).setChecked(true);
 
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -140,6 +151,7 @@ public class MySales extends AppCompatActivity implements MySalesAdapter.OnEleme
                 CookHandler.acceptRequest(toAction, "Denied");
                 decisionBar.setVisibility(View.GONE);
                 list.remove(toActionPosition);
+                nav.setBackground(navBack);
                 myAdapter.notifyDataSetChanged();
 
             }
@@ -153,6 +165,7 @@ public class MySales extends AppCompatActivity implements MySalesAdapter.OnEleme
                 CookHandler.acceptRequest(toAction, "Accept");
                 decisionBar.setVisibility(View.GONE);
                 list.remove(toActionPosition);
+                nav.setBackground(navBack);
                 myAdapter.notifyDataSetChanged();
             }
         });
@@ -165,7 +178,21 @@ public class MySales extends AppCompatActivity implements MySalesAdapter.OnEleme
     public void onElementClicked(int position) {
         // Going to make a fragment pop up probably
         decisionBar.setVisibility(View.VISIBLE);
+        // TODO FIX
         toAction = list.get(position);
+        nav.setBackground(getDrawable(altNav));
+        for(View tempItemView : myAdapter.itemViewList) {
+            /** navigate through all the itemViews and change color
+             of selected view to colorSelected and rest of the views to colorDefault **/
+            if(myAdapter.itemViewList.get(position) == tempItemView) {
+                tempItemView.setBackgroundResource(R.color.grey);
+
+            }
+            else{
+                tempItemView.setBackgroundResource(R.color.white);
+            }
+        }
+
 
     }
 }

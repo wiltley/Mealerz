@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:fontFamily="@font/montserrat"
-            android:text="View offered"
+            android:text="My Offered"
             app:layout_constraintRight_toRightOf="parent" />
 
     </LinearLayout>
