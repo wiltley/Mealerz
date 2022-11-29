@@ -142,9 +142,12 @@ public class UserHandler {
 
 
                     if (document.getString("role").equals("cook") && document.getString("status").equals("Banned")) {
-                        Long banExpiry = document.getLong("banExpiry");
+                        if (document.contains("permaBan") && document.getBoolean("permaBan") == true){
+                            Toast.makeText(context, "Sorry, but your account is  permanently banned", Toast.LENGTH_LONG).show();
+                        }
                         //Check if ban expired and remove banned status
-                        if (banExpiry != null) {
+                        else if (document.getLong("banExpiry") != null) {
+                            Long banExpiry = document.getLong("banExpiry");
                             if (System.currentTimeMillis() >= banExpiry) {
                                 Map<String, Object> userMap = new HashMap<>();
                                 userMap.put("status", null);
