@@ -82,7 +82,6 @@ public class CookRecipeView extends AppCompatActivity {
 
         nav = findViewById(R.id.btm_nav);
 
-        nav.getMenu().findItem(R.id.recipeView).setChecked(true);
 
 
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
