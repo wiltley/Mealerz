@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.Recipe;
 import com.example.mealerapplication.ui.Recipe.CreateRecipe;
-import com.example.mealerapplication.ui.Recipe.CookRecipeView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

@@ -20,14 +20,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".ui.Recipe.Client_To_Cook_Profile"
-            android:exported="true"
-            android:theme="@style/Theme.MealerApplication.NoActionBar">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
         <activity
             android:name=".ui.cook.CompletedSales"
             android:exported="false"
@@ -36,6 +29,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".ui.cook.MySales"
             android:exported="false"
@@ -78,7 +72,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.Recipe.CookRecipeView"
+            android:name=".ui.cook.CookRecipeView"
             android:exported="false"
             android:theme="@style/Theme.MealerApplication.NoActionBar">
             <meta-data
@@ -111,7 +105,8 @@
         </activity>
         <activity
             android:name=".ui.complaints.ComplaintsDecision"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/Theme.MealerApplication.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -119,10 +114,14 @@
         <activity
             android:name=".ui.complaints.ComplaintsActivity"
             android:exported="false"
-            android:label="ComplaintsActivity"></activity>
+            android:label="ComplaintsActivity"
+            android:theme="@style/Theme.MealerApplication.NoActionBar">
+
+            </activity>
         <activity
             android:name=".ui.welcome.Welcomephase2"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/Theme.MealerApplication.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
