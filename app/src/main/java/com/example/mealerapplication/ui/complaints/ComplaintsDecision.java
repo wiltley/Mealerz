@@ -63,6 +63,8 @@ public class ComplaintsDecision extends AppCompatActivity {
         Button ban = findViewById(R.id.ban_button);
         banTime = System.currentTimeMillis();
 
+        Button permaban = findViewById(R.id.permaBanButton);
+
         Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
         ban.setText(getString(R.string.ban_until, dateFormat.format(date)));
@@ -155,6 +157,22 @@ public class ComplaintsDecision extends AppCompatActivity {
                 }
 
                 return false;
+            }
+        });
+
+        permaban.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Map<String, Object> userMap = new HashMap<>();
+                userMap.put("status", "Banned");
+                userMap.put("banExpiry", -1);
+                userMap.put("permaBan", true);
+                db = FirebaseFirestore.getInstance();
+                db.collection("users").document(complaint.getAccused_UID()).update(userMap);
+                complaint.removeFromDB();
+
+                Intent i = new Intent(ComplaintsDecision.this, ComplaintsActivity.class);
+                startActivity(i);
             }
         });
     }
