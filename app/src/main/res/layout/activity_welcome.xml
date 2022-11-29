@@ -8,44 +8,78 @@
     android:background="@drawable/background_gradient_one"
     tools:context=".ui.welcome.WelcomeActivity">
 
-    <TextView
-        android:id="@+id/welcome1"
-        android:layout_width="370dp"
-        android:layout_height="124dp"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="256dp"
-        android:layout_marginEnd="35dp"
-        android:text="Welcome! Select which type of user you are."
-        android:textColor="#eeaf61"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.642"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#1a1a1a"
+        android:padding="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
-    <Button
-        android:id="@+id/clientButton"
-        android:layout_width="167dp"
-        android:layout_height="94dp"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="22dp"
-        android:text="CLIENT"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/cookButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcome1" />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/montserrat"
+            android:text="Welcome first time user!" />
 
-    <Button
-        android:id="@+id/cookButton"
-        android:layout_width="178dp"
-        android:layout_height="94dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="57dp"
-        android:layout_marginEnd="21dp"
-        android:text="COOK"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/clientButton"
-        app:layout_constraintTop_toBottomOf="@+id/welcome1" />
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <TextView
+            android:id="@+id/welcome1"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="200dp"
+            android:text="Welcome to Mealerz! Select which type of user you are."
+            android:textColor="#FFFF"
+            android:fontFamily="@font/montserrat"
+            android:textAlignment="center"
+            android:textSize="34sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.642"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="0dp"
+
+            >
+
+
+            <Button
+                android:id="@+id/clientButton"
+                android:layout_height="100dp"
+                android:layout_width="150dp"
+                android:layout_marginStart="30dp"
+                android:text="CLIENT"
+                android:textSize="30sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                 />
+
+            <Button
+                android:id="@+id/cookButton"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="30dp"
+                android:text="COOK"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,7 +22,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Welcomephase2 extends AppCompatActivity {
-    private Button signoutButton;
+    private Button proceedButton;
 
     String role;
 
@@ -34,7 +34,7 @@ public class Welcomephase2 extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         TextView tV = findViewById(R.id.welcome2);
-        Button button = findViewById(R.id.signoutButton);
+        proceedButton = findViewById(R.id.welcome_proceed);
 
         DocumentReference docRef = db.collection("users").document(auth.getCurrentUser().getUid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -44,11 +44,8 @@ public class Welcomephase2 extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document != null) {
                         role = document.getString("role");
-                        tV.setText("Welcome dear, " + role +"!");
+                        tV.setText(tV.getText().toString() + role);
 
-                        if(document.getString("role").equals("admin")){
-                            button.setText("View Complaints");
-                        }
                     } else {
                         Log.d("LOGGER", "No such document");
                     }
@@ -58,40 +55,23 @@ public class Welcomephase2 extends AppCompatActivity {
             }
         });
 
-        signoutButton = findViewById(R.id.signoutButton);
-        signoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Intent intent;
-                if(role.equals("admin")){
-
-                    intent = new Intent(Welcomephase2.this, ComplaintsActivity.class);
-                }else if(role.equals("cook")){
-
-                    intent = new Intent(Welcomephase2.this, MyMealsActivity.class);
-                // TEMPORARILY ROUTING THIS TO COMPLAINTS VIEW
-                }else{
-                    intent = new Intent(Welcomephase2.this, MealsSearch.class);
-                }
-                //auth.signOut();
-                startActivity(intent);
-            }
-        });
-
-        Button continueButton = findViewById(R.id.finishCookRegistration);
+        Button continueButton = findViewById(R.id.welcome_proceed);
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(role.equals("cook")){
-
                     Intent intent = new Intent(Welcomephase2.this, MyMealsActivity.class);
                     startActivity(intent);
                 }else if(role.equals("client")){
 
                     Intent intent = new Intent(Welcomephase2.this, MealsSearch.class);
                     startActivity(intent);
+                }else if(role.equals("admin")){
+                    Intent intent = new Intent(Welcomephase2.this, ComplaintsActivity.class);
+                    startActivity(intent);
+
                 }
             }
         });

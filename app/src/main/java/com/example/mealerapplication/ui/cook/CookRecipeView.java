@@ -1,4 +1,4 @@
-package com.example.mealerapplication.ui.Recipe;
+package com.example.mealerapplication.ui.cook;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,9 +14,7 @@ import android.widget.Toast;
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.accounthandling.CookHandler;
 import com.example.mealerapplication.data.model.Recipe;
-import com.example.mealerapplication.ui.cook.MyMealsActivity;
-import com.example.mealerapplication.ui.cook.MyOfferedMealsActivity;
-import com.example.mealerapplication.ui.cook.MySales;
+import com.example.mealerapplication.ui.Recipe.CreateRecipe;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
