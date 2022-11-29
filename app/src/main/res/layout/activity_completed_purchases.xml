@@ -7,6 +7,25 @@
     android:background="@drawable/background_gradient_one"
     tools:context=".ui.client.CompletedPurchases">
 
+    <RelativeLayout
+        android:layout_width="401dp"
+        android:layout_height="59dp"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="672dp">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/btm_nav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="@drawable/nav_layout"
+            android:clipToPadding="false"
+            app:itemIconTint="@color/white"
+            app:itemTextColor="@color/white"
+            app:menu="@menu/client_bottom_navigation_menu" />
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,5 +69,7 @@
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </ScrollView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

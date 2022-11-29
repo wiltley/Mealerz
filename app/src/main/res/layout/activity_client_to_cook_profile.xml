@@ -7,28 +7,31 @@
     android:background="@drawable/background_gradient_one"
     tools:context=".ui.Recipe.Client_To_Cook_Profile">
 
-    <LinearLayout android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="#1a1a1a"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:fontFamily="@font/montserrat"
-            android:text="Viewing profile" />
+            android:text="Viewing profile"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp" />
 
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="411dp"
         android:layout_height="53dp"
-        tools:layout_editor_absoluteY="678dp">
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/testimonial">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/btm_nav"
@@ -37,7 +40,10 @@
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom"
             android:layout_marginBottom="0dp"
+            android:background="@drawable/nav_layout"
             android:clipToPadding="false"
+            app:itemIconTint="@color/white"
+            app:itemTextColor="@color/white"
             app:menu="@menu/client_bottom_navigation_menu" />
     </RelativeLayout>
 
@@ -45,118 +51,148 @@
         android:id="@+id/complaintButton"
         android:layout_width="114dp"
         android:layout_height="41dp"
+        android:layout_marginStart="79dp"
         android:text="Complaint"
         android:textSize="12sp"
-        tools:layout_editor_absoluteX="291dp"
-        tools:layout_editor_absoluteY="5dp" />
+        app:layout_constraintStart_toEndOf="@+id/cookProfile"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/testimonial"
         android:layout_width="372dp"
         android:layout_height="235dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="9dp"
         android:background="@drawable/background_gradient_two"
-        tools:layout_editor_absoluteX="17dp"
-        tools:layout_editor_absoluteY="431dp" />
-
-    <TextView
-        android:id="@+id/biography"
-        android:layout_width="335dp"
-        android:layout_height="64dp"
-        android:background="@drawable/background_gradient_two"
-        android:text="Bio"
-        android:textAlignment="center"
-        android:textColor="#F4F2F2"
-        android:textSize="14sp"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="177dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="183dp"
         android:layout_height="26dp"
+        android:layout_marginStart="114dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/background_gradient_two"
         android:text="Client Testimonial"
         android:textAlignment="center"
         android:textColor="#F4F2F2"
         android:textSize="14sp"
-        tools:layout_editor_absoluteX="114dp"
-        tools:layout_editor_absoluteY="396dp" />
-
-    <TextView
-        android:id="@+id/cookEmail"
-        android:layout_width="197dp"
-        android:layout_height="42dp"
-        android:background="@drawable/background_gradient_two"
-        android:text="Cook's Email"
-        android:textAlignment="center"
-        android:textColor="#F4F2F2"
-        android:textSize="14sp"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="114dp" />
-
-    <TextView
-        android:id="@+id/averageReview"
-        android:layout_width="137dp"
-        android:layout_height="40dp"
-        android:background="@drawable/background_gradient_two"
-        android:text="Average Review"
-        android:textAlignment="center"
-        android:textColor="#F4F2F2"
-        android:textSize="14sp"
-        tools:layout_editor_absoluteX="245dp"
-        tools:layout_editor_absoluteY="114dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <TextView
         android:id="@+id/cookName"
         android:layout_width="150dp"
         android:layout_height="34dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="21dp"
         android:background="@drawable/background_gradient_two"
         android:text="Cook's Name"
         android:textAlignment="center"
         android:textColor="#F4F2F2"
         android:textSize="14sp"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="71dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cookProfile" />
+
+    <TextView
+        android:id="@+id/biography"
+        android:layout_width="335dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="21dp"
+        android:background="@drawable/background_gradient_two"
+        android:text="Bio"
+        android:textAlignment="center"
+        android:textColor="#F4F2F2"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cookEmail" />
+
+    <TextView
+        android:id="@+id/averageReview"
+        android:layout_width="137dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/background_gradient_two"
+        android:text="Average Review"
+        android:textAlignment="center"
+        android:textColor="#F4F2F2"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/cookEmail"
+        app:layout_constraintTop_toBottomOf="@+id/complaintButton" />
+
+    <TextView
+        android:id="@+id/cookEmail"
+        android:layout_width="197dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/background_gradient_two"
+        android:text="Cook's Email"
+        android:textAlignment="center"
+        android:textColor="#F4F2F2"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cookName" />
 
     <Spinner
         android:id="@+id/rating"
         android:layout_width="66dp"
         android:layout_height="36dp"
-        tools:layout_editor_absoluteX="339dp"
-        tools:layout_editor_absoluteY="328dp" />
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toEndOf="@+id/rating1"
+        app:layout_constraintTop_toBottomOf="@+id/biography" />
 
     <TextView
         android:id="@+id/rating1"
         android:layout_width="120dp"
         android:layout_height="29dp"
+        android:layout_marginStart="145dp"
+        android:layout_marginTop="17dp"
         android:background="@drawable/background_gradient_two"
         android:text="Your Rating"
         android:textColor="#F4F2F2"
         android:textSize="14sp"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="284dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/biography" />
 
     <TextView
         android:id="@+id/cookProfile"
-        android:layout_width="273dp"
-        android:layout_height="40dp"
+        android:layout_width="212dp"
+        android:layout_height="47dp"
         android:background="@drawable/background_gradient_two"
         android:text="Cook Profile"
         android:textAlignment="center"
         android:textColor="#F4F2F2"
         android:textSize="30sp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="301dp"
+        android:id="@+id/textInputLayout"
+        android:layout_width="282dp"
         android:layout_height="41dp"
-        tools:layout_editor_absoluteX="21dp"
-        tools:layout_editor_absoluteY="323dp">
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rating1">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Please Type Your Review" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="112dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="7dp"
+        android:text="SUBMIT"
+        app:layout_constraintStart_toEndOf="@+id/textInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/rating" />
 </androidx.constraintlayout.widget.ConstraintLayout>
