@@ -13,6 +13,7 @@ import com.example.mealerapplication.R;
 import com.example.mealerapplication.ui.login.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class myProfileCook extends AppCompatActivity {
 
@@ -28,6 +29,7 @@ public class myProfileCook extends AppCompatActivity {
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(myProfileCook.this, LoginActivity.class);
                 startActivity(intent);
             }
