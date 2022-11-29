@@ -1,4 +1,4 @@
-package com.example.mealerapplication.ui.Recipe;
+package com.example.mealerapplication.ui.client;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +12,6 @@ import android.widget.Button;
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.accounthandling.ClientHandler;
 import com.example.mealerapplication.data.model.Recipe;
-import com.example.mealerapplication.ui.client.MealsSearch;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.textfield.TextInputLayout;
@@ -76,16 +75,16 @@ public class ClientRecipeView extends AppCompatActivity {
 
                 switch (item.getItemId()){
                     case R.id.searchMenu_client:
-                        Intent intent0 = new Intent(ClientRecipeView.this, MealsSearch.class);
-                        startActivity(intent0);
+                        Intent intent = new Intent(ClientRecipeView.this, MealsSearch.class);
+                        startActivity(intent);
                         return true;
 
                     case R.id.requests_client:
                         return true;
 
                     case R.id.myProfile_client:
-//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
-//                        startActivity(intent2);
+                        Intent intent1 = new Intent(ClientRecipeView.this, myProfileClient.class);
+                        startActivity(intent1);
                         return true;
 
 //                    default:

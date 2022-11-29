@@ -1,4 +1,4 @@
-package com.example.mealerapplication.ui.cook;
+package com.example.mealerapplication.ui.client;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,11 +13,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.mealerapplication.R;
-import com.example.mealerapplication.ui.client.ClientRecipeView;
-
-import com.example.mealerapplication.ui.client.ComplaintCreation;
-import com.example.mealerapplication.ui.client.MealsSearch;
-import com.example.mealerapplication.ui.client.myProfileClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -27,7 +22,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class CookProfile extends AppCompatActivity {
+public class ClientCookProfile extends AppCompatActivity {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference ref = db.collection("reviews")
@@ -101,7 +96,7 @@ public class CookProfile extends AppCompatActivity {
         complaint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CookProfile.this, ComplaintCreation.class);
+                Intent intent = new Intent(ClientCookProfile.this, ComplaintCreation.class);
                 startActivity(intent);
             }
         });
@@ -116,17 +111,17 @@ public class CookProfile extends AppCompatActivity {
 
                 switch (item.getItemId()){
                     case R.id.searchMenu_client:
-                        Intent intent0 = new Intent(CookProfile.this, MealsSearch.class);
+                        Intent intent0 = new Intent(ClientCookProfile.this, MealsSearch.class);
                         startActivity(intent0);
                         return true;
 
                     case R.id.requests_client:
-                        Intent intent = new Intent(CookProfile.this, ClientRecipeView.class);
+                        Intent intent = new Intent(ClientCookProfile.this, ClientRecipeView.class);
                         startActivity(intent);
                         return true;
 
                     case R.id.myProfile_client:
-                        Intent intent1 = new Intent(CookProfile.this, myProfileClient.class);
+                        Intent intent1 = new Intent(ClientCookProfile.this, myProfileClient.class);
                         startActivity(intent1);
                         return true;
 

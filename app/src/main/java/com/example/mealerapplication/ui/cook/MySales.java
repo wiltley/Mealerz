@@ -1,7 +1,6 @@
 package com.example.mealerapplication.ui.cook;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,15 +11,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.accounthandling.CookHandler;
 import com.example.mealerapplication.data.model.MealRequest;
-import com.example.mealerapplication.data.rendering.ClickableAdapter;
-import com.example.mealerapplication.ui.Recipe.CreateRecipe;
-import com.example.mealerapplication.ui.client.MyPurchasesAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -118,21 +113,21 @@ public class MySales extends AppCompatActivity implements MySalesAdapter.OnEleme
 
                 switch (item.getItemId()){
                     case R.id.myMenu:
-                        Intent intent1 = new Intent(MySales.this, MyMealsActivity.class);
-                        startActivity(intent1);
+                        Intent intent = new Intent(MySales.this, MyMealsActivity.class);
+                        startActivity(intent);
                         return true;
 
                     case R.id.createFood:
-                        Intent intent2 = new Intent(MySales.this, CreateRecipe.class);
-                        startActivity(intent2);
+                        Intent intent1 = new Intent(MySales.this, CreateRecipe.class);
+                        startActivity(intent1);
                         return true;
 
                     case R.id.requests:
                         return true;
 
                     case R.id.myProfile:
-//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
-//                        startActivity(intent2);
+                        Intent intent2 = new Intent(MySales.this, myProfileCook.class);
+                        startActivity(intent2);
                         return true;
 
 //                    default:

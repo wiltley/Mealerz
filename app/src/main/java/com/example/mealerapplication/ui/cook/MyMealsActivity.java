@@ -10,11 +10,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.Recipe;
-import com.example.mealerapplication.ui.Recipe.CreateRecipe;
+import com.example.mealerapplication.ui.cook.CreateRecipe;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -113,18 +113,17 @@ public class MyMealsActivity extends AppCompatActivity implements MyMealsAdapter
                         return true;
 
                     case R.id.createFood:
-                        Intent intent2 = new Intent(MyMealsActivity.this, CreateRecipe.class);
-                        startActivity(intent2);
+                        Intent intent = new Intent(MyMealsActivity.this, CreateRecipe.class);
+                        startActivity(intent);
                         return true;
 
                     case R.id.requests:
-                        Intent intent4 = new Intent(MyMealsActivity.this, MySales.class);
-                        startActivity(intent4);
+                        Intent intent1 = new Intent(MyMealsActivity.this, MySales.class);
+                        startActivity(intent1);
                         return true;
                     case R.id.myProfile:
-                        Toast.makeText(MyMealsActivity.this, "profile", Toast.LENGTH_LONG).show();
-//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
-//                        startActivity(intent2);
+                        Intent intent2 = new Intent(MyMealsActivity.this, myProfileCook.class);
+                        startActivity(intent2);
                         return true;
 
                     //default:

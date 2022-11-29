@@ -14,7 +14,9 @@ import androidx.annotation.NonNull;
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.Recipe;
 import com.example.mealerapplication.data.rendering.ClickableAdapter;
-import com.example.mealerapplication.ui.Recipe.CreateRecipe;
+
+import com.example.mealerapplication.ui.cook.CreateRecipe;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -112,22 +114,22 @@ public class MyOfferedMealsActivity extends AppCompatActivity implements Clickab
 
                 switch (item.getItemId()){
                     case R.id.myMenu:
-                        Intent intent1 = new Intent(MyOfferedMealsActivity.this, MyMealsActivity.class);
-                        startActivity(intent1);
+                        Intent intent = new Intent(MyOfferedMealsActivity.this, MyMealsActivity.class);
+                        startActivity(intent);
                         return true;
 
                     case R.id.createFood:
-                        Intent intent2 = new Intent(MyOfferedMealsActivity.this, CreateRecipe.class);
-                        startActivity(intent2);
+                        Intent intent1 = new Intent(MyOfferedMealsActivity.this, CreateRecipe.class);
+                        startActivity(intent1);
                         return true;
 
                     case R.id.requests:
-                        Intent intent3 = new Intent(MyOfferedMealsActivity.this, MySales.class);
-                        startActivity(intent3);
+                        Intent intent2 = new Intent(MyOfferedMealsActivity.this, MySales.class);
+                        startActivity(intent2);
                         return true;
                     case R.id.myProfile:
-//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
-//                        startActivity(intent2);
+                        Intent intent3 = new Intent(MyOfferedMealsActivity.this, myProfileCook.class);
+                        startActivity(intent3);
                           return true;
 
 //                    default:

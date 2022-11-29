@@ -104,18 +104,18 @@ public class CompletedPurchases extends AppCompatActivity implements ClickableAd
 
                 switch (item.getItemId()){
                     case R.id.searchMenu_client:
-                        Intent intent1 = new Intent(CompletedPurchases.this, MealsSearch.class);
-                        startActivity(intent1);
-                        return true;
-
-                    case R.id.requests_client:
-                        Intent intent = new Intent(CompletedPurchases.this, MyPurchases.class);
+                        Intent intent = new Intent(CompletedPurchases.this, MealsSearch.class);
                         startActivity(intent);
                         return true;
 
+                    case R.id.requests_client:
+                        Intent intent1 = new Intent(CompletedPurchases.this, MyPurchases.class);
+                        startActivity(intent1);
+                        return true;
+
                     case R.id.myProfile_client:
-//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
-//                        startActivity(intent2);
+                        Intent intent2 = new Intent(CompletedPurchases.this, myProfileClient.class);
+                        startActivity(intent2);
                         return true;
 
 //                    default:
