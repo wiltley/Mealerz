@@ -22,6 +22,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:background="@drawable/nav_layout"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
         android:layout_marginTop="264dp"
         android:clipToPadding="false"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,6 +45,7 @@
         android:layout_marginStart="18dp"
         android:layout_marginTop="20dp"
         android:text="Complaint"
+
         android:textColor="@color/white"
         android:textSize="34sp"
         app:layout_constraintStart_toStartOf="parent"

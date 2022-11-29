@@ -89,19 +89,16 @@ public class CookRecipeView extends AppCompatActivity {
 
                 switch (item.getItemId()){
                     case R.id.myMenu:
-                        Toast.makeText(CookRecipeView.this, "meals", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(CookRecipeView.this, MyMealsActivity.class);
                         startActivity(intent);
                         break;
 
                     case R.id.createFood:
-                        Toast.makeText(CookRecipeView.this, "meals", Toast.LENGTH_LONG).show();
                         Intent intent2 = new Intent(CookRecipeView.this, CreateRecipe.class);
                         startActivity(intent2);
                         break;
 
                     case R.id.requests:
-                        Toast.makeText(CookRecipeView.this, "requests", Toast.LENGTH_LONG).show();
                         Intent intent3 = new Intent(CookRecipeView.this, MySales.class);
                         startActivity(intent3);
                         break;

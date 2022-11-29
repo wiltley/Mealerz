@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:fontFamily="@font/montserrat"
-            android:text="Return to all"
+            android:text="View All"
             app:layout_constraintRight_toRightOf="parent" />
 
     </LinearLayout>
@@ -53,9 +53,9 @@
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom"
             android:background="@drawable/nav_layout"
-            android:clipToPadding="false"
             app:itemIconTint="@color/white"
             app:itemTextColor="@color/white"
+            android:clipToPadding="false"
             app:menu="@menu/bottom_navigation_menu" />
     </RelativeLayout>
 
