@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -16,6 +17,8 @@ import com.example.mealerapplication.data.rendering.ClickableAdapter;
 import com.example.mealerapplication.ui.cook.MyMealsAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,6 +34,7 @@ public class CompletedPurchases extends AppCompatActivity implements ClickableAd
     ArrayList<MealRequest> list;
     FirebaseAuth auth;
     FirebaseFirestore db ;
+    BottomNavigationView nav;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +91,36 @@ public class CompletedPurchases extends AppCompatActivity implements ClickableAd
                     myAdapter.notifyDataSetChanged();
                 }
 
+            }
+        });
+
+        nav = findViewById(R.id.btm_nav);
+
+
+        nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()){
+                    case R.id.searchMenu_client:
+                        Intent intent1 = new Intent(CompletedPurchases.this, MealsSearch.class);
+                        startActivity(intent1);
+                        return true;
+
+                    case R.id.requests_client:
+                        Intent intent = new Intent(CompletedPurchases.this, MyPurchases.class);
+                        startActivity(intent);
+                        return true;
+
+                    case R.id.myProfile_client:
+//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
+//                        startActivity(intent2);
+                        return true;
+
+//                    default:
+                }
+
+                return false;
             }
         });
     }

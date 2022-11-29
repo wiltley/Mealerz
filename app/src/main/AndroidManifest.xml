@@ -19,7 +19,6 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
         <activity
             android:name=".ui.Recipe.Client_To_Cook_Profile"
@@ -28,7 +27,6 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
         <activity
             android:name=".ui.cook.CompletedSales"
@@ -121,9 +119,7 @@
         <activity
             android:name=".ui.complaints.ComplaintsActivity"
             android:exported="false"
-            android:label="ComplaintsActivity">
-
-            </activity>
+            android:label="ComplaintsActivity"></activity>
         <activity
             android:name=".ui.welcome.Welcomephase2"
             android:exported="false">
@@ -156,9 +152,7 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
-
             android:theme="@style/Theme.MealerApplication.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

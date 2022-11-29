@@ -193,7 +193,11 @@
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom"
             android:clipToPadding="false"
-            app:menu="@menu/client_bottom_navigation_menu" />
+            app:menu="@menu/client_bottom_navigation_menu"
+            android:background="@drawable/nav_layout"
+            app:itemIconTint="@color/white"
+            app:itemTextColor="@color/white"/>
+
     </RelativeLayout>
 
 
