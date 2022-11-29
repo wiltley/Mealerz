@@ -16,6 +16,8 @@ import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.Complaint;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -28,7 +30,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class ComplaintsDecision extends AppCompatActivity {
-    TextView message;
+    TextInputEditText message;
     Button dismiss;
     TextView accus;
     String accused;
@@ -54,6 +56,7 @@ public class ComplaintsDecision extends AppCompatActivity {
         accused = complaint.getAccused();
         msg = complaint.getMessage();
 
+        message.setText(msg);
 
 
         calendar = findViewById(R.id.ban_calendar);
@@ -66,7 +69,6 @@ public class ComplaintsDecision extends AppCompatActivity {
 
 
         accus.setText(accused);
-        message.setText(msg);
 
 
         // This will later be handled by a moderator class or something by calling a static function
