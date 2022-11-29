@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient_one"
     android:orientation="vertical"
-    tools:context=".ui.Recipe.CreateRecipe">
+    tools:context=".ui.cook.CreateRecipe">
   <LinearLayout android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
@@ -146,9 +146,6 @@
         android:clipToPadding="false"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
-        android:background="@drawable/nav_layout"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
         app:menu="@menu/bottom_navigation_menu"
         android:background="@drawable/nav_layout"
         app:itemIconTint="@color/white"

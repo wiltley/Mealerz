@@ -1,4 +1,4 @@
-package com.example.mealerapplication.ui.Recipe;
+package com.example.mealerapplication.ui.cook;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,9 +15,6 @@ import android.widget.Toast;
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.accounthandling.CookHandler;
 import com.example.mealerapplication.data.model.Recipe;
-import com.example.mealerapplication.ui.cook.MyOfferedMealsActivity;
-import com.example.mealerapplication.ui.cook.MySales;
-import com.example.mealerapplication.ui.cook.MyMealsActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.textfield.TextInputLayout;
@@ -104,27 +101,26 @@ public class CreateRecipe extends AppCompatActivity {
                     case R.id.myMenu:
                         Intent intent = new Intent(CreateRecipe.this, MyMealsActivity.class);
                         startActivity(intent);
-                        break;
+                        return true;
 
                     case R.id.createFood:
-                        break;
+                        return true;
 
 
                     case R.id.requests:
-                        Toast.makeText(CreateRecipe.this, "requests", Toast.LENGTH_LONG).show();
                         Intent intent3 = new Intent(CreateRecipe.this, MySales.class);
                         startActivity(intent3);
-                        break;
-                    case R.id.myProfile:
-                        Toast.makeText(CreateRecipe.this, "profile", Toast.LENGTH_LONG).show();
-//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
-//                        startActivity(intent2);
-                        break;
+                        return true;
 
-                    default:
+                    case R.id.myProfile:
+                        Intent intent2 = new Intent(CreateRecipe.this, myProfileCook.class);
+                        startActivity(intent2);
+                        return true;
+
+//                    default:
                 }
 
-                return true;
+                return false;
             }
         });
     }

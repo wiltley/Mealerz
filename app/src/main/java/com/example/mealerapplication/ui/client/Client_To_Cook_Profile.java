@@ -1,8 +1,7 @@
-package com.example.mealerapplication.ui.Recipe;
+package com.example.mealerapplication.ui.client;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -11,27 +10,17 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.mealerapplication.ComplaintCreation;
 import com.example.mealerapplication.R;
-import com.example.mealerapplication.data.model.Recipe;
-import com.example.mealerapplication.ui.client.MealsSearch;
-import com.example.mealerapplication.ui.cook.MyMealsAdapter;
-import com.example.mealerapplication.ui.login.LoginActivity;
-import com.example.mealerapplication.ui.registration.SignupActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.ArrayList;
 
 public class Client_To_Cook_Profile extends AppCompatActivity {
 
@@ -132,8 +121,8 @@ public class Client_To_Cook_Profile extends AppCompatActivity {
                         return true;
 
                     case R.id.myProfile_client:
-//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
-//                        startActivity(intent2);
+                        Intent intent1 = new Intent(Client_To_Cook_Profile.this, myProfileClient.class);
+                        startActivity(intent1);
                         return true;
 
 //                    default:

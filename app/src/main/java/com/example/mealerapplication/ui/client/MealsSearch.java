@@ -21,10 +21,8 @@ import android.widget.Spinner;
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.Recipe;
 import com.example.mealerapplication.data.rendering.Searcher;
-import com.example.mealerapplication.ui.Recipe.ClientRecipeView;
 
 import com.example.mealerapplication.ui.cook.MyMealsAdapter;
-import com.example.mealerapplication.ui.cook.MyOfferedMealsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -133,8 +131,8 @@ public class MealsSearch extends AppCompatActivity implements MealsSearchAdapter
                         return true;
 
                     case R.id.myProfile_client:
-//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
-//                        startActivity(intent2);
+                        Intent intent1 = new Intent(MealsSearch.this, myProfileClient.class);
+                        startActivity(intent1);
                         return true;
 
 //                    default:

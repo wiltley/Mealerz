@@ -143,12 +143,10 @@ public class ComplaintsDecision extends AppCompatActivity {
                         startActivity(intent);
                         return true;
 
-//                    case R.id.setBanTime:
-//                        return true;
 
                     case R.id.myProfile_admin:
-//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
-//                        startActivity(intent2);
+                        Intent intent1 = new Intent(ComplaintsDecision.this, myProfileAdmin.class);
+                        startActivity(intent1);
                         return true;
 
 //                    default:

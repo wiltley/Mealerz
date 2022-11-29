@@ -1,4 +1,4 @@
-package com.example.mealerapplication.ui.Recipe;
+package com.example.mealerapplication.ui.cook;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,9 +14,6 @@ import android.widget.Toast;
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.accounthandling.CookHandler;
 import com.example.mealerapplication.data.model.Recipe;
-import com.example.mealerapplication.ui.cook.MyMealsActivity;
-import com.example.mealerapplication.ui.cook.MyOfferedMealsActivity;
-import com.example.mealerapplication.ui.cook.MySales;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -83,6 +80,9 @@ public class CookRecipeView extends AppCompatActivity {
 
         nav = findViewById(R.id.btm_nav);
 
+        nav.getMenu().findItem(R.id.recipeView).setChecked(true);
+
+
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -91,27 +91,26 @@ public class CookRecipeView extends AppCompatActivity {
                     case R.id.myMenu:
                         Intent intent = new Intent(CookRecipeView.this, MyMealsActivity.class);
                         startActivity(intent);
-                        break;
+                        return true;
 
                     case R.id.createFood:
-                        Intent intent2 = new Intent(CookRecipeView.this, CreateRecipe.class);
-                        startActivity(intent2);
-                        break;
+                        Intent intent1 = new Intent(CookRecipeView.this, CreateRecipe.class);
+                        startActivity(intent1);
+                        return true;
 
                     case R.id.requests:
-                        Intent intent3 = new Intent(CookRecipeView.this, MySales.class);
-                        startActivity(intent3);
-                        break;
+                        Intent intent2 = new Intent(CookRecipeView.this, MySales.class);
+                        startActivity(intent2);
+                        return true;
                     case R.id.myProfile:
-                        Toast.makeText(CookRecipeView.this, "profile", Toast.LENGTH_LONG).show();
-//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
-//                        startActivity(intent2);
-                        break;
+                        Intent intent3 = new Intent(CookRecipeView.this, myProfileCook.class);
+                        startActivity(intent3);
+                        return true;
 
-                    default:
+//                    default:
                 }
 
-                return true;
+                return false;
             }
         });
     }

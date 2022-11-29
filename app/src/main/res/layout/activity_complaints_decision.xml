@@ -86,28 +86,18 @@
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/btm_nav"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="68dp"
             android:layout_gravity="bottom"
             android:layout_marginTop="264dp"
             android:layout_weight="1"
             android:background="@drawable/nav_layout"
+            android:clipToPadding="false"
             app:itemIconTint="@color/white"
             app:itemTextColor="@color/white"
-            android:clipToPadding="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/complaintsList"
-            android:background="@drawable/nav_layout"
-            app:itemIconTint="@color/white"
-            app:itemTextColor="@color/white"
-            app:menu="@menu/admin_bottom_navigation_menu">
-
-            <RelativeLayout
-                android:layout_width="413dp"
-                android:layout_height="match_parent">
-
-            </RelativeLayout>
-        </com.google.android.material.bottomnavigation.BottomNavigationView>
+            app:menu="@menu/admin_bottom_navigation_menu" />
 
         <Space
             android:layout_width="wrap_content"

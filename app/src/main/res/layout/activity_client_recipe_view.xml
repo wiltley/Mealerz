@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient_one"
     android:orientation="vertical"
-    tools:context=".ui.Recipe.ClientRecipeView">
+    tools:context=".ui.client.ClientRecipeView">
 
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -190,9 +190,6 @@
             android:id="@+id/btm_nav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/nav_layout"
-            app:itemIconTint="@color/white"
-            app:itemTextColor="@color/white"
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom"
             android:clipToPadding="false"

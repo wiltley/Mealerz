@@ -1,4 +1,4 @@
-package com.example.mealerapplication;
+package com.example.mealerapplication.ui.client;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
+
+import com.example.mealerapplication.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient_one"
-    tools:context=".ui.Recipe.Client_To_Cook_Profile">
+    tools:context=".ui.client.Client_To_Cook_Profile">
 
     <LinearLayout
         android:id="@+id/linearLayout2"

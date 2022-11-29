@@ -95,13 +95,12 @@ public class MyPurchases extends AppCompatActivity implements MyPurchasesAdapter
                         startActivity(intent);
                         return true;
 
-
                     case R.id.requests_client:
                         return true;
 
                     case R.id.myProfile_client:
-//                        Intent intent2 = new Intent(MyMealsActivity.this, .class);
-//                        startActivity(intent2);
+                        Intent intent2 = new Intent(MyPurchases.this, myProfileClient.class);
+                        startActivity(intent2);
                         return true;
 
 //                    default:
