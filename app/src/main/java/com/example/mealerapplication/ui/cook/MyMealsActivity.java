@@ -102,7 +102,6 @@ public class MyMealsActivity extends AppCompatActivity implements MyMealsAdapter
             }
         });
         nav = findViewById(R.id.btm_nav);
-        nav.getMenu().findItem(R.id.myMenu).setChecked(true);
 
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

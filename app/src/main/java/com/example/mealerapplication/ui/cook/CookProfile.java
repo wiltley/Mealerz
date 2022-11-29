@@ -108,7 +108,6 @@ public class CookProfile extends AppCompatActivity {
 
 
         nav = findViewById(R.id.btm_nav);
-        nav.getMenu().findItem(R.id.myProfile_client).setChecked(true);
 
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

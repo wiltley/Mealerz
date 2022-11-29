@@ -36,7 +36,6 @@ public class myProfileCook extends AppCompatActivity {
         });
 
         nav = findViewById(R.id.btm_nav);
-        nav.getMenu().findItem(R.id.myMenu).setChecked(true);
 
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

@@ -91,7 +91,6 @@ public class CreateRecipe extends AppCompatActivity {
         //}
     //}
         nav = findViewById(R.id.btm_nav);
-        nav.getMenu().findItem(R.id.createFood).setChecked(true);
 
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
