@@ -150,9 +150,6 @@
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
         app:menu="@menu/bottom_navigation_menu"
-        android:background="@drawable/nav_layout"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
         />
   </RelativeLayout>
 
