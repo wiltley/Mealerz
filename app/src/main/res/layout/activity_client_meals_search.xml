@@ -83,6 +83,8 @@
             android:clipToPadding="false"
 
             android:background="@drawable/nav_layout"
+
+            app:itemTextColor="@color/white"
             app:itemIconTint="@color/white"
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom"
