@@ -16,14 +16,14 @@
         >
 
         <TextView
-            android:id="@+id/text_view_id"
+            android:id="@+id/my_purchases_label"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textColor="#FFFFFF"
             android:textSize="20dp"
             android:layout_marginLeft="10dp"
             android:fontFamily="@font/montserrat"
-            android:text="Orders In Progress" />
+            android:text="Orders in Progress" />
 
         <Button
             android:layout_width="wrap_content"
@@ -31,6 +31,7 @@
             android:layout_marginLeft="30dp"
             android:fontFamily="@font/montserrat"
             android:text="View history"
+            android:id="@+id/swap_purchases"
             app:layout_constraintRight_toRightOf="parent" />
     </LinearLayout>
 

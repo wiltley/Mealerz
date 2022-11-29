@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.mealerapplication.R;
 import com.example.mealerapplication.data.model.MealRequest;
@@ -34,6 +37,10 @@ public class MyPurchases extends AppCompatActivity implements MyPurchasesAdapter
     FirebaseAuth auth;
     FirebaseFirestore db ;
     BottomNavigationView nav;
+    Button swapView;
+    ArrayList<MealRequest> toDisplay;
+    TextView topLabel;
+    int currentState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +48,21 @@ public class MyPurchases extends AppCompatActivity implements MyPurchasesAdapter
         setContentView(R.layout.activity_my_purchases);
         recyclerView = findViewById(R.id.my_purchases_list);
 
+        currentState = 0;
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        topLabel = findViewById(R.id.my_purchases_label);
+
+        swapView = findViewById(R.id.swap_purchases);
         list = new ArrayList<>();
+        toDisplay = new ArrayList();
+
         myAdapter = new MyPurchasesAdapter(this, list, this );
         recyclerView.setAdapter(myAdapter);
+
+
+
 
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
         CollectionReference notesRef = rootRef.collection("requests")
@@ -55,7 +71,7 @@ public class MyPurchases extends AppCompatActivity implements MyPurchasesAdapter
                 .document(FirebaseAuth.getInstance().getUid())
                 .collection("in progress");
 
-        // Not too sure if we want this stored in here or not yet
+
         notesRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -73,10 +89,65 @@ public class MyPurchases extends AppCompatActivity implements MyPurchasesAdapter
                         r.setStatus(document.getString("Status"));
 
                         list.add(r);
+                        toDisplay.add(r);
 
                     }
 
                     myAdapter.notifyDataSetChanged();
+                }
+
+            }
+        });
+
+        rootRef = FirebaseFirestore.getInstance();
+        notesRef = rootRef.collection("requests")
+                .document("purchase")
+                .collection("clients")
+                .document(FirebaseAuth.getInstance().getUid())
+                .collection("completed");
+
+
+        notesRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        MealRequest r = new MealRequest();
+
+
+                        r.setDocumentID(document.getId());
+                        r.setClientName(document.getString("Requester Name"));
+                        r.setClientID(document.getString("Requester ID"));
+                        r.setCookID(document.getString("Cook ID"));
+                        r.setCookName(document.getString("Cook Name"));
+                        r.setMealName(document.getString("Meal Name"));
+                        r.setStatus(document.getString("Status"));
+
+                        toDisplay.add(r);
+
+                    }
+
+                }
+
+            }
+        });
+
+        swapView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(currentState == 0){
+                    myAdapter.list = toDisplay;
+                    myAdapter.notifyDataSetChanged();
+                    topLabel.setText("Order History");
+                    swapView.setText("View In Progress");
+                    currentState = 1;
+                }else{
+                    currentState = 0;
+                    myAdapter.list = list;
+                    topLabel.setText("Orders in Progress");
+                    myAdapter.notifyDataSetChanged();
+                    swapView.setText("View history");
                 }
 
             }

@@ -176,13 +176,9 @@ public class UserHandler {
                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(i);
 
-                    } else if (document.getString("role").equals("admin")) {
-                        Intent i = new Intent(context, Welcomephase2.class);
-                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        context.startActivity(i);
                     } else {
 
-                        Intent i = new Intent(context, ComplaintsActivity.class);
+                        Intent i = new Intent(context, Welcomephase2.class);
                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(i);
                     }

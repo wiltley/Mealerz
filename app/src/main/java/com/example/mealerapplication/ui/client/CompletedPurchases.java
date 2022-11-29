@@ -35,6 +35,7 @@ public class CompletedPurchases extends AppCompatActivity implements ClickableAd
     FirebaseAuth auth;
     FirebaseFirestore db ;
     BottomNavigationView nav;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

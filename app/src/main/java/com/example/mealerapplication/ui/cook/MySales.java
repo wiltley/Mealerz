@@ -162,7 +162,7 @@ public class MySales extends AppCompatActivity implements MySalesAdapter.OnEleme
             public void onClick(View view) {
 
 
-                CookHandler.acceptRequest(toAction, "Accept");
+                CookHandler.acceptRequest(toAction, "Accepted");
                 decisionBar.setVisibility(View.GONE);
                 list.remove(toActionPosition);
                 nav.setBackground(navBack);
