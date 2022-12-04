@@ -17,10 +17,8 @@ import java.util.ArrayList;
 
 public class CookProfileAdapter extends ClickableAdapter {
 
-    ArrayList<Review> rev;
     public CookProfileAdapter(Context context, ArrayList list, OnElementClickedListener mOnClickedListener, ArrayList<Review> rev) {
         super(context, list, mOnClickedListener);
-        this.rev = rev;
     }
     public CookProfileAdapter(Context context, ArrayList list, OnElementClickedListener mOnClickedListener) {
         super(context, list, mOnClickedListener);
@@ -34,7 +32,7 @@ public class CookProfileAdapter extends ClickableAdapter {
     }
     @Override
     public void onBindViewHolder(@NonNull ClickableAdapter.MyViewHolder holder, int position) {
-        Review review = rev.get(position);
+        Review review = (Review) list.get(position);
         holder.text1.setText(review.getFirstName());
         holder.text2.setText(String.valueOf(review.getRating()));
         holder.text3.setText(review.getReviews());
