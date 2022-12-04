@@ -162,7 +162,7 @@ public class CookProfile extends AppCompatActivity implements CookProfileAdapter
 
 
                         // We shouldn't be in need to the other stuff just yet
-//                    r.setDocumentID(document.getId());
+                        r.setDocumentID(document.getId());
                         r.setRating(document.getString("rating"));
                         r.setReviews(document.getString("review"));
                         r.setFirstName(document.getString("firstName"));

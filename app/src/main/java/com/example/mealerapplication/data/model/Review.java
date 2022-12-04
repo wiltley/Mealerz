@@ -4,12 +4,15 @@ public class Review {
     String reviews;
     String firstName;
     String rating;
+    String documentID;
 
 
-    public Review(String firstName, String rating, String reviews) {
+    public Review(String firstName, String rating, String reviews, String documentID) {
         this.firstName = firstName;
         this.rating = rating;
         this.reviews = reviews;
+        this.documentID = documentID;
+
     }
 
     public Review() {
@@ -42,4 +45,7 @@ public class Review {
     }
 
 
+    public void setDocumentID(String documentID) {
+        this.documentID = documentID;
+    }
 }
