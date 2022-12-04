@@ -1,9 +1,12 @@
 package com.example.mealerapplication.ui.cook;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +16,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.mealerapplication.R;
+import com.example.mealerapplication.data.model.Recipe;
+import com.example.mealerapplication.data.model.Review;
+import com.example.mealerapplication.data.rendering.ClickableAdapter;
 import com.example.mealerapplication.ui.client.ClientRecipeView;
 
 import com.example.mealerapplication.ui.client.ComplaintCreation;
@@ -23,9 +29,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 public class CookProfile extends AppCompatActivity {
 
@@ -42,6 +54,9 @@ public class CookProfile extends AppCompatActivity {
     TextView biography;
     RecyclerView testimonial;
     Button complaint;
+    RecyclerView recyclerView;
+    MyMealsAdapter myAdapter;
+    ArrayList<Review> list;
 //    ArrayList<Recipe> list;
 
 
@@ -60,13 +75,15 @@ public class CookProfile extends AppCompatActivity {
         testimonial = (RecyclerView) findViewById(R.id.testimonial);
 
         // CODE FOR POPULATING RECYCLER VIEW WITH ARRAY FROM DB
-//        testimonial.setHasFixedSize(true);
-//        testimonial.setLayoutManager(new LinearLayoutManager(this));
-//
-//        list = new ArrayList<>();
-//        MyMealsAdapter myAdapter = new MyMealsAdapter(this, list, this);
-//        testimonial.setAdapter(myAdapter);
+        db = FirebaseFirestore.getInstance();
+        testimonial.setHasFixedSize(true);
+        testimonial.setLayoutManager(new LinearLayoutManager(this));
 
+        list = new ArrayList<Review>();
+        CookProfileAdapter myAdapter = new CookProfileAdapter((Context) this, (ArrayList) list, (ClickableAdapter.OnElementClickedListener) this);
+        testimonial.setAdapter(myAdapter);
+
+        EventChangeListner();
 
         ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -136,5 +153,25 @@ public class CookProfile extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private void EventChangeListner() {
+        db.collection("Testimonial")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (error != null) {
+                            Log.e("Firestore error", error.getMessage());
+                            return;
+                        }
+
+                        for (DocumentChange dc : value.getDocumentChanges()){
+                            if(dc.getType() == DocumentChange.Type.ADDED){
+                                list.add(dc.getDocument().toObject(Review.class));
+                            }
+                            myAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
     }
 }
