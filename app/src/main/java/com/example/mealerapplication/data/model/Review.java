@@ -3,11 +3,17 @@ package com.example.mealerapplication.data.model;
 public class Review {
     String reviews;
     String firstName;
+    String rating;
 
-    public Review(String firstName, double rating, String reviews) {
+
+    public Review(String firstName, String rating, String reviews) {
         this.firstName = firstName;
         this.rating = rating;
         this.reviews = reviews;
+    }
+
+    public Review() {
+
     }
 
     public String getFirstName() {
@@ -18,15 +24,13 @@ public class Review {
         this.firstName = firstName;
     }
 
-    public double getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
-
-    double rating;
 
 
     public String getReviews() {

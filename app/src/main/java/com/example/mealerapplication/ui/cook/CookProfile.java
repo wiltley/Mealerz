@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,23 +28,31 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
-public class CookProfile extends AppCompatActivity {
+public class CookProfile extends AppCompatActivity implements CookProfileAdapter.OnElementClickedListener {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference ref = db.collection("reviews")
                               .document("cooks")
                               .collection("COOKID")
                               .document("18lui00utQdn1ZckDJ4NT5dGODd2");
+    CollectionReference ref2 = db.collection("reviews")
+                                .document("cooks")
+                                .collection("COOKID")
+                                .document("18lui00utQdn1ZckDJ4NT5dGODd2")
+                                .collection("Testimonial");
     BottomNavigationView nav;
     DatabaseReference mDatabase;
     TextView cookName;
@@ -54,10 +61,8 @@ public class CookProfile extends AppCompatActivity {
     TextView biography;
     RecyclerView testimonial;
     Button complaint;
-    RecyclerView recyclerView;
-    MyMealsAdapter myAdapter;
+    CookProfileAdapter myAdapter;
     ArrayList<Review> list;
-//    ArrayList<Recipe> list;
 
 
 
@@ -79,11 +84,10 @@ public class CookProfile extends AppCompatActivity {
         testimonial.setHasFixedSize(true);
         testimonial.setLayoutManager(new LinearLayoutManager(this));
 
-        list = new ArrayList<Review>();
-        CookProfileAdapter myAdapter = new CookProfileAdapter((Context) this, (ArrayList) list, (ClickableAdapter.OnElementClickedListener) this);
+        list = new ArrayList<>();
+        myAdapter = new CookProfileAdapter(this,list,this);
         testimonial.setAdapter(myAdapter);
 
-        EventChangeListner();
 
         ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -99,12 +103,7 @@ public class CookProfile extends AppCompatActivity {
                         cookEmail.setText(CookEmail);
                         biography.setText(Biography);
                         averageRating.setText(AverageRating.toString());
-                        
-//                        String Testimonial = document.getString("testimonial");
-//                        testimonial.setText(Testimonial);
 
-//                        ArrayList[] testimonial = new ArrayList[];
-//                        for
                     } else {
                         Log.d("LOGGER", "No such document");
                     }
@@ -153,25 +152,36 @@ public class CookProfile extends AppCompatActivity {
                 return false;
             }
         });
+
+        ref2.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Review r = new Review();
+
+
+                        // We shouldn't be in need to the other stuff just yet
+//                    r.setDocumentID(document.getId());
+                        r.setRating(document.getString("rating"));
+                        r.setReviews(document.getString("review"));
+                        r.setFirstName(document.getString("firstName"));
+
+                        list.add(r);
+
+                    }
+
+                    myAdapter.notifyDataSetChanged();
+                }
+
+            }
+        });
     }
 
-    private void EventChangeListner() {
-        db.collection("Testimonial")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        if (error != null) {
-                            Log.e("Firestore error", error.getMessage());
-                            return;
-                        }
 
-                        for (DocumentChange dc : value.getDocumentChanges()){
-                            if(dc.getType() == DocumentChange.Type.ADDED){
-                                list.add(dc.getDocument().toObject(Review.class));
-                            }
-                            myAdapter.notifyDataSetChanged();
-                        }
-                    }
-                });
+
+    @Override
+    public void onElementClicked(int position) {
+
     }
 }
