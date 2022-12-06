@@ -1,7 +1,9 @@
 package com.example.mealerapplication.ui.cook;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -13,6 +15,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.mealerapplication.R;
+import com.example.mealerapplication.data.model.Recipe;
+import com.example.mealerapplication.data.model.Review;
+import com.example.mealerapplication.data.rendering.ClickableAdapter;
 import com.example.mealerapplication.ui.client.ClientRecipeView;
 
 import com.example.mealerapplication.ui.client.ComplaintCreation;
@@ -23,17 +28,31 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
-public class CookProfile extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class CookProfile extends AppCompatActivity implements CookProfileAdapter.OnElementClickedListener {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference ref = db.collection("reviews")
                               .document("cooks")
                               .collection("COOKID")
                               .document("18lui00utQdn1ZckDJ4NT5dGODd2");
+    CollectionReference ref2 = db.collection("reviews")
+                                .document("cooks")
+                                .collection("COOKID")
+                                .document("18lui00utQdn1ZckDJ4NT5dGODd2")
+                                .collection("Testimonial");
     BottomNavigationView nav;
     DatabaseReference mDatabase;
     TextView cookName;
@@ -42,7 +61,8 @@ public class CookProfile extends AppCompatActivity {
     TextView biography;
     RecyclerView testimonial;
     Button complaint;
-//    ArrayList<Recipe> list;
+    CookProfileAdapter myAdapter;
+    ArrayList<Review> list;
 
 
 
@@ -60,12 +80,13 @@ public class CookProfile extends AppCompatActivity {
         testimonial = (RecyclerView) findViewById(R.id.testimonial);
 
         // CODE FOR POPULATING RECYCLER VIEW WITH ARRAY FROM DB
-//        testimonial.setHasFixedSize(true);
-//        testimonial.setLayoutManager(new LinearLayoutManager(this));
-//
-//        list = new ArrayList<>();
-//        MyMealsAdapter myAdapter = new MyMealsAdapter(this, list, this);
-//        testimonial.setAdapter(myAdapter);
+        db = FirebaseFirestore.getInstance();
+        testimonial.setHasFixedSize(true);
+        testimonial.setLayoutManager(new LinearLayoutManager(this));
+
+        list = new ArrayList<>();
+        myAdapter = new CookProfileAdapter(this,list,this);
+        testimonial.setAdapter(myAdapter);
 
 
         ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -82,12 +103,7 @@ public class CookProfile extends AppCompatActivity {
                         cookEmail.setText(CookEmail);
                         biography.setText(Biography);
                         averageRating.setText(AverageRating.toString());
-                        
-//                        String Testimonial = document.getString("testimonial");
-//                        testimonial.setText(Testimonial);
 
-//                        ArrayList[] testimonial = new ArrayList[];
-//                        for
                     } else {
                         Log.d("LOGGER", "No such document");
                     }
@@ -135,5 +151,36 @@ public class CookProfile extends AppCompatActivity {
                 return false;
             }
         });
+
+        ref2.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Review r = new Review();
+
+
+                        // We shouldn't be in need to the other stuff just yet
+                        r.setDocumentID(document.getId());
+                        r.setRating(document.getString("rating"));
+                        r.setReviews(document.getString("review"));
+                        r.setFirstName(document.getString("firstName"));
+
+                        list.add(r);
+
+                    }
+
+                    myAdapter.notifyDataSetChanged();
+                }
+
+            }
+        });
+    }
+
+
+
+    @Override
+    public void onElementClicked(int position) {
+
     }
 }
