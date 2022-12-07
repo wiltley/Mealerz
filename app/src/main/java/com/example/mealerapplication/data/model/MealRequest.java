@@ -1,5 +1,8 @@
 package com.example.mealerapplication.data.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MealRequest {
 
     String clientID;
@@ -16,6 +19,20 @@ public class MealRequest {
     String cookName;
 
     String clientAddress;
+
+    public MealRequest(String clientID, String cookID, String mealID, String mealName, String clientName, String status, String cookName, String clientAddress) {
+        this.clientID = clientID;
+        this.cookID = cookID;
+        this.mealID = mealID;
+        this.mealName = mealName;
+        this.clientName = clientName;
+        this.status = status;
+        this.cookName = cookName;
+        this.clientAddress = clientAddress;
+    }
+
+    public MealRequest() {
+    }
 
     public String getMeal(){return this.mealID;}
     public String getClientID(){return this.clientID;}
@@ -38,4 +55,18 @@ public class MealRequest {
     public void setStatus(String status){this.status = status;}
     public void setClientAddress(String clientAddress){this.clientAddress = clientAddress;}
 
+    public Map<String, Object> getMealRequestMap(){
+        //Gives data in map form for storing in Firebase
+        Map<String, Object> data = new HashMap<>();
+        data.put("mealName", mealName);
+        data.put("clientName", clientName);
+        data.put("cookName", cookName);
+        data.put("clientID", clientID);
+        data.put("cookID", cookID);
+        data.put("mealID", mealID);
+        data.put("clientAddress", clientAddress);
+        data.put("status", status);
+
+        return data;
+    }
 }
